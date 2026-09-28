@@ -14,7 +14,8 @@ Keine Anmeldung, kein Backend, keine Tracking: der gesamte Lernfortschritt liegt
 - **8 Aufgabentypen**: choice, symbol, listen, match, build, blank, dialogue, basket
 - Level, XP, Sterne, Word-Mastery (1–5) und eine fälligkeitsbasierte Wiederholungsliste
 - Arabische Oberfläche (RTL) mit deutschen Sprachhinweisen
-- Einstellungen: deutsches Sprachausgabe-Signal, arabische Hilfe, reduzierte Bewegung, große Schrift
+- Deutsche Wörter per Maus, Enter oder Leertaste mit der lokalen Gerätestimme anhören
+- Einstellungen: deutsche Sprachausgabe, arabische Hilfe, reduzierte Bewegung, große Schrift
 
 ## Lokal starten
 

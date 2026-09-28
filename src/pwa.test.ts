@@ -20,6 +20,7 @@ describe('PWA contract', () => {
     const worker = readFileSync(resolve(root, 'public/sw.js'), 'utf8');
     expect(worker).toContain("request.method !== 'GET'");
     expect(worker).toContain('url.origin !== self.location.origin');
+    expect(worker).toContain("request.mode === 'navigate'");
     expect(worker).toMatch(/CACHE_NAME\s*=\s*'yalla-deutsch-[^']+'/);
     expect(worker).toContain('caches.open(CACHE_NAME)');
   });

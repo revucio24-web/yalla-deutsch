@@ -1,0 +1,43 @@
+.word-card .word-pronunciation {
+  width: auto;
+  max-width: 100%;
+  height: auto;
+  min-height: 34px;
+  padding: 5px 9px;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  background: #e9f7f2;
+  color: var(--navy);
+  font-size: .94rem;
+  font-weight: 800;
+  line-height: 1.25;
+}
+
+.word-card .word-pronunciation small {
+  color: var(--teal);
+  font-size: .72rem;
+}
+
+.word-card .word-pronunciation span {
+  color: var(--teal);
+  font-size: 1rem;
+}
+
+.word-card .word-pronunciation:hover:not(:disabled),
+.word-card .word-pronunciation:focus-visible,
+.speakable-stimulus:hover:not(:disabled),
+.speakable-stimulus:focus-visible {
+  outline: 3px solid rgba(22, 141, 135, .24);
+  outline-offset: 2px;
+}
+
+.speakable-stimulus {
+  width: 100%;
+  border: 1px solid transparent;
+}
+
+.word-pronunciation:disabled,
+.speakable-stimulus:disabled {
+  opacity: .65;
+}

@@ -6,6 +6,10 @@ export function stopSpeaking(): void {
   if (canSpeak()) window.speechSynthesis.cancel();
 }
 
+export function germanWordText(german: string, article?: string | null): string {
+  return [article?.trim(), german.trim()].filter(Boolean).join(' ');
+}
+
 export function speakGerman(text: string, enabled = true): boolean {
   if (!enabled || !canSpeak()) return false;
   window.speechSynthesis.cancel();
