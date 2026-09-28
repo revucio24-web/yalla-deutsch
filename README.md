@@ -26,6 +26,21 @@ pnpm lint       # ESLint
 pnpm build      # Typecheck + Produktionsbuild nach dist/
 ```
 
+## PWA und Offline-Nutzung
+
+Nach dem ersten vollständigen Laden kann die App offline weiterlaufen. Unterstützte Browser
+bieten über das Browsermenü **„App installieren“** beziehungsweise **„Zum Startbildschirm
+hinzufügen“** an. Lernfortschritt bleibt ausschließlich im lokalen `localStorage`.
+
+Der Service Worker cached nur öffentliche, gleich-originige GET-Ressourcen der App. Es werden
+keine Konten, API-Antworten, Tracker oder privaten Dokumente gespeichert.
+
+Die PWA-Icons lassen sich reproduzierbar neu erstellen:
+
+```bash
+python scripts/generate_pwa_icons.py
+```
+
 ## Deployment
 
 Statischer Build, läuft auf jedem kostenlosen Static-Host. `base: './'` in
