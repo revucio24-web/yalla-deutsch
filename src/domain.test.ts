@@ -6,12 +6,25 @@ import {
 } from './domain';
 
 describe('authored learning content', () => {
-  it('contains five districts, 25 playable missions, and 150 distinct words', () => {
+  it('extends every district without changing the original 25-mission path', () => {
+    const originalLessonIds = [
+      'home-01', 'home-02', 'home-03', 'home-04', 'home-05',
+      'market-01', 'market-02', 'market-03', 'market-04', 'market-05',
+      'traffic-01', 'traffic-02', 'traffic-03', 'traffic-04', 'traffic-05',
+      'work-01', 'work-02', 'work-03', 'work-04', 'work-05',
+      'health-01', 'health-02', 'health-03', 'health-04', 'health-05',
+    ];
+
     expect(worlds).toHaveLength(5);
-    expect(lessons).toHaveLength(25);
-    expect(vocabulary).toHaveLength(150);
-    expect(new Set(vocabulary.map((word) => word.id)).size).toBe(150);
-    expect(new Set(lessons.map((lesson) => lesson.id)).size).toBe(25);
+    expect(lessons).toHaveLength(30);
+    expect(vocabulary).toHaveLength(180);
+    expect(new Set(vocabulary.map((word) => word.id)).size).toBe(180);
+    expect(new Set(lessons.map((lesson) => lesson.id)).size).toBe(30);
+    expect(lessons.slice(0, 25).map((lesson) => lesson.id)).toEqual(originalLessonIds);
+    expect(lessons.map((lesson) => lesson.order)).toEqual(Array.from({ length: 30 }, (_, index) => index));
+    for (const world of worlds) {
+      expect(lessons.filter((lesson) => lesson.world === world.id), world.id).toHaveLength(6);
+    }
     for (const lesson of lessons) {
       expect(lesson.wordIds).toHaveLength(6);
       expect(lesson.wordIds.every((id) => vocabulary.some((word) => word.id === id))).toBe(true);

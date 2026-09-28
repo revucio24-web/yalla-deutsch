@@ -948,5 +948,195 @@
         "Ja, bitte."
       ]
     }
+  },
+  {
+    "id": "home-06",
+    "world": "home",
+    "order": 25,
+    "titleDe": "Familie und Besuch",
+    "titleAr": "العائلة والزيارة",
+    "wordIds": [
+      "home-06-01",
+      "home-06-02",
+      "home-06-03",
+      "home-06-04",
+      "home-06-05",
+      "home-06-06"
+    ],
+    "phrase": {
+      "german": "Heute besucht uns meine Familie.",
+      "arabic": "تزورنا عائلتي اليوم."
+    },
+    "blank": {
+      "sentence": "Meine ___ kommt heute zu Besuch.",
+      "answer": "Familie",
+      "options": [
+        "Familie",
+        "Verbindung",
+        "Behandlung"
+      ]
+    },
+    "dialogue": {
+      "prompt": "Wann kommt deine Familie?",
+      "promptAr": "متى تأتي عائلتك؟",
+      "answer": "Sie kommt heute Abend.",
+      "options": [
+        "Sie kommt heute Abend.",
+        "Sie fährt mit dem Kilo.",
+        "Sie arbeitet im Rezept."
+      ]
+    }
+  },
+  {
+    "id": "market-06",
+    "world": "market",
+    "order": 26,
+    "titleDe": "Mengen und Preise",
+    "titleAr": "الكميات والأسعار",
+    "wordIds": [
+      "market-06-01",
+      "market-06-02",
+      "market-06-03",
+      "market-06-04",
+      "market-06-05",
+      "market-06-06"
+    ],
+    "phrase": {
+      "german": "Das Angebot kostet zwei Euro pro Kilo.",
+      "arabic": "العرض يكلف يوروين للكيلو."
+    },
+    "blank": {
+      "sentence": "Das Produkt ist heute im ___.",
+      "answer": "Angebot",
+      "options": [
+        "Kilo",
+        "Angebot",
+        "Besuch"
+      ]
+    },
+    "dialogue": {
+      "prompt": "Wie möchten Sie bezahlen?",
+      "promptAr": "كيف تريد أن تدفع؟",
+      "answer": "Mit Karte, bitte.",
+      "options": [
+        "Das ist sehr teuer.",
+        "Mit Karte, bitte.",
+        "Ein Gramm, bitte."
+      ]
+    }
+  },
+  {
+    "id": "traffic-06",
+    "world": "traffic",
+    "order": 27,
+    "titleDe": "Reise planen",
+    "titleAr": "تخطيط الرحلة",
+    "wordIds": [
+      "traffic-06-01",
+      "traffic-06-02",
+      "traffic-06-03",
+      "traffic-06-04",
+      "traffic-06-05",
+      "traffic-06-06"
+    ],
+    "phrase": {
+      "german": "Ich möchte eine direkte Verbindung reservieren.",
+      "arabic": "أريد حجز رحلة مباشرة."
+    },
+    "blank": {
+      "sentence": "Muss ich in Köln ___?",
+      "answer": "umsteigen",
+      "options": [
+        "bezahlen",
+        "helfen",
+        "umsteigen"
+      ]
+    },
+    "dialogue": {
+      "prompt": "Was ist Ihr Reiseziel?",
+      "promptAr": "ما هي وجهة سفرك؟",
+      "answer": "Mein Reiseziel ist Berlin.",
+      "options": [
+        "Mein Reiseziel ist Berlin.",
+        "Die Familie ist billig.",
+        "Ich bin allergisch."
+      ]
+    }
+  },
+  {
+    "id": "work-06",
+    "world": "work",
+    "order": 28,
+    "titleDe": "Am Telefon",
+    "titleAr": "على الهاتف",
+    "wordIds": [
+      "work-06-01",
+      "work-06-02",
+      "work-06-03",
+      "work-06-04",
+      "work-06-05",
+      "work-06-06"
+    ],
+    "phrase": {
+      "german": "Wir vereinbaren einen Anruf für Dienstag.",
+      "arabic": "نحدد مكالمة ليوم الثلاثاء."
+    },
+    "blank": {
+      "sentence": "Können Sie mich später ___?",
+      "answer": "zurückrufen",
+      "options": [
+        "zurückrufen",
+        "umsteigen",
+        "bezahlen"
+      ]
+    },
+    "dialogue": {
+      "prompt": "Ist Frau Keller erreichbar?",
+      "promptAr": "هل يمكن الوصول إلى السيدة كيلر؟",
+      "answer": "Nein, ich bitte um eine Rückmeldung.",
+      "options": [
+        "Das Angebot ist billig.",
+        "Nein, ich bitte um eine Rückmeldung.",
+        "Das Reiseziel ist dort."
+      ]
+    }
+  },
+  {
+    "id": "health-06",
+    "world": "health",
+    "order": 29,
+    "titleDe": "Gesund bleiben",
+    "titleAr": "البقاء بصحة جيدة",
+    "wordIds": [
+      "health-06-01",
+      "health-06-02",
+      "health-06-03",
+      "health-06-04",
+      "health-06-05",
+      "health-06-06"
+    ],
+    "phrase": {
+      "german": "Die Untersuchung ist Teil der Behandlung.",
+      "arabic": "الفحص جزء من العلاج."
+    },
+    "blank": {
+      "sentence": "Bitte bringen Sie Ihre ___ mit.",
+      "answer": "Versicherungskarte",
+      "options": [
+        "Rückfahrt",
+        "Rückmeldung",
+        "Versicherungskarte"
+      ]
+    },
+    "dialogue": {
+      "prompt": "Sind Sie gegen Penicillin allergisch?",
+      "promptAr": "هل لديك حساسية من البنسلين؟",
+      "answer": "Nein, ich bin nicht allergisch.",
+      "options": [
+        "Nein, ich bin nicht allergisch.",
+        "Ich möchte zwei Kilo.",
+        "Bitte rufen Sie zurück."
+      ]
+    }
   }
 ]

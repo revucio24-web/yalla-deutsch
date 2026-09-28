@@ -1198,5 +1198,245 @@
     "article": "der",
     "icon": "☎️",
     "world": "health"
+  },
+  {
+    "id": "home-06-01",
+    "german": "Familie",
+    "arabic": "العائلة",
+    "article": "die",
+    "icon": "👨‍👩‍👧",
+    "world": "home"
+  },
+  {
+    "id": "home-06-02",
+    "german": "Mutter",
+    "arabic": "الأم",
+    "article": "die",
+    "icon": "👩",
+    "world": "home"
+  },
+  {
+    "id": "home-06-03",
+    "german": "Vater",
+    "arabic": "الأب",
+    "article": "der",
+    "icon": "👨",
+    "world": "home"
+  },
+  {
+    "id": "home-06-04",
+    "german": "Kind",
+    "arabic": "الطفل",
+    "article": "das",
+    "icon": "🧒",
+    "world": "home"
+  },
+  {
+    "id": "home-06-05",
+    "german": "Besuch",
+    "arabic": "الزيارة",
+    "article": "der",
+    "icon": "🎁",
+    "world": "home"
+  },
+  {
+    "id": "home-06-06",
+    "german": "helfen",
+    "arabic": "يساعد",
+    "article": null,
+    "icon": "🤝",
+    "world": "home"
+  },
+  {
+    "id": "market-06-01",
+    "german": "Angebot",
+    "arabic": "العرض",
+    "article": "das",
+    "icon": "🏷️",
+    "world": "market"
+  },
+  {
+    "id": "market-06-02",
+    "german": "Kilo",
+    "arabic": "كيلوغرام",
+    "article": "das",
+    "icon": "⚖️",
+    "world": "market"
+  },
+  {
+    "id": "market-06-03",
+    "german": "Gramm",
+    "arabic": "غرام",
+    "article": "das",
+    "icon": "🧂",
+    "world": "market"
+  },
+  {
+    "id": "market-06-04",
+    "german": "teuer",
+    "arabic": "غالٍ",
+    "article": null,
+    "icon": "💎",
+    "world": "market"
+  },
+  {
+    "id": "market-06-05",
+    "german": "billig",
+    "arabic": "رخيص",
+    "article": null,
+    "icon": "🪙",
+    "world": "market"
+  },
+  {
+    "id": "market-06-06",
+    "german": "bezahlen",
+    "arabic": "يدفع",
+    "article": null,
+    "icon": "💳",
+    "world": "market"
+  },
+  {
+    "id": "traffic-06-01",
+    "german": "Reiseziel",
+    "arabic": "وجهة السفر",
+    "article": "das",
+    "icon": "🎯",
+    "world": "traffic"
+  },
+  {
+    "id": "traffic-06-02",
+    "german": "Rückfahrt",
+    "arabic": "رحلة العودة",
+    "article": "die",
+    "icon": "↩️",
+    "world": "traffic"
+  },
+  {
+    "id": "traffic-06-03",
+    "german": "umsteigen",
+    "arabic": "يبدّل وسيلة النقل",
+    "article": null,
+    "icon": "🔄",
+    "world": "traffic"
+  },
+  {
+    "id": "traffic-06-04",
+    "german": "Verbindung",
+    "arabic": "خط الرحلة",
+    "article": "die",
+    "icon": "🔗",
+    "world": "traffic"
+  },
+  {
+    "id": "traffic-06-05",
+    "german": "reservieren",
+    "arabic": "يحجز",
+    "article": null,
+    "icon": "🎫",
+    "world": "traffic"
+  },
+  {
+    "id": "traffic-06-06",
+    "german": "direkt",
+    "arabic": "مباشر",
+    "article": null,
+    "icon": "➡️",
+    "world": "traffic"
+  },
+  {
+    "id": "work-06-01",
+    "german": "Anruf",
+    "arabic": "المكالمة",
+    "article": "der",
+    "icon": "📞",
+    "world": "work"
+  },
+  {
+    "id": "work-06-02",
+    "german": "erreichbar",
+    "arabic": "متاح للاتصال",
+    "article": null,
+    "icon": "📶",
+    "world": "work"
+  },
+  {
+    "id": "work-06-03",
+    "german": "vereinbaren",
+    "arabic": "يحدّد موعداً",
+    "article": null,
+    "icon": "📅",
+    "world": "work"
+  },
+  {
+    "id": "work-06-04",
+    "german": "verschieben",
+    "arabic": "يؤجّل",
+    "article": null,
+    "icon": "⏰",
+    "world": "work"
+  },
+  {
+    "id": "work-06-05",
+    "german": "Rückmeldung",
+    "arabic": "الرد",
+    "article": "die",
+    "icon": "📨",
+    "world": "work"
+  },
+  {
+    "id": "work-06-06",
+    "german": "zurückrufen",
+    "arabic": "يعيد الاتصال",
+    "article": null,
+    "icon": "☎️",
+    "world": "work"
+  },
+  {
+    "id": "health-06-01",
+    "german": "Untersuchung",
+    "arabic": "الفحص",
+    "article": "die",
+    "icon": "🩺",
+    "world": "health"
+  },
+  {
+    "id": "health-06-02",
+    "german": "Versicherungskarte",
+    "arabic": "بطاقة التأمين",
+    "article": "die",
+    "icon": "🪪",
+    "world": "health"
+  },
+  {
+    "id": "health-06-03",
+    "german": "allergisch",
+    "arabic": "مصاب بالحساسية",
+    "article": null,
+    "icon": "🤧",
+    "world": "health"
+  },
+  {
+    "id": "health-06-04",
+    "german": "gesund",
+    "arabic": "سليم",
+    "article": null,
+    "icon": "🍏",
+    "world": "health"
+  },
+  {
+    "id": "health-06-05",
+    "german": "Behandlung",
+    "arabic": "العلاج",
+    "article": "die",
+    "icon": "🏥",
+    "world": "health"
+  },
+  {
+    "id": "health-06-06",
+    "german": "Nebenwirkung",
+    "arabic": "أثر جانبي",
+    "article": "die",
+    "icon": "⚠️",
+    "world": "health"
   }
 ]

@@ -10,7 +10,7 @@ Keine Anmeldung, kein Backend, keine Tracking: der gesamte Lernfortschritt liegt
 
 ## Inhalt
 
-- **5 Stadtbereiche** mit **25 Missionen** und **150 Wörtern**
+- **5 Stadtbereiche** mit **30 Missionen** und **180 Wörtern** auf A1/A2-Niveau
 - **8 Aufgabentypen**: choice, symbol, listen, match, build, blank, dialogue, basket
 - Level, XP, Sterne, Word-Mastery (1–5) und eine fälligkeitsbasierte Wiederholungsliste
 - Arabische Oberfläche (RTL) mit deutschen Sprachhinweisen
