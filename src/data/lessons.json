@@ -1,0 +1,952 @@
+[
+  {
+    "id": "home-01",
+    "world": "home",
+    "order": 0,
+    "titleDe": "Hallo!",
+    "titleAr": "التحية الأولى",
+    "wordIds": [
+      "home-01-01",
+      "home-01-02",
+      "home-01-03",
+      "home-01-04",
+      "home-01-05",
+      "home-01-06"
+    ],
+    "phrase": {
+      "german": "Guten Morgen, ich heiße Sami.",
+      "arabic": "صباح الخير، اسمي سامي."
+    },
+    "blank": {
+      "sentence": "___ Morgen!",
+      "answer": "Guten",
+      "options": [
+        "Guten",
+        "Hallo",
+        "Guten Morgen"
+      ]
+    },
+    "dialogue": {
+      "prompt": "Wie heißen Sie?",
+      "promptAr": "ما اسمك؟",
+      "answer": "Ich heiße Sami.",
+      "options": [
+        "Gute Nacht.",
+        "Das kostet drei Euro.",
+        "Ich heiße Sami."
+      ]
+    }
+  },
+  {
+    "id": "home-02",
+    "world": "home",
+    "order": 1,
+    "titleDe": "Mein Name",
+    "titleAr": "التعارف",
+    "wordIds": [
+      "home-02-01",
+      "home-02-02",
+      "home-02-03",
+      "home-02-04",
+      "home-02-05",
+      "home-02-06"
+    ],
+    "phrase": {
+      "german": "Mein Name ist Lina.",
+      "arabic": "اسمي لينا."
+    },
+    "blank": {
+      "sentence": "Mein ___ ist Lina.",
+      "answer": "Name",
+      "options": [
+        "Vorname",
+        "Nachname",
+        "Name"
+      ]
+    },
+    "dialogue": {
+      "prompt": "Woher kommen Sie?",
+      "promptAr": "من أين أنت؟",
+      "answer": "Ich komme aus Syrien.",
+      "options": [
+        "Das kostet drei Euro.",
+        "Ich komme aus Syrien.",
+        "Gute Nacht."
+      ]
+    }
+  },
+  {
+    "id": "home-03",
+    "world": "home",
+    "order": 2,
+    "titleDe": "Meine Wohnung",
+    "titleAr": "شقتي",
+    "wordIds": [
+      "home-03-01",
+      "home-03-02",
+      "home-03-03",
+      "home-03-04",
+      "home-03-05",
+      "home-03-06"
+    ],
+    "phrase": {
+      "german": "Das ist meine Wohnung.",
+      "arabic": "هذه شقتي."
+    },
+    "blank": {
+      "sentence": "Das ist meine ___.",
+      "answer": "Wohnung",
+      "options": [
+        "Zimmer",
+        "Wohnung",
+        "Haus"
+      ]
+    },
+    "dialogue": {
+      "prompt": "Haben Sie einen Schlüssel?",
+      "promptAr": "هل لديك مفتاح؟",
+      "answer": "Ja, hier ist er.",
+      "options": [
+        "Ja, hier ist er.",
+        "Gute Nacht.",
+        "Das kostet drei Euro."
+      ]
+    }
+  },
+  {
+    "id": "home-04",
+    "world": "home",
+    "order": 3,
+    "titleDe": "Möbel",
+    "titleAr": "الأثاث",
+    "wordIds": [
+      "home-04-01",
+      "home-04-02",
+      "home-04-03",
+      "home-04-04",
+      "home-04-05",
+      "home-04-06"
+    ],
+    "phrase": {
+      "german": "Der Tisch steht im Zimmer.",
+      "arabic": "الطاولة في الغرفة."
+    },
+    "blank": {
+      "sentence": "Der ___ steht im Zimmer.",
+      "answer": "Tisch",
+      "options": [
+        "Tisch",
+        "Stuhl",
+        "Bett"
+      ]
+    },
+    "dialogue": {
+      "prompt": "Wo ist das Bett?",
+      "promptAr": "أين السرير؟",
+      "answer": "Im Schlafzimmer.",
+      "options": [
+        "Gute Nacht.",
+        "Das kostet drei Euro.",
+        "Im Schlafzimmer."
+      ]
+    }
+  },
+  {
+    "id": "home-05",
+    "world": "home",
+    "order": 4,
+    "titleDe": "Mein Tag",
+    "titleAr": "يومي",
+    "wordIds": [
+      "home-05-01",
+      "home-05-02",
+      "home-05-03",
+      "home-05-04",
+      "home-05-05",
+      "home-05-06"
+    ],
+    "phrase": {
+      "german": "Wir frühstücken am Morgen.",
+      "arabic": "نتناول الفطور صباحاً."
+    },
+    "blank": {
+      "sentence": "Wir frühstücken am ___.",
+      "answer": "Morgen",
+      "options": [
+        "Abend",
+        "Tag",
+        "Morgen"
+      ]
+    },
+    "dialogue": {
+      "prompt": "Wie spät ist es?",
+      "promptAr": "كم الساعة؟",
+      "answer": "Es ist acht Uhr.",
+      "options": [
+        "Das kostet drei Euro.",
+        "Es ist acht Uhr.",
+        "Gute Nacht."
+      ]
+    }
+  },
+  {
+    "id": "market-01",
+    "world": "market",
+    "order": 5,
+    "titleDe": "Obst kaufen",
+    "titleAr": "شراء الفاكهة",
+    "wordIds": [
+      "market-01-01",
+      "market-01-02",
+      "market-01-03",
+      "market-01-04",
+      "market-01-05",
+      "market-01-06"
+    ],
+    "phrase": {
+      "german": "Ich möchte zwei Äpfel.",
+      "arabic": "أريد تفاحتين."
+    },
+    "blank": {
+      "sentence": "Ich möchte zwei ___.",
+      "answer": "Äpfel",
+      "options": [
+        "Banane",
+        "Äpfel",
+        "Apfel"
+      ]
+    },
+    "dialogue": {
+      "prompt": "Was möchten Sie?",
+      "promptAr": "ماذا تريد؟",
+      "answer": "Zwei Äpfel, bitte.",
+      "options": [
+        "Zwei Äpfel, bitte.",
+        "Gute Nacht.",
+        "Das kostet drei Euro."
+      ]
+    }
+  },
+  {
+    "id": "market-02",
+    "world": "market",
+    "order": 6,
+    "titleDe": "Gemüse",
+    "titleAr": "الخضار",
+    "wordIds": [
+      "market-02-01",
+      "market-02-02",
+      "market-02-03",
+      "market-02-04",
+      "market-02-05",
+      "market-02-06"
+    ],
+    "phrase": {
+      "german": "Die Tomate ist frisch.",
+      "arabic": "الطماطم طازجة."
+    },
+    "blank": {
+      "sentence": "Die ___ ist frisch.",
+      "answer": "Tomate",
+      "options": [
+        "Tomate",
+        "Kartoffel",
+        "Karotte"
+      ]
+    },
+    "dialogue": {
+      "prompt": "Haben Sie Kartoffeln?",
+      "promptAr": "هل لديكم بطاطا؟",
+      "answer": "Ja, dort drüben.",
+      "options": [
+        "Gute Nacht.",
+        "Das kostet drei Euro.",
+        "Ja, dort drüben."
+      ]
+    }
+  },
+  {
+    "id": "market-03",
+    "world": "market",
+    "order": 7,
+    "titleDe": "In der Bäckerei",
+    "titleAr": "في المخبز",
+    "wordIds": [
+      "market-03-01",
+      "market-03-02",
+      "market-03-03",
+      "market-03-04",
+      "market-03-05",
+      "market-03-06"
+    ],
+    "phrase": {
+      "german": "Das Brot kostet drei Euro.",
+      "arabic": "الخبز يكلف ثلاثة يورو."
+    },
+    "blank": {
+      "sentence": "Das ___ kostet drei Euro.",
+      "answer": "Brot",
+      "options": [
+        "Brötchen",
+        "Kuchen",
+        "Brot"
+      ]
+    },
+    "dialogue": {
+      "prompt": "Was kostet das Brot?",
+      "promptAr": "كم سعر الخبز؟",
+      "answer": "Drei Euro.",
+      "options": [
+        "Das kostet drei Euro.",
+        "Drei Euro.",
+        "Gute Nacht."
+      ]
+    }
+  },
+  {
+    "id": "market-04",
+    "world": "market",
+    "order": 8,
+    "titleDe": "Getränke",
+    "titleAr": "المشروبات",
+    "wordIds": [
+      "market-04-01",
+      "market-04-02",
+      "market-04-03",
+      "market-04-04",
+      "market-04-05",
+      "market-04-06"
+    ],
+    "phrase": {
+      "german": "Ich trinke ein Glas Wasser.",
+      "arabic": "أشرب كوب ماء."
+    },
+    "blank": {
+      "sentence": "Ich trinke ein Glas ___.",
+      "answer": "Wasser",
+      "options": [
+        "Kaffee",
+        "Wasser",
+        "Milch"
+      ]
+    },
+    "dialogue": {
+      "prompt": "Möchten Sie etwas trinken?",
+      "promptAr": "هل تريد شيئاً للشرب؟",
+      "answer": "Ja, Wasser, bitte.",
+      "options": [
+        "Ja, Wasser, bitte.",
+        "Gute Nacht.",
+        "Das kostet drei Euro."
+      ]
+    }
+  },
+  {
+    "id": "market-05",
+    "world": "market",
+    "order": 9,
+    "titleDe": "An der Kasse",
+    "titleAr": "عند صندوق الدفع",
+    "wordIds": [
+      "market-05-01",
+      "market-05-02",
+      "market-05-03",
+      "market-05-04",
+      "market-05-05",
+      "market-05-06"
+    ],
+    "phrase": {
+      "german": "Wo ist die Kasse?",
+      "arabic": "أين صندوق الدفع؟"
+    },
+    "blank": {
+      "sentence": "Wo ist die ___?",
+      "answer": "Kasse",
+      "options": [
+        "Kasse",
+        "Preis",
+        "Euro"
+      ]
+    },
+    "dialogue": {
+      "prompt": "Brauchen Sie eine Tüte?",
+      "promptAr": "هل تحتاج إلى كيس؟",
+      "answer": "Ja, bitte.",
+      "options": [
+        "Gute Nacht.",
+        "Das kostet drei Euro.",
+        "Ja, bitte."
+      ]
+    }
+  },
+  {
+    "id": "traffic-01",
+    "world": "traffic",
+    "order": 10,
+    "titleDe": "Verkehrsmittel",
+    "titleAr": "وسائل النقل",
+    "wordIds": [
+      "traffic-01-01",
+      "traffic-01-02",
+      "traffic-01-03",
+      "traffic-01-04",
+      "traffic-01-05",
+      "traffic-01-06"
+    ],
+    "phrase": {
+      "german": "Ich fahre mit dem Bus.",
+      "arabic": "أذهب بالحافلة."
+    },
+    "blank": {
+      "sentence": "Ich fahre mit dem ___.",
+      "answer": "Bus",
+      "options": [
+        "Bahn",
+        "Zug",
+        "Bus"
+      ]
+    },
+    "dialogue": {
+      "prompt": "Fahren Sie mit dem Bus?",
+      "promptAr": "هل تذهب بالحافلة؟",
+      "answer": "Ja, zum Bahnhof.",
+      "options": [
+        "Das kostet drei Euro.",
+        "Ja, zum Bahnhof.",
+        "Gute Nacht."
+      ]
+    }
+  },
+  {
+    "id": "traffic-02",
+    "world": "traffic",
+    "order": 11,
+    "titleDe": "Am Bahnhof",
+    "titleAr": "في المحطة",
+    "wordIds": [
+      "traffic-02-01",
+      "traffic-02-02",
+      "traffic-02-03",
+      "traffic-02-04",
+      "traffic-02-05",
+      "traffic-02-06"
+    ],
+    "phrase": {
+      "german": "Der Bahnhof ist dort.",
+      "arabic": "محطة القطار هناك."
+    },
+    "blank": {
+      "sentence": "Der ___ ist dort.",
+      "answer": "Bahnhof",
+      "options": [
+        "Gleis",
+        "Bahnhof",
+        "Haltestelle"
+      ]
+    },
+    "dialogue": {
+      "prompt": "Wo ist die Haltestelle?",
+      "promptAr": "أين الموقف؟",
+      "answer": "Dort an der Straße.",
+      "options": [
+        "Dort an der Straße.",
+        "Gute Nacht.",
+        "Das kostet drei Euro."
+      ]
+    }
+  },
+  {
+    "id": "traffic-03",
+    "world": "traffic",
+    "order": 12,
+    "titleDe": "Fahrkarte",
+    "titleAr": "تذكرة السفر",
+    "wordIds": [
+      "traffic-03-01",
+      "traffic-03-02",
+      "traffic-03-03",
+      "traffic-03-04",
+      "traffic-03-05",
+      "traffic-03-06"
+    ],
+    "phrase": {
+      "german": "Ich brauche ein Ticket.",
+      "arabic": "أحتاج إلى تذكرة."
+    },
+    "blank": {
+      "sentence": "Ich brauche ein ___.",
+      "answer": "Ticket",
+      "options": [
+        "Ticket",
+        "Fahrkarte",
+        "Automat"
+      ]
+    },
+    "dialogue": {
+      "prompt": "Haben Sie eine Fahrkarte?",
+      "promptAr": "هل لديك تذكرة سفر؟",
+      "answer": "Ja, hier ist sie.",
+      "options": [
+        "Gute Nacht.",
+        "Das kostet drei Euro.",
+        "Ja, hier ist sie."
+      ]
+    }
+  },
+  {
+    "id": "traffic-04",
+    "world": "traffic",
+    "order": 13,
+    "titleDe": "Den Weg finden",
+    "titleAr": "معرفة الطريق",
+    "wordIds": [
+      "traffic-04-01",
+      "traffic-04-02",
+      "traffic-04-03",
+      "traffic-04-04",
+      "traffic-04-05",
+      "traffic-04-06"
+    ],
+    "phrase": {
+      "german": "Gehen Sie zur Ampel.",
+      "arabic": "اذهب إلى إشارة المرور."
+    },
+    "blank": {
+      "sentence": "Gehen Sie zur ___.",
+      "answer": "Ampel",
+      "options": [
+        "Karte",
+        "Weg",
+        "Ampel"
+      ]
+    },
+    "dialogue": {
+      "prompt": "Wo ist der Ausgang?",
+      "promptAr": "أين المخرج؟",
+      "answer": "Geradeaus und dann links.",
+      "options": [
+        "Das kostet drei Euro.",
+        "Geradeaus und dann links.",
+        "Gute Nacht."
+      ]
+    }
+  },
+  {
+    "id": "traffic-05",
+    "world": "traffic",
+    "order": 14,
+    "titleDe": "Pünktlich sein",
+    "titleAr": "الوصول في الوقت",
+    "wordIds": [
+      "traffic-05-01",
+      "traffic-05-02",
+      "traffic-05-03",
+      "traffic-05-04",
+      "traffic-05-05",
+      "traffic-05-06"
+    ],
+    "phrase": {
+      "german": "Der Zug hat Verspätung.",
+      "arabic": "القطار متأخر."
+    },
+    "blank": {
+      "sentence": "Der Zug hat ___.",
+      "answer": "Verspätung",
+      "options": [
+        "Stunde",
+        "Verspätung",
+        "Minute"
+      ]
+    },
+    "dialogue": {
+      "prompt": "Wann fährt der Zug?",
+      "promptAr": "متى ينطلق القطار؟",
+      "answer": "In zehn Minuten.",
+      "options": [
+        "In zehn Minuten.",
+        "Gute Nacht.",
+        "Das kostet drei Euro."
+      ]
+    }
+  },
+  {
+    "id": "work-01",
+    "world": "work",
+    "order": 15,
+    "titleDe": "Mein Arbeitsplatz",
+    "titleAr": "مكان عملي",
+    "wordIds": [
+      "work-01-01",
+      "work-01-02",
+      "work-01-03",
+      "work-01-04",
+      "work-01-05",
+      "work-01-06"
+    ],
+    "phrase": {
+      "german": "Ich arbeite im Büro.",
+      "arabic": "أعمل في المكتب."
+    },
+    "blank": {
+      "sentence": "Ich arbeite im ___.",
+      "answer": "Büro",
+      "options": [
+        "Büro",
+        "Arbeit",
+        "Firma"
+      ]
+    },
+    "dialogue": {
+      "prompt": "Wo arbeiten Sie?",
+      "promptAr": "أين تعمل؟",
+      "answer": "In einem Büro.",
+      "options": [
+        "Gute Nacht.",
+        "Das kostet drei Euro.",
+        "In einem Büro."
+      ]
+    }
+  },
+  {
+    "id": "work-02",
+    "world": "work",
+    "order": 16,
+    "titleDe": "Im Büro",
+    "titleAr": "في المكتب",
+    "wordIds": [
+      "work-02-01",
+      "work-02-02",
+      "work-02-03",
+      "work-02-04",
+      "work-02-05",
+      "work-02-06"
+    ],
+    "phrase": {
+      "german": "Ich schreibe eine E-Mail.",
+      "arabic": "أكتب بريداً إلكترونياً."
+    },
+    "blank": {
+      "sentence": "Ich schreibe eine ___.",
+      "answer": "E-Mail",
+      "options": [
+        "Computer",
+        "Bildschirm",
+        "E-Mail"
+      ]
+    },
+    "dialogue": {
+      "prompt": "Ist der Computer frei?",
+      "promptAr": "هل الحاسوب متاح؟",
+      "answer": "Ja, bitte.",
+      "options": [
+        "Das kostet drei Euro.",
+        "Ja, bitte.",
+        "Gute Nacht."
+      ]
+    }
+  },
+  {
+    "id": "work-03",
+    "world": "work",
+    "order": 17,
+    "titleDe": "Zeit und Termine",
+    "titleAr": "الوقت والمواعيد",
+    "wordIds": [
+      "work-03-01",
+      "work-03-02",
+      "work-03-03",
+      "work-03-04",
+      "work-03-05",
+      "work-03-06"
+    ],
+    "phrase": {
+      "german": "Der Termin ist am Montag.",
+      "arabic": "الموعد يوم الاثنين."
+    },
+    "blank": {
+      "sentence": "Der ___ ist am Montag.",
+      "answer": "Termin",
+      "options": [
+        "Schicht",
+        "Termin",
+        "Pause"
+      ]
+    },
+    "dialogue": {
+      "prompt": "Wann haben wir Pause?",
+      "promptAr": "متى الاستراحة؟",
+      "answer": "Um zwölf Uhr.",
+      "options": [
+        "Um zwölf Uhr.",
+        "Gute Nacht.",
+        "Das kostet drei Euro."
+      ]
+    }
+  },
+  {
+    "id": "work-04",
+    "world": "work",
+    "order": 18,
+    "titleDe": "Eine Stelle suchen",
+    "titleAr": "البحث عن وظيفة",
+    "wordIds": [
+      "work-04-01",
+      "work-04-02",
+      "work-04-03",
+      "work-04-04",
+      "work-04-05",
+      "work-04-06"
+    ],
+    "phrase": {
+      "german": "Ich habe einen Lebenslauf.",
+      "arabic": "لدي سيرة ذاتية."
+    },
+    "blank": {
+      "sentence": "Ich habe einen ___.",
+      "answer": "Lebenslauf",
+      "options": [
+        "Lebenslauf",
+        "Beruf",
+        "Bewerbung"
+      ]
+    },
+    "dialogue": {
+      "prompt": "Suchen Sie eine Stelle?",
+      "promptAr": "هل تبحث عن وظيفة؟",
+      "answer": "Ja, ich bewerbe mich.",
+      "options": [
+        "Gute Nacht.",
+        "Das kostet drei Euro.",
+        "Ja, ich bewerbe mich."
+      ]
+    }
+  },
+  {
+    "id": "work-05",
+    "world": "work",
+    "order": 19,
+    "titleDe": "Zusammen arbeiten",
+    "titleAr": "العمل معاً",
+    "wordIds": [
+      "work-05-01",
+      "work-05-02",
+      "work-05-03",
+      "work-05-04",
+      "work-05-05",
+      "work-05-06"
+    ],
+    "phrase": {
+      "german": "Ich habe eine Frage zum Projekt.",
+      "arabic": "لدي سؤال عن المشروع."
+    },
+    "blank": {
+      "sentence": "Ich habe eine ___ zum Projekt.",
+      "answer": "Frage",
+      "options": [
+        "Besprechung",
+        "Antwort",
+        "Frage"
+      ]
+    },
+    "dialogue": {
+      "prompt": "Haben Sie die Aufgabe verstanden?",
+      "promptAr": "هل فهمت المهمة؟",
+      "answer": "Ja, danke.",
+      "options": [
+        "Das kostet drei Euro.",
+        "Ja, danke.",
+        "Gute Nacht."
+      ]
+    }
+  },
+  {
+    "id": "health-01",
+    "world": "health",
+    "order": 20,
+    "titleDe": "Mein Kopf",
+    "titleAr": "رأسي",
+    "wordIds": [
+      "health-01-01",
+      "health-01-02",
+      "health-01-03",
+      "health-01-04",
+      "health-01-05",
+      "health-01-06"
+    ],
+    "phrase": {
+      "german": "Mein Kopf tut weh.",
+      "arabic": "رأسي يؤلمني."
+    },
+    "blank": {
+      "sentence": "Mein ___ tut weh.",
+      "answer": "Kopf",
+      "options": [
+        "Ohr",
+        "Kopf",
+        "Auge"
+      ]
+    },
+    "dialogue": {
+      "prompt": "Wo tut es weh?",
+      "promptAr": "أين يؤلمك؟",
+      "answer": "Am Kopf.",
+      "options": [
+        "Am Kopf.",
+        "Gute Nacht.",
+        "Das kostet drei Euro."
+      ]
+    }
+  },
+  {
+    "id": "health-02",
+    "world": "health",
+    "order": 21,
+    "titleDe": "Mein Körper",
+    "titleAr": "جسمي",
+    "wordIds": [
+      "health-02-01",
+      "health-02-02",
+      "health-02-03",
+      "health-02-04",
+      "health-02-05",
+      "health-02-06"
+    ],
+    "phrase": {
+      "german": "Mein Bauch tut weh.",
+      "arabic": "بطني يؤلمني."
+    },
+    "blank": {
+      "sentence": "Mein ___ tut weh.",
+      "answer": "Bauch",
+      "options": [
+        "Bauch",
+        "Arm",
+        "Bein"
+      ]
+    },
+    "dialogue": {
+      "prompt": "Wo haben Sie Schmerzen?",
+      "promptAr": "أين تشعر بالألم؟",
+      "answer": "Im Bauch.",
+      "options": [
+        "Gute Nacht.",
+        "Das kostet drei Euro.",
+        "Im Bauch."
+      ]
+    }
+  },
+  {
+    "id": "health-03",
+    "world": "health",
+    "order": 22,
+    "titleDe": "Beim Arzt",
+    "titleAr": "عند الطبيب",
+    "wordIds": [
+      "health-03-01",
+      "health-03-02",
+      "health-03-03",
+      "health-03-04",
+      "health-03-05",
+      "health-03-06"
+    ],
+    "phrase": {
+      "german": "Ich brauche einen Termin beim Arzt.",
+      "arabic": "أحتاج إلى موعد عند الطبيب."
+    },
+    "blank": {
+      "sentence": "Ich brauche einen ___ beim Arzt.",
+      "answer": "Termin",
+      "options": [
+        "Arzt",
+        "Ärztin",
+        "Termin"
+      ]
+    },
+    "dialogue": {
+      "prompt": "Haben Sie einen Termin?",
+      "promptAr": "هل لديك موعد؟",
+      "answer": "Ja, um zehn Uhr.",
+      "options": [
+        "Das kostet drei Euro.",
+        "Ja, um zehn Uhr.",
+        "Gute Nacht."
+      ]
+    }
+  },
+  {
+    "id": "health-04",
+    "world": "health",
+    "order": 23,
+    "titleDe": "Wie geht es dir?",
+    "titleAr": "كيف حالك؟",
+    "wordIds": [
+      "health-04-01",
+      "health-04-02",
+      "health-04-03",
+      "health-04-04",
+      "health-04-05",
+      "health-04-06"
+    ],
+    "phrase": {
+      "german": "Ich habe Fieber und Husten.",
+      "arabic": "لدي حمّى وسعال."
+    },
+    "blank": {
+      "sentence": "Ich habe ___ und Husten.",
+      "answer": "Fieber",
+      "options": [
+        "Husten",
+        "Fieber",
+        "Schmerz"
+      ]
+    },
+    "dialogue": {
+      "prompt": "Was fehlt Ihnen?",
+      "promptAr": "ما الذي تعاني منه؟",
+      "answer": "Ich habe Fieber.",
+      "options": [
+        "Ich habe Fieber.",
+        "Gute Nacht.",
+        "Das kostet drei Euro."
+      ]
+    }
+  },
+  {
+    "id": "health-05",
+    "world": "health",
+    "order": 24,
+    "titleDe": "In der Apotheke",
+    "titleAr": "في الصيدلية",
+    "wordIds": [
+      "health-05-01",
+      "health-05-02",
+      "health-05-03",
+      "health-05-04",
+      "health-05-05",
+      "health-05-06"
+    ],
+    "phrase": {
+      "german": "Ich brauche ein Medikament.",
+      "arabic": "أحتاج إلى دواء."
+    },
+    "blank": {
+      "sentence": "Ich brauche ein ___.",
+      "answer": "Medikament",
+      "options": [
+        "Medikament",
+        "Tablette",
+        "Wasser"
+      ]
+    },
+    "dialogue": {
+      "prompt": "Brauchen Sie Hilfe?",
+      "promptAr": "هل تحتاج إلى مساعدة؟",
+      "answer": "Ja, bitte.",
+      "options": [
+        "Gute Nacht.",
+        "Das kostet drei Euro.",
+        "Ja, bitte."
+      ]
+    }
+  }
+]

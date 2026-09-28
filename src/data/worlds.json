@@ -1,0 +1,42 @@
+[
+  {
+    "id": "home",
+    "de": "Zuhause",
+    "ar": "البيت والبداية",
+    "subtitle": "Begrüßung, Wohnung und Alltag",
+    "icon": "⌂",
+    "color": "#2b9d95"
+  },
+  {
+    "id": "market",
+    "de": "Supermarkt",
+    "ar": "السوق",
+    "subtitle": "Einkaufen, Essen und Preise",
+    "icon": "◧",
+    "color": "#efaa62"
+  },
+  {
+    "id": "traffic",
+    "de": "Unterwegs",
+    "ar": "في الطريق",
+    "subtitle": "Bus, Bahn und Orientierung",
+    "icon": "↗",
+    "color": "#6b8fce"
+  },
+  {
+    "id": "work",
+    "de": "Arbeit",
+    "ar": "العمل",
+    "subtitle": "Beruf, Termine und Gespräche",
+    "icon": "▣",
+    "color": "#9c83b9"
+  },
+  {
+    "id": "health",
+    "de": "Gesundheit",
+    "ar": "الصحة",
+    "subtitle": "Körper, Arzt und Apotheke",
+    "icon": "+",
+    "color": "#de807e"
+  }
+]

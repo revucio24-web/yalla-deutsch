@@ -1,0 +1,1202 @@
+[
+  {
+    "id": "home-01-01",
+    "german": "Hallo",
+    "arabic": "مرحباً",
+    "article": null,
+    "icon": "👋",
+    "world": "home"
+  },
+  {
+    "id": "home-01-02",
+    "german": "Guten Morgen",
+    "arabic": "صباح الخير",
+    "article": null,
+    "icon": "🌅",
+    "world": "home"
+  },
+  {
+    "id": "home-01-03",
+    "german": "Guten Tag",
+    "arabic": "نهارك سعيد",
+    "article": null,
+    "icon": "☀️",
+    "world": "home"
+  },
+  {
+    "id": "home-01-04",
+    "german": "Guten Abend",
+    "arabic": "مساء الخير",
+    "article": null,
+    "icon": "🌆",
+    "world": "home"
+  },
+  {
+    "id": "home-01-05",
+    "german": "Tschüss",
+    "arabic": "وداعاً",
+    "article": null,
+    "icon": "👋",
+    "world": "home"
+  },
+  {
+    "id": "home-01-06",
+    "german": "Danke",
+    "arabic": "شكراً",
+    "article": null,
+    "icon": "🙏",
+    "world": "home"
+  },
+  {
+    "id": "home-02-01",
+    "german": "Name",
+    "arabic": "اسم",
+    "article": "der",
+    "icon": "✍️",
+    "world": "home"
+  },
+  {
+    "id": "home-02-02",
+    "german": "Vorname",
+    "arabic": "الاسم الأول",
+    "article": "der",
+    "icon": "🪪",
+    "world": "home"
+  },
+  {
+    "id": "home-02-03",
+    "german": "Nachname",
+    "arabic": "اسم العائلة",
+    "article": "der",
+    "icon": "🪪",
+    "world": "home"
+  },
+  {
+    "id": "home-02-04",
+    "german": "Adresse",
+    "arabic": "عنوان",
+    "article": "die",
+    "icon": "📍",
+    "world": "home"
+  },
+  {
+    "id": "home-02-05",
+    "german": "Stadt",
+    "arabic": "مدينة",
+    "article": "die",
+    "icon": "🏙️",
+    "world": "home"
+  },
+  {
+    "id": "home-02-06",
+    "german": "Land",
+    "arabic": "بلد",
+    "article": "das",
+    "icon": "🌍",
+    "world": "home"
+  },
+  {
+    "id": "home-03-01",
+    "german": "Wohnung",
+    "arabic": "شقة",
+    "article": "die",
+    "icon": "🏠",
+    "world": "home"
+  },
+  {
+    "id": "home-03-02",
+    "german": "Haus",
+    "arabic": "بيت",
+    "article": "das",
+    "icon": "🏡",
+    "world": "home"
+  },
+  {
+    "id": "home-03-03",
+    "german": "Zimmer",
+    "arabic": "غرفة",
+    "article": "das",
+    "icon": "🚪",
+    "world": "home"
+  },
+  {
+    "id": "home-03-04",
+    "german": "Tür",
+    "arabic": "باب",
+    "article": "die",
+    "icon": "🚪",
+    "world": "home"
+  },
+  {
+    "id": "home-03-05",
+    "german": "Fenster",
+    "arabic": "نافذة",
+    "article": "das",
+    "icon": "🪟",
+    "world": "home"
+  },
+  {
+    "id": "home-03-06",
+    "german": "Schlüssel",
+    "arabic": "مفتاح",
+    "article": "der",
+    "icon": "🔑",
+    "world": "home"
+  },
+  {
+    "id": "home-04-01",
+    "german": "Tisch",
+    "arabic": "طاولة",
+    "article": "der",
+    "icon": "🪑",
+    "world": "home"
+  },
+  {
+    "id": "home-04-02",
+    "german": "Stuhl",
+    "arabic": "كرسي",
+    "article": "der",
+    "icon": "🪑",
+    "world": "home"
+  },
+  {
+    "id": "home-04-03",
+    "german": "Bett",
+    "arabic": "سرير",
+    "article": "das",
+    "icon": "🛏️",
+    "world": "home"
+  },
+  {
+    "id": "home-04-04",
+    "german": "Sofa",
+    "arabic": "أريكة",
+    "article": "das",
+    "icon": "🛋️",
+    "world": "home"
+  },
+  {
+    "id": "home-04-05",
+    "german": "Schrank",
+    "arabic": "خزانة",
+    "article": "der",
+    "icon": "🗄️",
+    "world": "home"
+  },
+  {
+    "id": "home-04-06",
+    "german": "Lampe",
+    "arabic": "مصباح",
+    "article": "die",
+    "icon": "💡",
+    "world": "home"
+  },
+  {
+    "id": "home-05-01",
+    "german": "Morgen",
+    "arabic": "صباح",
+    "article": "der",
+    "icon": "🌅",
+    "world": "home"
+  },
+  {
+    "id": "home-05-02",
+    "german": "Abend",
+    "arabic": "مساء",
+    "article": "der",
+    "icon": "🌇",
+    "world": "home"
+  },
+  {
+    "id": "home-05-03",
+    "german": "Tag",
+    "arabic": "يوم",
+    "article": "der",
+    "icon": "☀️",
+    "world": "home"
+  },
+  {
+    "id": "home-05-04",
+    "german": "Nacht",
+    "arabic": "ليل",
+    "article": "die",
+    "icon": "🌙",
+    "world": "home"
+  },
+  {
+    "id": "home-05-05",
+    "german": "Frühstück",
+    "arabic": "فطور",
+    "article": "das",
+    "icon": "🥐",
+    "world": "home"
+  },
+  {
+    "id": "home-05-06",
+    "german": "Uhr",
+    "arabic": "ساعة",
+    "article": "die",
+    "icon": "🕒",
+    "world": "home"
+  },
+  {
+    "id": "market-01-01",
+    "german": "Apfel",
+    "arabic": "تفاحة",
+    "article": "der",
+    "icon": "🍎",
+    "world": "market"
+  },
+  {
+    "id": "market-01-02",
+    "german": "Banane",
+    "arabic": "موزة",
+    "article": "die",
+    "icon": "🍌",
+    "world": "market"
+  },
+  {
+    "id": "market-01-03",
+    "german": "Orange",
+    "arabic": "برتقالة",
+    "article": "die",
+    "icon": "🍊",
+    "world": "market"
+  },
+  {
+    "id": "market-01-04",
+    "german": "Birne",
+    "arabic": "كمثرى",
+    "article": "die",
+    "icon": "🍐",
+    "world": "market"
+  },
+  {
+    "id": "market-01-05",
+    "german": "Traube",
+    "arabic": "حبة عنب",
+    "article": "die",
+    "icon": "🍇",
+    "world": "market"
+  },
+  {
+    "id": "market-01-06",
+    "german": "Erdbeere",
+    "arabic": "فراولة",
+    "article": "die",
+    "icon": "🍓",
+    "world": "market"
+  },
+  {
+    "id": "market-02-01",
+    "german": "Tomate",
+    "arabic": "طماطم",
+    "article": "die",
+    "icon": "🍅",
+    "world": "market"
+  },
+  {
+    "id": "market-02-02",
+    "german": "Kartoffel",
+    "arabic": "بطاطا",
+    "article": "die",
+    "icon": "🥔",
+    "world": "market"
+  },
+  {
+    "id": "market-02-03",
+    "german": "Karotte",
+    "arabic": "جزرة",
+    "article": "die",
+    "icon": "🥕",
+    "world": "market"
+  },
+  {
+    "id": "market-02-04",
+    "german": "Gurke",
+    "arabic": "خيار",
+    "article": "die",
+    "icon": "🥒",
+    "world": "market"
+  },
+  {
+    "id": "market-02-05",
+    "german": "Zwiebel",
+    "arabic": "بصلة",
+    "article": "die",
+    "icon": "🧅",
+    "world": "market"
+  },
+  {
+    "id": "market-02-06",
+    "german": "Salat",
+    "arabic": "سلطة",
+    "article": "der",
+    "icon": "🥗",
+    "world": "market"
+  },
+  {
+    "id": "market-03-01",
+    "german": "Brot",
+    "arabic": "خبز",
+    "article": "das",
+    "icon": "🍞",
+    "world": "market"
+  },
+  {
+    "id": "market-03-02",
+    "german": "Brötchen",
+    "arabic": "خبزة صغيرة",
+    "article": "das",
+    "icon": "🥖",
+    "world": "market"
+  },
+  {
+    "id": "market-03-03",
+    "german": "Kuchen",
+    "arabic": "كعكة",
+    "article": "der",
+    "icon": "🍰",
+    "world": "market"
+  },
+  {
+    "id": "market-03-04",
+    "german": "Keks",
+    "arabic": "بسكويت",
+    "article": "der",
+    "icon": "🍪",
+    "world": "market"
+  },
+  {
+    "id": "market-03-05",
+    "german": "Mehl",
+    "arabic": "طحين",
+    "article": "das",
+    "icon": "🌾",
+    "world": "market"
+  },
+  {
+    "id": "market-03-06",
+    "german": "Butter",
+    "arabic": "زبدة",
+    "article": "die",
+    "icon": "🧈",
+    "world": "market"
+  },
+  {
+    "id": "market-04-01",
+    "german": "Wasser",
+    "arabic": "ماء",
+    "article": "das",
+    "icon": "💧",
+    "world": "market"
+  },
+  {
+    "id": "market-04-02",
+    "german": "Milch",
+    "arabic": "حليب",
+    "article": "die",
+    "icon": "🥛",
+    "world": "market"
+  },
+  {
+    "id": "market-04-03",
+    "german": "Kaffee",
+    "arabic": "قهوة",
+    "article": "der",
+    "icon": "☕",
+    "world": "market"
+  },
+  {
+    "id": "market-04-04",
+    "german": "Tee",
+    "arabic": "شاي",
+    "article": "der",
+    "icon": "🫖",
+    "world": "market"
+  },
+  {
+    "id": "market-04-05",
+    "german": "Saft",
+    "arabic": "عصير",
+    "article": "der",
+    "icon": "🧃",
+    "world": "market"
+  },
+  {
+    "id": "market-04-06",
+    "german": "Flasche",
+    "arabic": "زجاجة",
+    "article": "die",
+    "icon": "🍾",
+    "world": "market"
+  },
+  {
+    "id": "market-05-01",
+    "german": "Preis",
+    "arabic": "سعر",
+    "article": "der",
+    "icon": "🏷️",
+    "world": "market"
+  },
+  {
+    "id": "market-05-02",
+    "german": "Kasse",
+    "arabic": "صندوق الدفع",
+    "article": "die",
+    "icon": "🧾",
+    "world": "market"
+  },
+  {
+    "id": "market-05-03",
+    "german": "Euro",
+    "arabic": "يورو",
+    "article": "der",
+    "icon": "💶",
+    "world": "market"
+  },
+  {
+    "id": "market-05-04",
+    "german": "Geld",
+    "arabic": "مال",
+    "article": "das",
+    "icon": "💰",
+    "world": "market"
+  },
+  {
+    "id": "market-05-05",
+    "german": "Tüte",
+    "arabic": "كيس",
+    "article": "die",
+    "icon": "🛍️",
+    "world": "market"
+  },
+  {
+    "id": "market-05-06",
+    "german": "Quittung",
+    "arabic": "إيصال",
+    "article": "die",
+    "icon": "🧾",
+    "world": "market"
+  },
+  {
+    "id": "traffic-01-01",
+    "german": "Bus",
+    "arabic": "حافلة",
+    "article": "der",
+    "icon": "🚌",
+    "world": "traffic"
+  },
+  {
+    "id": "traffic-01-02",
+    "german": "Bahn",
+    "arabic": "قطار محلي",
+    "article": "die",
+    "icon": "🚈",
+    "world": "traffic"
+  },
+  {
+    "id": "traffic-01-03",
+    "german": "Zug",
+    "arabic": "قطار",
+    "article": "der",
+    "icon": "🚆",
+    "world": "traffic"
+  },
+  {
+    "id": "traffic-01-04",
+    "german": "Fahrrad",
+    "arabic": "دراجة",
+    "article": "das",
+    "icon": "🚲",
+    "world": "traffic"
+  },
+  {
+    "id": "traffic-01-05",
+    "german": "Auto",
+    "arabic": "سيارة",
+    "article": "das",
+    "icon": "🚗",
+    "world": "traffic"
+  },
+  {
+    "id": "traffic-01-06",
+    "german": "Taxi",
+    "arabic": "سيارة أجرة",
+    "article": "das",
+    "icon": "🚕",
+    "world": "traffic"
+  },
+  {
+    "id": "traffic-02-01",
+    "german": "Bahnhof",
+    "arabic": "محطة القطار",
+    "article": "der",
+    "icon": "🚉",
+    "world": "traffic"
+  },
+  {
+    "id": "traffic-02-02",
+    "german": "Haltestelle",
+    "arabic": "موقف",
+    "article": "die",
+    "icon": "🚏",
+    "world": "traffic"
+  },
+  {
+    "id": "traffic-02-03",
+    "german": "Gleis",
+    "arabic": "رصيف القطار",
+    "article": "das",
+    "icon": "🚆",
+    "world": "traffic"
+  },
+  {
+    "id": "traffic-02-04",
+    "german": "Straße",
+    "arabic": "شارع",
+    "article": "die",
+    "icon": "🛣️",
+    "world": "traffic"
+  },
+  {
+    "id": "traffic-02-05",
+    "german": "Kreuzung",
+    "arabic": "تقاطع",
+    "article": "die",
+    "icon": "➕",
+    "world": "traffic"
+  },
+  {
+    "id": "traffic-02-06",
+    "german": "Ampel",
+    "arabic": "إشارة المرور",
+    "article": "die",
+    "icon": "🚦",
+    "world": "traffic"
+  },
+  {
+    "id": "traffic-03-01",
+    "german": "Ticket",
+    "arabic": "تذكرة",
+    "article": "das",
+    "icon": "🎫",
+    "world": "traffic"
+  },
+  {
+    "id": "traffic-03-02",
+    "german": "Fahrkarte",
+    "arabic": "تذكرة سفر",
+    "article": "die",
+    "icon": "🎟️",
+    "world": "traffic"
+  },
+  {
+    "id": "traffic-03-03",
+    "german": "Automat",
+    "arabic": "آلة البيع",
+    "article": "der",
+    "icon": "🏧",
+    "world": "traffic"
+  },
+  {
+    "id": "traffic-03-04",
+    "german": "Fahrplan",
+    "arabic": "جدول الرحلات",
+    "article": "der",
+    "icon": "🗓️",
+    "world": "traffic"
+  },
+  {
+    "id": "traffic-03-05",
+    "german": "Abfahrt",
+    "arabic": "مغادرة",
+    "article": "die",
+    "icon": "↗️",
+    "world": "traffic"
+  },
+  {
+    "id": "traffic-03-06",
+    "german": "Ankunft",
+    "arabic": "وصول",
+    "article": "die",
+    "icon": "↘️",
+    "world": "traffic"
+  },
+  {
+    "id": "traffic-04-01",
+    "german": "Karte",
+    "arabic": "خريطة",
+    "article": "die",
+    "icon": "🗺️",
+    "world": "traffic"
+  },
+  {
+    "id": "traffic-04-02",
+    "german": "Weg",
+    "arabic": "طريق",
+    "article": "der",
+    "icon": "🛤️",
+    "world": "traffic"
+  },
+  {
+    "id": "traffic-04-03",
+    "german": "Richtung",
+    "arabic": "اتجاه",
+    "article": "die",
+    "icon": "🧭",
+    "world": "traffic"
+  },
+  {
+    "id": "traffic-04-04",
+    "german": "Ecke",
+    "arabic": "زاوية",
+    "article": "die",
+    "icon": "↪️",
+    "world": "traffic"
+  },
+  {
+    "id": "traffic-04-05",
+    "german": "Brücke",
+    "arabic": "جسر",
+    "article": "die",
+    "icon": "🌉",
+    "world": "traffic"
+  },
+  {
+    "id": "traffic-04-06",
+    "german": "Ausgang",
+    "arabic": "مخرج",
+    "article": "der",
+    "icon": "🚪",
+    "world": "traffic"
+  },
+  {
+    "id": "traffic-05-01",
+    "german": "Minute",
+    "arabic": "دقيقة",
+    "article": "die",
+    "icon": "⏱️",
+    "world": "traffic"
+  },
+  {
+    "id": "traffic-05-02",
+    "german": "Stunde",
+    "arabic": "ساعة",
+    "article": "die",
+    "icon": "🕐",
+    "world": "traffic"
+  },
+  {
+    "id": "traffic-05-03",
+    "german": "Fahrgast",
+    "arabic": "راكب",
+    "article": "der",
+    "icon": "🧍",
+    "world": "traffic"
+  },
+  {
+    "id": "traffic-05-04",
+    "german": "Fahrer",
+    "arabic": "سائق",
+    "article": "der",
+    "icon": "🧑‍✈️",
+    "world": "traffic"
+  },
+  {
+    "id": "traffic-05-05",
+    "german": "Verspätung",
+    "arabic": "تأخير",
+    "article": "die",
+    "icon": "⌛",
+    "world": "traffic"
+  },
+  {
+    "id": "traffic-05-06",
+    "german": "Anschluss",
+    "arabic": "وصلة نقل",
+    "article": "der",
+    "icon": "🔄",
+    "world": "traffic"
+  },
+  {
+    "id": "work-01-01",
+    "german": "Arbeit",
+    "arabic": "عمل",
+    "article": "die",
+    "icon": "💼",
+    "world": "work"
+  },
+  {
+    "id": "work-01-02",
+    "german": "Büro",
+    "arabic": "مكتب",
+    "article": "das",
+    "icon": "🏢",
+    "world": "work"
+  },
+  {
+    "id": "work-01-03",
+    "german": "Firma",
+    "arabic": "شركة",
+    "article": "die",
+    "icon": "🏬",
+    "world": "work"
+  },
+  {
+    "id": "work-01-04",
+    "german": "Arbeitsplatz",
+    "arabic": "مكان العمل",
+    "article": "der",
+    "icon": "🖥️",
+    "world": "work"
+  },
+  {
+    "id": "work-01-05",
+    "german": "Chef",
+    "arabic": "مدير",
+    "article": "der",
+    "icon": "👨‍💼",
+    "world": "work"
+  },
+  {
+    "id": "work-01-06",
+    "german": "Kollegin",
+    "arabic": "زميلة",
+    "article": "die",
+    "icon": "👩‍💼",
+    "world": "work"
+  },
+  {
+    "id": "work-02-01",
+    "german": "Computer",
+    "arabic": "حاسوب",
+    "article": "der",
+    "icon": "💻",
+    "world": "work"
+  },
+  {
+    "id": "work-02-02",
+    "german": "Bildschirm",
+    "arabic": "شاشة",
+    "article": "der",
+    "icon": "🖥️",
+    "world": "work"
+  },
+  {
+    "id": "work-02-03",
+    "german": "Tastatur",
+    "arabic": "لوحة مفاتيح",
+    "article": "die",
+    "icon": "⌨️",
+    "world": "work"
+  },
+  {
+    "id": "work-02-04",
+    "german": "Maus",
+    "arabic": "فأرة الحاسوب",
+    "article": "die",
+    "icon": "🖱️",
+    "world": "work"
+  },
+  {
+    "id": "work-02-05",
+    "german": "Telefon",
+    "arabic": "هاتف",
+    "article": "das",
+    "icon": "☎️",
+    "world": "work"
+  },
+  {
+    "id": "work-02-06",
+    "german": "E-Mail",
+    "arabic": "بريد إلكتروني",
+    "article": "die",
+    "icon": "✉️",
+    "world": "work"
+  },
+  {
+    "id": "work-03-01",
+    "german": "Termin",
+    "arabic": "موعد",
+    "article": "der",
+    "icon": "📅",
+    "world": "work"
+  },
+  {
+    "id": "work-03-02",
+    "german": "Pause",
+    "arabic": "استراحة",
+    "article": "die",
+    "icon": "☕",
+    "world": "work"
+  },
+  {
+    "id": "work-03-03",
+    "german": "Schicht",
+    "arabic": "وردية عمل",
+    "article": "die",
+    "icon": "🕗",
+    "world": "work"
+  },
+  {
+    "id": "work-03-04",
+    "german": "Woche",
+    "arabic": "أسبوع",
+    "article": "die",
+    "icon": "🗓️",
+    "world": "work"
+  },
+  {
+    "id": "work-03-05",
+    "german": "Monat",
+    "arabic": "شهر",
+    "article": "der",
+    "icon": "📆",
+    "world": "work"
+  },
+  {
+    "id": "work-03-06",
+    "german": "Kalender",
+    "arabic": "تقويم",
+    "article": "der",
+    "icon": "🗓️",
+    "world": "work"
+  },
+  {
+    "id": "work-04-01",
+    "german": "Beruf",
+    "arabic": "مهنة",
+    "article": "der",
+    "icon": "🧑‍🔧",
+    "world": "work"
+  },
+  {
+    "id": "work-04-02",
+    "german": "Bewerbung",
+    "arabic": "طلب توظيف",
+    "article": "die",
+    "icon": "📄",
+    "world": "work"
+  },
+  {
+    "id": "work-04-03",
+    "german": "Lebenslauf",
+    "arabic": "سيرة ذاتية",
+    "article": "der",
+    "icon": "📃",
+    "world": "work"
+  },
+  {
+    "id": "work-04-04",
+    "german": "Stelle",
+    "arabic": "وظيفة",
+    "article": "die",
+    "icon": "💼",
+    "world": "work"
+  },
+  {
+    "id": "work-04-05",
+    "german": "Vorstellungsgespräch",
+    "arabic": "مقابلة عمل",
+    "article": "das",
+    "icon": "🤝",
+    "world": "work"
+  },
+  {
+    "id": "work-04-06",
+    "german": "Vertrag",
+    "arabic": "عقد",
+    "article": "der",
+    "icon": "📝",
+    "world": "work"
+  },
+  {
+    "id": "work-05-01",
+    "german": "Besprechung",
+    "arabic": "اجتماع",
+    "article": "die",
+    "icon": "🗣️",
+    "world": "work"
+  },
+  {
+    "id": "work-05-02",
+    "german": "Frage",
+    "arabic": "سؤال",
+    "article": "die",
+    "icon": "❓",
+    "world": "work"
+  },
+  {
+    "id": "work-05-03",
+    "german": "Antwort",
+    "arabic": "جواب",
+    "article": "die",
+    "icon": "💬",
+    "world": "work"
+  },
+  {
+    "id": "work-05-04",
+    "german": "Aufgabe",
+    "arabic": "مهمة",
+    "article": "die",
+    "icon": "📋",
+    "world": "work"
+  },
+  {
+    "id": "work-05-05",
+    "german": "Projekt",
+    "arabic": "مشروع",
+    "article": "das",
+    "icon": "🗂️",
+    "world": "work"
+  },
+  {
+    "id": "work-05-06",
+    "german": "Nachricht",
+    "arabic": "رسالة",
+    "article": "die",
+    "icon": "✉️",
+    "world": "work"
+  },
+  {
+    "id": "health-01-01",
+    "german": "Kopf",
+    "arabic": "رأس",
+    "article": "der",
+    "icon": "🧑",
+    "world": "health"
+  },
+  {
+    "id": "health-01-02",
+    "german": "Auge",
+    "arabic": "عين",
+    "article": "das",
+    "icon": "👁️",
+    "world": "health"
+  },
+  {
+    "id": "health-01-03",
+    "german": "Ohr",
+    "arabic": "أذن",
+    "article": "das",
+    "icon": "👂",
+    "world": "health"
+  },
+  {
+    "id": "health-01-04",
+    "german": "Nase",
+    "arabic": "أنف",
+    "article": "die",
+    "icon": "👃",
+    "world": "health"
+  },
+  {
+    "id": "health-01-05",
+    "german": "Mund",
+    "arabic": "فم",
+    "article": "der",
+    "icon": "👄",
+    "world": "health"
+  },
+  {
+    "id": "health-01-06",
+    "german": "Hand",
+    "arabic": "يد",
+    "article": "die",
+    "icon": "✋",
+    "world": "health"
+  },
+  {
+    "id": "health-02-01",
+    "german": "Arm",
+    "arabic": "ذراع",
+    "article": "der",
+    "icon": "💪",
+    "world": "health"
+  },
+  {
+    "id": "health-02-02",
+    "german": "Bein",
+    "arabic": "ساق",
+    "article": "das",
+    "icon": "🦵",
+    "world": "health"
+  },
+  {
+    "id": "health-02-03",
+    "german": "Bauch",
+    "arabic": "بطن",
+    "article": "der",
+    "icon": "🧍",
+    "world": "health"
+  },
+  {
+    "id": "health-02-04",
+    "german": "Rücken",
+    "arabic": "ظهر",
+    "article": "der",
+    "icon": "🧍",
+    "world": "health"
+  },
+  {
+    "id": "health-02-05",
+    "german": "Fuß",
+    "arabic": "قدم",
+    "article": "der",
+    "icon": "🦶",
+    "world": "health"
+  },
+  {
+    "id": "health-02-06",
+    "german": "Herz",
+    "arabic": "قلب",
+    "article": "das",
+    "icon": "❤️",
+    "world": "health"
+  },
+  {
+    "id": "health-03-01",
+    "german": "Arzt",
+    "arabic": "طبيب",
+    "article": "der",
+    "icon": "🧑‍⚕️",
+    "world": "health"
+  },
+  {
+    "id": "health-03-02",
+    "german": "Ärztin",
+    "arabic": "طبيبة",
+    "article": "die",
+    "icon": "👩‍⚕️",
+    "world": "health"
+  },
+  {
+    "id": "health-03-03",
+    "german": "Praxis",
+    "arabic": "عيادة",
+    "article": "die",
+    "icon": "🏥",
+    "world": "health"
+  },
+  {
+    "id": "health-03-04",
+    "german": "Termin",
+    "arabic": "موعد",
+    "article": "der",
+    "icon": "📅",
+    "world": "health"
+  },
+  {
+    "id": "health-03-05",
+    "german": "Rezept",
+    "arabic": "وصفة طبية",
+    "article": "das",
+    "icon": "📄",
+    "world": "health"
+  },
+  {
+    "id": "health-03-06",
+    "german": "Apotheke",
+    "arabic": "صيدلية",
+    "article": "die",
+    "icon": "⚕️",
+    "world": "health"
+  },
+  {
+    "id": "health-04-01",
+    "german": "Schmerz",
+    "arabic": "ألم",
+    "article": "der",
+    "icon": "🤕",
+    "world": "health"
+  },
+  {
+    "id": "health-04-02",
+    "german": "Fieber",
+    "arabic": "حمّى",
+    "article": "das",
+    "icon": "🌡️",
+    "world": "health"
+  },
+  {
+    "id": "health-04-03",
+    "german": "Husten",
+    "arabic": "سعال",
+    "article": "der",
+    "icon": "😷",
+    "world": "health"
+  },
+  {
+    "id": "health-04-04",
+    "german": "Schnupfen",
+    "arabic": "زكام",
+    "article": "der",
+    "icon": "🤧",
+    "world": "health"
+  },
+  {
+    "id": "health-04-05",
+    "german": "Übelkeit",
+    "arabic": "غثيان",
+    "article": "die",
+    "icon": "🤢",
+    "world": "health"
+  },
+  {
+    "id": "health-04-06",
+    "german": "Müdigkeit",
+    "arabic": "تعب",
+    "article": "die",
+    "icon": "😴",
+    "world": "health"
+  },
+  {
+    "id": "health-05-01",
+    "german": "Medikament",
+    "arabic": "دواء",
+    "article": "das",
+    "icon": "💊",
+    "world": "health"
+  },
+  {
+    "id": "health-05-02",
+    "german": "Tablette",
+    "arabic": "حبّة دواء",
+    "article": "die",
+    "icon": "💊",
+    "world": "health"
+  },
+  {
+    "id": "health-05-03",
+    "german": "Wasser",
+    "arabic": "ماء",
+    "article": "das",
+    "icon": "💧",
+    "world": "health"
+  },
+  {
+    "id": "health-05-04",
+    "german": "Ruhe",
+    "arabic": "راحة",
+    "article": "die",
+    "icon": "🛏️",
+    "world": "health"
+  },
+  {
+    "id": "health-05-05",
+    "german": "Hilfe",
+    "arabic": "مساعدة",
+    "article": "die",
+    "icon": "🆘",
+    "world": "health"
+  },
+  {
+    "id": "health-05-06",
+    "german": "Notruf",
+    "arabic": "اتصال طوارئ",
+    "article": "der",
+    "icon": "☎️",
+    "world": "health"
+  }
+]
