@@ -499,7 +499,7 @@
   {
     "id": "traffic-01-02",
     "german": "Bahn",
-    "arabic": "قطار محلي",
+    "arabic": "سكة الحديد",
     "article": "die",
     "icon": "🚈",
     "world": "traffic"
@@ -554,10 +554,10 @@
   },
   {
     "id": "traffic-02-03",
-    "german": "Gleis",
-    "arabic": "رصيف القطار",
-    "article": "das",
-    "icon": "🚆",
+    "german": "Bahnsteig",
+    "arabic": "رصيف المحطة",
+    "article": "der",
+    "icon": "🚉",
     "world": "traffic",
     "illustration": "platform"
   },

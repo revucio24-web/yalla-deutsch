@@ -50,7 +50,7 @@ export const dialogScenarios: DialogScenario[] = [
         choices: [
           { id: 'here-you-are', text: 'Bitte schön.', translationAr: 'تفضّل.' },
           { id: 'good-morning', text: 'Guten Morgen! Wie geht es Ihnen?', translationAr: 'صباح الخير! كيف حالك؟' },
-          { id: 'later', text: 'Ich bin gestern hier.', translationAr: 'أنا هنا أمس.' },
+          { id: 'later', text: 'Ich war gestern hier.', translationAr: 'كنت هنا أمس.' },
         ],
       },
     ],

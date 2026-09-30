@@ -2,7 +2,7 @@ import { createElement } from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import MemoryGame from './MemoryGame';
-import { vocabulary } from './domain';
+import { vocabulary, wordsById } from './domain';
 import {
   createMemoryRound, hideMismatchedCards, initialMemoryGameState,
   isMemoryMatch, isMemoryRoundComplete, MISMATCH_REVEAL_DURATION_MS,
@@ -51,6 +51,22 @@ describe('word-pair game', () => {
         const labels = round.cards.filter((card) => card.face === face).map((card) => card.label.normalize('NFKC').trim().replace(/\s+/gu, ' ').toLowerCase());
         expect(new Set(labels).size).toBe(6);
       }
+    }
+  });
+
+  it('keeps the Bahn and Zug cards distinct without changing their progress IDs', () => {
+    const transportWords = ['traffic-01-01', 'traffic-01-02', 'traffic-01-03', 'traffic-01-04', 'traffic-01-05', 'traffic-01-06']
+      .map((id) => wordsById.get(id));
+    expect(transportWords.every(Boolean)).toBe(true);
+    const words = transportWords.filter((word) => word !== undefined);
+    expect(wordsById.get('traffic-01-02')).toMatchObject({ id: 'traffic-01-02', german: 'Bahn', arabic: 'سكة الحديد' });
+    expect(wordsById.get('traffic-01-03')).toMatchObject({ id: 'traffic-01-03', german: 'Zug', arabic: 'قطار' });
+
+    for (let seed = 0; seed < 64; seed += 1) {
+      const round = createMemoryRound(words, seed);
+      expect(round.words).toHaveLength(6);
+      expect(new Set(round.cards.filter((card) => card.face === 'ar').map((card) => card.label)).size).toBe(6);
+      expect(new Set(round.words.map((word) => word.id)).size).toBe(6);
     }
   });
 

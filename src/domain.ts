@@ -9,9 +9,9 @@ export type World = { id: string; de: string; ar: string; subtitle: string; icon
 export type Word = { id: string; german: string; arabic: string; article: string | null; icon: string; illustration?: WordIllustrationKey; world: string };
 export type Lesson = {
   id: string; world: string; order: number; titleDe: string; titleAr: string; wordIds: string[];
-  phrase: { german: string; arabic: string };
-  blank: { sentence: string; answer: string; options: string[] };
-  dialogue: { prompt: string; promptAr: string; answer: string; options: string[] };
+  phrase: { german: string; arabic: string; acceptedAnswers?: string[] };
+  blank: { sentence: string; answer: string; options: string[]; acceptedAnswers?: string[] };
+  dialogue: { prompt: string; promptAr: string; answer: string; options: string[]; acceptedAnswers?: string[] };
 };
 export type Settings = { sound: boolean; hints: boolean; reduceMotion: boolean; largeText: boolean };
 export type WordProgress = { mastery: number; dueAt: number };
@@ -68,6 +68,10 @@ export function shuffleTokens(tokens: readonly string[], seed: number): string[]
 
 export function lessonWords(lesson: Lesson): Word[] {
   return lesson.wordIds.map((id) => wordsById.get(id)).filter((word): word is Word => Boolean(word));
+}
+
+export function isAnswerAccepted(answer: string, expected: string, acceptedAnswers: readonly string[] = []): boolean {
+  return answer === expected || acceptedAnswers.includes(answer);
 }
 
 export function createTasks(lesson: Lesson, seed = lesson.order): Task[] {
