@@ -177,7 +177,7 @@ export default function DialogTrainer({ hints, sound, progress, onRecordAttempt 
     <div className="page-heading">
       <span className="eyebrow" lang="de">SPRECHEN · A1–A2</span>
       <h1 lang="ar">تدرّب على الحوار</h1>
-      <p lang="ar">مواقف يومية قصيرة، مع ردود ألمانية وترجمتها العربية. اختر جواباً واستمع إلى نطقه.</p>
+      <p lang="ar">اختر محادثة قصيرة، واستمع إلى الكلمات، ثم اختر الإجابة المناسبة للموقف. نتعلّم معاً خطوةً خطوة!</p>
     </div>
     <section className="dialog-overview" aria-label="Dialogtrainer-Fortschritt">
       <div className="dialog-overview-stat"><span aria-hidden="true">✦</span><div><b>{totalPoints}</b><small lang="ar">نقطة محفوظة · <span lang="de">Punkte</span></small></div></div>

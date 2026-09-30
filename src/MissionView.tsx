@@ -34,9 +34,9 @@ export default function MissionView({ lesson, settings, showTranslations, onExit
     if (solved) return;
     if (!madeMistake) setFirstTry((count) => count + 1);
     setSolved(true);
-    setFeedback({ arabic: 'أحسنت!', german: 'Richtig.' });
+    setFeedback({ arabic: 'أحسنت! رائع.', german: 'Richtig – super gemacht!' });
   };
-  const miss = () => { setMadeMistake(true); setFeedback({ arabic: 'حاول مرة أخرى', german: 'Versuch es noch einmal.' }); };
+  const miss = () => { setMadeMistake(true); setFeedback({ arabic: 'محاولة جميلة، لنجرّب مرة أخرى!', german: 'Guter Versuch! Probier es noch einmal.' }); };
   const judge = (correct: boolean) => { if (correct) succeed(); else miss(); };
   const advance = () => {
     stopSpeaking();
@@ -67,9 +67,9 @@ export default function MissionView({ lesson, settings, showTranslations, onExit
       <span className="mission-chapter" dir="ltr" lang="de">{lesson.titleDe}</span>
     </header>
     <div className="mission-layout">
-      <aside className="guide-card"><div className="guide-avatar">ن</div><strong>نور</strong><p>كل خطوة تقرّبك من هدفك. خذ وقتك!</p><div className="guide-tip"><span>✦</span> {prompt(task.type)}</div></aside>
+      <aside className="guide-card"><div className="guide-avatar">ن</div><strong>نور</strong><p>كل خطوة تقرّبك من هدفك. خذ وقتك!<br /><span lang="de">Du schaffst das!</span></p><div className="guide-tip"><span>✦</span> {prompt(task.type)}</div></aside>
       <section className="task-card" aria-live="polite">
-        <div className="task-meta"><span className="task-number" lang="de">AUFGABE {index + 1}</span><span className="task-type" lang="en">{task.type.toUpperCase()}</span></div>
+        <div className="task-meta"><span className="task-number" lang="de">RUNDE {index + 1}</span><span className="task-type" lang="en">{task.type.toUpperCase()}</span></div>
         <h1 lang="ar">{prompt(task.type)}</h1>
 
         {task.type === 'choice' && <><p className="task-context">ما معنى هذه الكلمة بالألمانية؟</p><div className="stimulus" lang="ar">{task.word.arabic}</div><div className="option-grid">{task.options.map((option) => <button key={option.id} disabled={solved} onClick={() => { speakGerman(wordLabel(option), settings.sound); judge(option.id === task.word.id); }} className="option" title="Klicken oder Enter: Deutsch anhören" lang="de"><span dir="ltr" lang="de">{wordLabel(option)}</span></button>)}</div></>}
