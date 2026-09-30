@@ -3,9 +3,10 @@ import lessonsJson from './data/lessons.json';
 import vocabularyJson from './data/vocabulary.json';
 import type { DialogTrainerProgress } from './dialogTrainer';
 import { emptyDialogTrainerProgress, sanitizeDialogTrainerProgress } from './dialogTrainer';
+import { isWordIllustrationKey, type WordIllustrationKey } from './illustrationKeys';
 
 export type World = { id: string; de: string; ar: string; subtitle: string; icon: string; color: string };
-export type Word = { id: string; german: string; arabic: string; article: string | null; icon: string; world: string };
+export type Word = { id: string; german: string; arabic: string; article: string | null; icon: string; illustration?: WordIllustrationKey; world: string };
 export type Lesson = {
   id: string; world: string; order: number; titleDe: string; titleAr: string; wordIds: string[];
   phrase: { german: string; arabic: string };
@@ -27,6 +28,10 @@ export const lessons = lessonsJson as Lesson[];
 export const vocabulary = vocabularyJson as Word[];
 export const wordsById = new Map(vocabulary.map((word) => [word.id, word]));
 export const STORAGE_KEY = 'yalla-deutsch-progress-v1';
+
+export function wordVisualKey(word: Pick<Word, 'icon' | 'illustration'>): string {
+  return isWordIllustrationKey(word.illustration) ? `illustration:${word.illustration}` : `emoji:${word.icon}`;
+}
 
 const taskPatterns: TaskType[][] = [
   ['choice', 'listen', 'match', 'build', 'dialogue'],
@@ -68,7 +73,7 @@ export function lessonWords(lesson: Lesson): Word[] {
 export function createTasks(lesson: Lesson, seed = lesson.order): Task[] {
   const words = lessonWords(lesson);
   if (!words.length) return [];
-  const uniqueSymbols = words.filter((entry, position) => words.findIndex((candidate) => candidate.icon === entry.icon) === position);
+  const uniqueSymbols = words.filter((entry, position) => words.findIndex((candidate) => wordVisualKey(candidate) === wordVisualKey(entry)) === position);
   const pattern = taskPatterns[lesson.order % taskPatterns.length];
   const targets = pattern.map((_, index) => words[(index + lesson.order) % words.length]);
   for (let index = 0; index < pattern.length; index += 1) {

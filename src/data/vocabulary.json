@@ -117,7 +117,8 @@
     "arabic": "غرفة",
     "article": "das",
     "icon": "🚪",
-    "world": "home"
+    "world": "home",
+    "illustration": "room"
   },
   {
     "id": "home-03-04",
@@ -149,7 +150,8 @@
     "arabic": "طاولة",
     "article": "der",
     "icon": "🪑",
-    "world": "home"
+    "world": "home",
+    "illustration": "table"
   },
   {
     "id": "home-04-02",
@@ -157,7 +159,8 @@
     "arabic": "كرسي",
     "article": "der",
     "icon": "🪑",
-    "world": "home"
+    "world": "home",
+    "illustration": "chair"
   },
   {
     "id": "home-04-03",
@@ -181,7 +184,8 @@
     "arabic": "خزانة",
     "article": "der",
     "icon": "🗄️",
-    "world": "home"
+    "world": "home",
+    "illustration": "wardrobe"
   },
   {
     "id": "home-04-06",
@@ -189,7 +193,8 @@
     "arabic": "مصباح",
     "article": "die",
     "icon": "💡",
-    "world": "home"
+    "world": "home",
+    "illustration": "lamp"
   },
   {
     "id": "home-05-01",
@@ -349,7 +354,8 @@
     "arabic": "خبزة صغيرة",
     "article": "das",
     "icon": "🥖",
-    "world": "market"
+    "world": "market",
+    "illustration": "bread-roll"
   },
   {
     "id": "market-03-03",
@@ -373,7 +379,8 @@
     "arabic": "طحين",
     "article": "das",
     "icon": "🌾",
-    "world": "market"
+    "world": "market",
+    "illustration": "flour"
   },
   {
     "id": "market-03-06",
@@ -429,7 +436,8 @@
     "arabic": "زجاجة",
     "article": "die",
     "icon": "🍾",
-    "world": "market"
+    "world": "market",
+    "illustration": "bottle"
   },
   {
     "id": "market-05-01",
@@ -445,7 +453,8 @@
     "arabic": "صندوق الدفع",
     "article": "die",
     "icon": "🧾",
-    "world": "market"
+    "world": "market",
+    "illustration": "cash-register"
   },
   {
     "id": "market-05-03",
@@ -549,7 +558,8 @@
     "arabic": "رصيف القطار",
     "article": "das",
     "icon": "🚆",
-    "world": "traffic"
+    "world": "traffic",
+    "illustration": "platform"
   },
   {
     "id": "traffic-02-04",
@@ -565,7 +575,8 @@
     "arabic": "تقاطع",
     "article": "die",
     "icon": "➕",
-    "world": "traffic"
+    "world": "traffic",
+    "illustration": "intersection"
   },
   {
     "id": "traffic-02-06",
@@ -594,10 +605,11 @@
   {
     "id": "traffic-03-03",
     "german": "Automat",
-    "arabic": "آلة البيع",
+    "arabic": "آلة التذاكر",
     "article": "der",
     "icon": "🏧",
-    "world": "traffic"
+    "world": "traffic",
+    "illustration": "ticket-machine"
   },
   {
     "id": "traffic-03-04",
@@ -613,7 +625,8 @@
     "arabic": "مغادرة",
     "article": "die",
     "icon": "↗️",
-    "world": "traffic"
+    "world": "traffic",
+    "illustration": "departure"
   },
   {
     "id": "traffic-03-06",
@@ -621,7 +634,8 @@
     "arabic": "وصول",
     "article": "die",
     "icon": "↘️",
-    "world": "traffic"
+    "world": "traffic",
+    "illustration": "arrival"
   },
   {
     "id": "traffic-04-01",
@@ -637,7 +651,8 @@
     "arabic": "طريق",
     "article": "der",
     "icon": "🛤️",
-    "world": "traffic"
+    "world": "traffic",
+    "illustration": "path"
   },
   {
     "id": "traffic-04-03",
@@ -653,7 +668,8 @@
     "arabic": "زاوية",
     "article": "die",
     "icon": "↪️",
-    "world": "traffic"
+    "world": "traffic",
+    "illustration": "corner"
   },
   {
     "id": "traffic-04-05",
@@ -701,7 +717,8 @@
     "arabic": "سائق",
     "article": "der",
     "icon": "🧑‍✈️",
-    "world": "traffic"
+    "world": "traffic",
+    "illustration": "driver"
   },
   {
     "id": "traffic-05-05",
@@ -709,7 +726,8 @@
     "arabic": "تأخير",
     "article": "die",
     "icon": "⌛",
-    "world": "traffic"
+    "world": "traffic",
+    "illustration": "delay"
   },
   {
     "id": "traffic-05-06",
@@ -717,7 +735,8 @@
     "arabic": "وصلة نقل",
     "article": "der",
     "icon": "🔄",
-    "world": "traffic"
+    "world": "traffic",
+    "illustration": "transfer"
   },
   {
     "id": "work-01-01",
@@ -869,7 +888,8 @@
     "arabic": "مهنة",
     "article": "der",
     "icon": "🧑‍🔧",
-    "world": "work"
+    "world": "work",
+    "illustration": "profession"
   },
   {
     "id": "work-04-02",
@@ -901,7 +921,8 @@
     "arabic": "مقابلة عمل",
     "article": "das",
     "icon": "🤝",
-    "world": "work"
+    "world": "work",
+    "illustration": "interview"
   },
   {
     "id": "work-04-06",
@@ -965,7 +986,8 @@
     "arabic": "رأس",
     "article": "der",
     "icon": "🧑",
-    "world": "health"
+    "world": "health",
+    "illustration": "head"
   },
   {
     "id": "health-01-02",
@@ -1029,7 +1051,8 @@
     "arabic": "بطن",
     "article": "der",
     "icon": "🧍",
-    "world": "health"
+    "world": "health",
+    "illustration": "abdomen"
   },
   {
     "id": "health-02-04",
@@ -1037,7 +1060,8 @@
     "arabic": "ظهر",
     "article": "der",
     "icon": "🧍",
-    "world": "health"
+    "world": "health",
+    "illustration": "back"
   },
   {
     "id": "health-02-05",
@@ -1101,7 +1125,8 @@
     "arabic": "صيدلية",
     "article": "die",
     "icon": "⚕️",
-    "world": "health"
+    "world": "health",
+    "illustration": "pharmacy"
   },
   {
     "id": "health-04-01",
@@ -1109,7 +1134,8 @@
     "arabic": "ألم",
     "article": "der",
     "icon": "🤕",
-    "world": "health"
+    "world": "health",
+    "illustration": "pain"
   },
   {
     "id": "health-04-02",
@@ -1125,7 +1151,8 @@
     "arabic": "سعال",
     "article": "der",
     "icon": "😷",
-    "world": "health"
+    "world": "health",
+    "illustration": "cough"
   },
   {
     "id": "health-04-04",
@@ -1157,7 +1184,8 @@
     "arabic": "دواء",
     "article": "das",
     "icon": "💊",
-    "world": "health"
+    "world": "health",
+    "illustration": "medicine"
   },
   {
     "id": "health-05-02",
@@ -1165,7 +1193,8 @@
     "arabic": "حبّة دواء",
     "article": "die",
     "icon": "💊",
-    "world": "health"
+    "world": "health",
+    "illustration": "tablet"
   },
   {
     "id": "health-05-03",
@@ -1237,7 +1266,8 @@
     "arabic": "الزيارة",
     "article": "der",
     "icon": "🎁",
-    "world": "home"
+    "world": "home",
+    "illustration": "visitor"
   },
   {
     "id": "home-06-06",
@@ -1269,7 +1299,8 @@
     "arabic": "غرام",
     "article": "das",
     "icon": "🧂",
-    "world": "market"
+    "world": "market",
+    "illustration": "gram"
   },
   {
     "id": "market-06-04",
@@ -1293,7 +1324,8 @@
     "arabic": "يدفع",
     "article": null,
     "icon": "💳",
-    "world": "market"
+    "world": "market",
+    "illustration": "pay"
   },
   {
     "id": "traffic-06-01",
@@ -1301,7 +1333,8 @@
     "arabic": "وجهة السفر",
     "article": "das",
     "icon": "🎯",
-    "world": "traffic"
+    "world": "traffic",
+    "illustration": "destination"
   },
   {
     "id": "traffic-06-02",
@@ -1333,7 +1366,8 @@
     "arabic": "يحجز",
     "article": null,
     "icon": "🎫",
-    "world": "traffic"
+    "world": "traffic",
+    "illustration": "reserve"
   },
   {
     "id": "traffic-06-06",
@@ -1373,7 +1407,8 @@
     "arabic": "يؤجّل",
     "article": null,
     "icon": "⏰",
-    "world": "work"
+    "world": "work",
+    "illustration": "reschedule"
   },
   {
     "id": "work-06-05",
@@ -1413,7 +1448,8 @@
     "arabic": "مصاب بالحساسية",
     "article": null,
     "icon": "🤧",
-    "world": "health"
+    "world": "health",
+    "illustration": "allergy"
   },
   {
     "id": "health-06-04",
@@ -1421,7 +1457,8 @@
     "arabic": "سليم",
     "article": null,
     "icon": "🍏",
-    "world": "health"
+    "world": "health",
+    "illustration": "healthy"
   },
   {
     "id": "health-06-05",

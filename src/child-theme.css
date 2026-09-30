@@ -1,0 +1,141 @@
+:root {
+  color-scheme: light;
+  color: #29464c;
+  background: #fffaf1;
+  --navy: #24464d;
+  --navy2: #345b61;
+  --teal: #176e64;
+  --teal2: #e3f2e7;
+  --amber: #f3c760;
+  --paper: #fffdf8;
+  --muted: #53686a;
+  --line: #7f887d;
+  --answer-edge: #7f887d;
+  --answer-hover: #58765f;
+  --answer-selected: #4e735c;
+  --focus-ring-light: #fffdf8;
+  --focus-ring-dark: #24464d;
+  --shadow: 0 14px 34px rgba(56, 70, 60, .09);
+}
+
+body { background: #fffaf1; color: #29464c; }
+button:focus-visible, input:focus-visible {
+  outline: 3px solid var(--focus-ring-light);
+  outline-offset: 3px;
+  box-shadow: 0 0 0 9px var(--focus-ring-dark);
+}
+
+.sidebar { background: #294c52; }
+.brand-copy small, .nav-item small { color: #d7e2d9; }
+.side-section { color: #f0cf72; }
+.nav-item { color: #f2f0e7; }
+.nav-item:hover, .nav-item.active { background: #3e6968; }
+.sidebar-note { background: #365d5d; border-color: #638078; }
+.sidebar-note p { color: #f0f1e8; }
+.sidebar-note b, .sidebar-footer { color: #dce5d8; }
+
+.main-area { background: #fffaf1; }
+.topbar { border-color: var(--line); }
+.top-pill { border-color: #e7dfcf; background: #fffdf8; color: #79551a; }
+.avatar-pill { background: #f8dfc5; }
+
+.hero { background: #294c52; }
+.hero-visual { background: radial-gradient(circle at 50% 30%, #f4d58a, #83b9a4 48%, #3d7770 82%); }
+.hero-glow { background: #ffe08a; box-shadow: 0 0 0 18px rgba(255, 224, 138, .28), 0 0 0 42px rgba(255, 224, 138, .12); }
+.hero-road { background: #6ea78d; border-color: #a6c48f; }
+.hero-tower { background: #fff0cc; border-color: #f3d99f; box-shadow: 0 18px 10px rgba(36, 70, 77, .35); }
+.hero-tower i { background: #83b9c0; border-color: #fff8e8; }
+.tower-two { background: #f0b39c; border-color: #df9a82; }
+.tower-three { background: #f7e7b8; border-color: #e4d29e; }
+.hero-chip { background: #3c6665; color: #fff3cf; border-color: #709084; }
+.hero p, .hero-meta { color: #f0f2e7; }
+.hero h1 em { color: #ffdb79; }
+.hero .primary-btn { background: #f3c760; color: #29434a; }
+.hero .primary-btn:hover { background: #ffdf86; }
+.floating-word { background: #fffdf8; }
+
+.next-card, .level-card, .word-card, .stats-grid > div, .progress-panel,
+.district-progress, .profile-panel, .edit-panel, .settings-panel, .reset-panel,
+.mission-group, .city-detail, .dialog-scenario-card, .dialog-session-card,
+.dialog-result-card, .welcome-panel, .finish-panel, .review-panel {
+  background-color: #fffdf8;
+  border-color: var(--line);
+}
+.next-card { background: linear-gradient(125deg, #fff1d5, #fffdf8 72%); }
+.dialog-home-card { background: linear-gradient(110deg, #ffedc8, #fffdf8 78%); border-color: var(--line); }
+.dialog-home-art { background: #ffe5aa; color: #684d20; }
+.world-tile { background: #fffdf8; }
+.world-tile > span { background: #f5edda; }
+.city-scene { background: linear-gradient(#b5e0d8, #edf3d7 69%, #f0d6a7 69%); border-color: var(--line); }
+.scene-sun { background: #ffe09a; box-shadow: 0 0 0 17px rgba(255, 224, 154, .34); }
+.city-hill--back { background: #b9d6a5; }
+.city-hill { background: #91c59b; }
+.city-hill--front { background: #72ae87; }
+.city-path { background: #e8c58e; border-color: #f5dfad; }
+.scene-tree { color: #32755d; }
+.building-label { background: #fffdf8; }
+
+.primary-btn { background: #176e64; color: #fff; box-shadow: 0 7px 16px rgba(23, 110, 100, .2); }
+.primary-btn:hover:not(:disabled) { background: #10574f; }
+.text-action, .section-title button, .settings-link { color: #176e64; }
+.progress-track { background: #e9e5d8; }
+.progress-track span { background: linear-gradient(90deg, #177669, #54a77d); }
+.level-badge { background: #ffedbd; color: #634810; }
+
+.collection-banner { background: linear-gradient(110deg, #294c52, #327366); }
+.collection-banner .eyebrow { color: #f4d782; }
+.collection-banner p { color: #f0f2e7; }
+.lesson-row, .mission-row { background: #fffdf8; border-color: var(--line); }
+.lesson-row:hover:not(:disabled), .mission-row:hover:not(:disabled) { border-color: var(--answer-hover); background: #f4f8eb; }
+.lesson-step { background: #e7f1df; color: #155e55; }
+.lesson-row.done .lesson-step { background: #176e64; }
+.mission-group-head > span:last-child, .mission-dot.done { color: #176e64; }
+
+.word-card { border-radius: 18px; }
+.word-illustration { display: inline-grid; place-items: center; flex: none; }
+.word-illustration svg { display: block; width: 100%; height: 100%; }
+.word-illustration-labels { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+.word-icon { grid-column: 1 / -1; width: 56px; height: 56px; padding: 3px; border-radius: 17px; background: #fff0c9; color: #31585a; font-size: 2rem; }
+.word-icon > span { line-height: 1; }
+.symbol-word-illustration { width: 58px; height: 58px; padding: 3px; border-radius: 17px; background: #fff0c9; font-size: 2.2rem; }
+.basket-word-illustration { width: 46px; height: 46px; padding: 3px; border-radius: 14px; background: #fff0c9; font-size: 1.8rem; }
+.word-card button { background: #e5f1df; color: #145c52; }
+.mastery-dots i { background: #dddccf; }
+.mastery-dots i.filled { background: #176e64; }
+
+.dialog-overview { background: linear-gradient(115deg, #fff0d0, #fffdf8 74%); border-color: var(--line); }
+.dialog-overview-stat > span { background: #ffe8b2; color: #684d20; }
+.dialog-overview-stat:nth-child(2) > span { background: #e3f2e7; color: #155e55; }
+.dialog-scenario-icon { background: #f5edda; }
+.dialog-level { background: #ffedbd; color: #684d20; }
+.dialog-progress-track { background: #e9e5d8; }
+.dialog-progress-track span { background: linear-gradient(90deg, #177669, #54a77d); }
+.dialog-bubble--other { background: #f6f0df; border-color: var(--line); }
+.dialog-bubble--learner { background: #e8f2e2; border-color: var(--line); }
+.dialog-choice { border-color: var(--answer-edge); }
+.dialog-choice:not(:disabled):hover { background: #f4f8eb; border-color: var(--answer-hover); }
+.dialog-choice.is-correct { border-color: var(--answer-selected); background: #e8f3e6; }
+.dialog-feedback.is-correct { background: #e5f3e7; color: #155e45; }
+.dialog-feedback.is-try-again:not(:empty) { background: #fff0cf; color: #684d20; }
+.dialog-result-icon { background: #ffedbd; color: #684d20; }
+.dialog-result-stats span { background: #f4f0e3; }
+
+.mission-shell { background: linear-gradient(145deg, #fff9eb, #f1f3e4); }
+.guide-card, .task-card { border-color: var(--line); }
+.guide-card { background: #fff0d0; }
+.guide-avatar { background: #f3c760; color: #29464d; }
+.guide-tip { background: #e6f1df; color: #24464d; }
+.task-card { background: #fffdf8; }
+.task-context, .task-number { color: #53686a; }
+.task-type, .task-feedback.success { color: #155e45; }
+.option, .match-option, .basket-item, .build-answer { border-color: var(--answer-edge); background: #fffdf8; }
+.build-answer button, .word-tiles button { border-color: var(--answer-edge); }
+.option:hover:not(:disabled), .match-option:hover:not(:disabled) { border-color: var(--answer-hover); background: #f4f8eb; }
+.basket-item.selected, .match-option.matched { border-color: var(--answer-selected); background: #e8f3e6; }
+.basket-targets span { background: #ffedbd; color: #4c4022; }
+.task-feedback { color: #53686a; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .word-illustration svg { transition: transform .18s ease; }
+  .word-card:hover .word-illustration svg, .symbol-option:hover .word-illustration svg { transform: translateY(-2px) scale(1.04); }
+}

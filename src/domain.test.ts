@@ -2,7 +2,7 @@ import { afterEach, describe, expect, it, vi } from 'vitest';
 import {
   answerPractice, completeMission, createTasks, freshProgress, lessonUnlocked,
   lessons, loadProgress, practiceQueue, saveProgress, shuffleTokens, starsFor,
-  STORAGE_KEY, vocabulary, wordsById, worlds,
+  STORAGE_KEY, vocabulary, wordsById, wordVisualKey, worlds,
 } from './domain';
 
 describe('authored learning content', () => {
@@ -42,7 +42,7 @@ describe('authored learning content', () => {
       expect(tasks).toHaveLength(5);
       for (const task of tasks) {
         expect(task.options).toContainEqual(task.word);
-        if (task.type === 'symbol') expect(new Set(task.options.map((word) => word.icon)).size).toBe(task.options.length);
+        if (task.type === 'symbol') expect(new Set(task.options.map(wordVisualKey)).size).toBe(task.options.length);
       }
     }
   });
@@ -53,9 +53,9 @@ describe('authored learning content', () => {
       expect(new Set(tasks.map((task) => task.word.id)).size, lesson.id).toBe(5);
       for (const task of tasks) {
         if (task.type !== 'symbol') continue;
-        expect(task.options.filter((option) => option.icon === task.word.icon), `${lesson.id} ${task.word.id}`).toHaveLength(1);
-        const shared = lesson.wordIds.filter((id) => wordsById.get(id)?.icon === task.word.icon);
-        expect(shared[0], `${lesson.id} ${task.word.id} is not the first owner of ${task.word.icon}`).toBe(task.word.id);
+        expect(task.options.filter((option) => wordVisualKey(option) === wordVisualKey(task.word)), `${lesson.id} ${task.word.id}`).toHaveLength(1);
+        const shared = lesson.wordIds.filter((id) => { const word = wordsById.get(id); return word && wordVisualKey(word) === wordVisualKey(task.word); });
+        expect(shared[0], `${lesson.id} ${task.word.id} is not the first owner of ${wordVisualKey(task.word)}`).toBe(task.word.id);
       }
     }
   });
