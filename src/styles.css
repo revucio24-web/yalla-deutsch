@@ -136,3 +136,7 @@ button:focus-visible, input:focus-visible { outline: 3px solid #9a5b00; outline-
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; }
 }
+
+.audio-feedback-toast { position: fixed; z-index: 10000; inset-inline: 14px; bottom: max(18px, env(safe-area-inset-bottom)); width: min(620px, calc(100% - 28px)); margin-inline: auto; padding: 13px 16px; border: 1px solid #d8b56d; border-radius: 14px; background: #fff8e8; color: #493916; box-shadow: 0 10px 30px rgba(16, 46, 69, .2); pointer-events: none; }
+.audio-feedback-toast p { margin: 0; line-height: 1.55; font-size: .83rem; }
+.audio-feedback-toast p + p { margin-top: 5px; }

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { canSpeak, speakGerman, stopSpeaking } from './audio';
+import { speakGerman, stopSpeaking } from './audio';
 import { dialogScenarios } from './dialogTrainer';
 import type { DialogScenario, DialogTrainerProgress } from './dialogTrainer';
 import './dialog-trainer.css';
@@ -16,7 +16,7 @@ function AudioButton({ text, enabled }: { text: string; enabled: boolean }) {
   return <button
     className="dialog-audio-btn"
     type="button"
-    disabled={!enabled || !canSpeak()}
+    disabled={!enabled}
     onClick={() => speakGerman(text, enabled)}
     aria-label={`Deutsch anhören: ${text}`}
     title="Deutsch anhören"
