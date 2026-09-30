@@ -12,6 +12,8 @@ Keine Anmeldung, kein Backend, keine Tracking: der gesamte Lernfortschritt liegt
 
 - **5 Stadtbereiche** mit **30 Missionen** und **180 Wörtern** auf A1/A2-Niveau
 - **8 Aufgabentypen**: choice, symbol, listen, match, build, blank, dialogue, basket
+- Dialogtrainer mit **3 A1/A2-Alltagssituationen**: Café, Bäckerei und Supermarkt
+- Gesprächsoptionen mit arabischen Übersetzungen, Gerätestimme, Punkten und lokalem Bestwert
 - Level, XP, Sterne, Word-Mastery (1–5) und eine fälligkeitsbasierte Wiederholungsliste
 - Arabische Oberfläche (RTL) mit deutschen Sprachhinweisen
 - Deutsche Wörter per Maus, Enter oder Leertaste mit der lokalen Gerätestimme anhören
@@ -29,9 +31,11 @@ pnpm build      # Typecheck + Produktionsbuild nach dist/
 
 ## PWA und Offline-Nutzung
 
+Der Produktionsbuild nimmt die gehashten JavaScript- und CSS-Dateien in den App-Cache auf.
 Nach dem ersten vollständigen Laden kann die App offline weiterlaufen. Unterstützte Browser
 bieten über das Browsermenü **„App installieren“** beziehungsweise **„Zum Startbildschirm
-hinzufügen“** an. Lernfortschritt bleibt ausschließlich im lokalen `localStorage`.
+hinzufügen“** an. Missionen, Dialogpunkte und Einstellungen bleiben ausschließlich im lokalen
+`localStorage` und verlassen das Gerät nicht.
 
 Der Service Worker cached nur öffentliche, gleich-originige GET-Ressourcen der App. Es werden
 keine Konten, API-Antworten, Tracker oder privaten Dokumente gespeichert.

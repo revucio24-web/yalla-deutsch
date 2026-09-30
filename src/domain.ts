@@ -1,6 +1,8 @@
 import worldsJson from './data/worlds.json';
 import lessonsJson from './data/lessons.json';
 import vocabularyJson from './data/vocabulary.json';
+import type { DialogTrainerProgress } from './dialogTrainer';
+import { emptyDialogTrainerProgress, sanitizeDialogTrainerProgress } from './dialogTrainer';
 
 export type World = { id: string; de: string; ar: string; subtitle: string; icon: string; color: string };
 export type Word = { id: string; german: string; arabic: string; article: string | null; icon: string; world: string };
@@ -15,6 +17,7 @@ export type WordProgress = { mastery: number; dueAt: number };
 export type Progress = {
   version: 1; nickname: string; avatar: string; xp: number; completed: string[];
   stars: Record<string, number>; words: Record<string, WordProgress>; settings: Settings;
+  dialogTrainer: DialogTrainerProgress;
 };
 export type TaskType = 'choice' | 'symbol' | 'listen' | 'match' | 'build' | 'blank' | 'dialogue' | 'basket';
 export type Task = { type: TaskType; word: Word; options: Word[]; pairWords: Word[]; buildTokens: string[]; lesson: Lesson };
@@ -90,6 +93,7 @@ export function freshProgress(): Progress {
   return {
     version: 1, nickname: '', avatar: '✦', xp: 0, completed: [], stars: {}, words: {},
     settings: { sound: true, hints: true, reduceMotion: false, largeText: false },
+    dialogTrainer: emptyDialogTrainerProgress(),
   };
 }
 
@@ -146,6 +150,7 @@ export function loadProgress(): Progress {
         reduceMotion: readBoolean(settings.reduceMotion, base.settings.reduceMotion),
         largeText: readBoolean(settings.largeText, base.settings.largeText),
       },
+      dialogTrainer: sanitizeDialogTrainerProgress(data.dialogTrainer),
     };
   } catch {
     return base;
