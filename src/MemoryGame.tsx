@@ -1,7 +1,7 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import {
   createMemoryRound, hideMismatchedCards, initialMemoryGameState,
-  isMemoryRoundComplete, revealMemoryCard,
+  isMemoryRoundComplete, revealMemoryCard, scheduleMismatchedCardsAutoClose,
 } from './memoryGame';
 import type { MemoryRound } from './memoryGame';
 import type { Word } from './domain';
@@ -23,6 +23,9 @@ function MemoryRoundView({ round, onPairFound, onNewRound }: {
   round: MemoryRound; onPairFound: (wordId: string) => void; onNewRound: () => void;
 }) {
   const [game, setGame] = useState(initialMemoryGameState);
+  useEffect(() => scheduleMismatchedCardsAutoClose(game, () => {
+    setGame((current) => current === game ? hideMismatchedCards(current) : current);
+  }), [game]);
   const completed = isMemoryRoundComplete(game, round.words.length);
   const openCards = new Set(game.openCardIds);
   const matchedPairs = new Set(game.matchedPairIds);
@@ -90,9 +93,6 @@ function MemoryRoundView({ round, onPairFound, onNewRound }: {
       </div> : <p lang="ar" dir="rtl">لا توجد كلمات في هذه الجولة بعد.</p>}
 
       <div className="memory-game-actions">
-        {game.lastResult === 'miss' && <button type="button" className="small-check memory-hide-mismatch" onClick={() => setGame(hideMismatchedCards(game))}>
-          <span lang="ar" dir="rtl">إخفاء البطاقتين</span> · <span lang="de" dir="ltr">Weiter spielen</span>
-        </button>}
         <button type="button" className="primary-btn" onClick={onNewRound}>
           <span lang="ar" dir="rtl">جولة جديدة</span> · <span lang="de" dir="ltr">Neue Runde</span> <span aria-hidden="true">↻</span>
         </button>

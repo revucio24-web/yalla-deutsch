@@ -15,6 +15,8 @@ export type MemoryGameState = {
   lastResult: 'idle' | 'match' | 'miss';
 };
 
+export const MISMATCH_REVEAL_DURATION_MS = 1000;
+
 function seededRandom(seed: number): () => number {
   let state = seed >>> 0;
   return () => {
@@ -98,7 +100,13 @@ export function revealMemoryCard(state: MemoryGameState, cardId: string, cards: 
 
 export function hideMismatchedCards(state: MemoryGameState): MemoryGameState {
   if (state.lastResult !== 'miss') return state;
-  return { ...state, openCardIds: [], lastResult: 'idle' };
+  return { ...state, openCardIds: [] };
+}
+
+export function scheduleMismatchedCardsAutoClose(state: MemoryGameState, onClose: () => void): () => void {
+  if (state.lastResult !== 'miss' || state.openCardIds.length !== 2) return () => undefined;
+  const timeoutId = setTimeout(onClose, MISMATCH_REVEAL_DURATION_MS);
+  return () => clearTimeout(timeoutId);
 }
 
 export function isMemoryRoundComplete(state: MemoryGameState, pairCount: number): boolean {

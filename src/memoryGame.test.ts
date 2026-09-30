@@ -1,14 +1,19 @@
 import { createElement } from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
-import { describe, expect, it } from 'vitest';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 import MemoryGame from './MemoryGame';
 import { vocabulary } from './domain';
 import {
   createMemoryRound, hideMismatchedCards, initialMemoryGameState,
-  isMemoryMatch, isMemoryRoundComplete, revealMemoryCard,
+  isMemoryMatch, isMemoryRoundComplete, MISMATCH_REVEAL_DURATION_MS,
+  revealMemoryCard, scheduleMismatchedCardsAutoClose,
 } from './memoryGame';
 
 const sampleWords = vocabulary.slice(0, 6);
+
+afterEach(() => {
+  vi.useRealTimers();
+});
 
 describe('word-pair game', () => {
   it('creates a deterministic round with six German-Arabic pairs and no missing faces', () => {
@@ -79,7 +84,7 @@ describe('word-pair game', () => {
     const readyAgain = hideMismatchedCards(miss);
     expect(readyAgain.openCardIds).toEqual([]);
     expect(readyAgain.moves).toBe(1);
-    expect(readyAgain.lastResult).toBe('idle');
+    expect(readyAgain.lastResult).toBe('miss');
 
     const matched = revealMemoryCard(revealMemoryCard(readyAgain, firstGerman.id, round.cards), firstArabic.id, round.cards);
     expect(matched.lastResult).toBe('match');
@@ -88,6 +93,86 @@ describe('word-pair game', () => {
     expect(matched.moves).toBe(2);
     expect(revealMemoryCard(matched, firstGerman.id, round.cards)).toBe(matched);
     expect(isMemoryRoundComplete(matched, round.words.length)).toBe(false);
+  });
+
+  it('automatically closes a wrong pair after a short reveal and keeps the error feedback visible', () => {
+    vi.useFakeTimers();
+    const round = createMemoryRound(sampleWords, 7);
+    const [firstWord, secondWord] = round.words;
+    const firstGerman = round.cards.find((card) => card.pairId === firstWord.id && card.face === 'de')!;
+    const firstArabic = round.cards.find((card) => card.pairId === firstWord.id && card.face === 'ar')!;
+    const otherArabic = round.cards.find((card) => card.pairId === secondWord.id && card.face === 'ar')!;
+    const oneOpen = revealMemoryCard(initialMemoryGameState(), firstGerman.id, round.cards);
+    let game = revealMemoryCard(oneOpen, otherArabic.id, round.cards);
+    const mismatchMoves = game.moves;
+    const cancel = scheduleMismatchedCardsAutoClose(game, () => { game = hideMismatchedCards(game); });
+
+    vi.advanceTimersByTime(MISMATCH_REVEAL_DURATION_MS - 1);
+    expect(game.openCardIds).toHaveLength(2);
+    expect(game.lastResult).toBe('miss');
+    vi.advanceTimersByTime(1);
+    expect(game.openCardIds).toEqual([]);
+    expect(game.lastResult).toBe('miss');
+    expect(game.moves).toBe(mismatchMoves);
+
+    game = revealMemoryCard(game, firstGerman.id, round.cards);
+    game = revealMemoryCard(game, firstArabic.id, round.cards);
+    expect(game.matchedPairIds).toEqual([firstWord.id]);
+    expect(game.moves).toBe(mismatchMoves + 1);
+    cancel();
+  });
+
+  it('ignores additional card clicks during the mismatch reveal without changing the active timer', () => {
+    vi.useFakeTimers();
+    const round = createMemoryRound(sampleWords, 12);
+    const [firstWord, secondWord] = round.words;
+    const firstGerman = round.cards.find((card) => card.pairId === firstWord.id && card.face === 'de')!;
+    const otherArabic = round.cards.find((card) => card.pairId === secondWord.id && card.face === 'ar')!;
+    const miss = revealMemoryCard(revealMemoryCard(initialMemoryGameState(), firstGerman.id, round.cards), otherArabic.id, round.cards);
+    const cancel = scheduleMismatchedCardsAutoClose(miss, vi.fn());
+
+    expect(vi.getTimerCount()).toBe(1);
+    const thirdCard = round.cards.find((card) => !miss.openCardIds.includes(card.id))!;
+    expect(revealMemoryCard(miss, thirdCard.id, round.cards)).toBe(miss);
+    expect(vi.getTimerCount()).toBe(1);
+    cancel();
+  });
+
+  it('cleans up the pending mismatch timer when restarting during the reveal', () => {
+    vi.useFakeTimers();
+    const round = createMemoryRound(sampleWords, 23);
+    const firstGerman = round.cards.find((card) => card.face === 'de')!;
+    const otherArabic = round.cards.find((card) => card.face === 'ar' && card.pairId !== firstGerman.pairId)!;
+    const miss = revealMemoryCard(revealMemoryCard(initialMemoryGameState(), firstGerman.id, round.cards), otherArabic.id, round.cards);
+    const onClose = vi.fn();
+    const cancel = scheduleMismatchedCardsAutoClose(miss, onClose);
+    const restartedGame = initialMemoryGameState();
+
+    expect(vi.getTimerCount()).toBe(1);
+    cancel();
+    expect(vi.getTimerCount()).toBe(0);
+    vi.advanceTimersByTime(MISMATCH_REVEAL_DURATION_MS);
+    expect(onClose).not.toHaveBeenCalled();
+    expect(restartedGame).toEqual(initialMemoryGameState());
+  });
+
+  it('does not auto-close a correct pair or start a mismatch timer', () => {
+    vi.useFakeTimers();
+    const round = createMemoryRound(sampleWords, 31);
+    const word = round.words[0];
+    const german = round.cards.find((card) => card.pairId === word.id && card.face === 'de')!;
+    const arabic = round.cards.find((card) => card.pairId === word.id && card.face === 'ar')!;
+    const matched = revealMemoryCard(revealMemoryCard(initialMemoryGameState(), german.id, round.cards), arabic.id, round.cards);
+    const onClose = vi.fn();
+    const cancel = scheduleMismatchedCardsAutoClose(matched, onClose);
+
+    expect(matched.lastResult).toBe('match');
+    expect(matched.matchedPairIds).toEqual([word.id]);
+    expect(vi.getTimerCount()).toBe(0);
+    vi.advanceTimersByTime(MISMATCH_REVEAL_DURATION_MS);
+    expect(onClose).not.toHaveBeenCalled();
+    expect(matched.matchedPairIds).toEqual([word.id]);
+    cancel();
   });
 
   it('finishes only after every pair is found', () => {
@@ -118,5 +203,6 @@ describe('word-pair game', () => {
     expect(markup).toContain('lang="ar"');
     expect(markup).toContain('dir="ltr"');
     expect(markup).toContain('role="group" aria-label="لعبة الأزواج"');
+    expect(markup).not.toContain('Weiter spielen');
   });
 });
