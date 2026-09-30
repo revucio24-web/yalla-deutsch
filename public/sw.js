@@ -4,6 +4,7 @@ const CACHE_NAME = 'yalla-deutsch-v3';
 // The production build fills this list with the exact files emitted by Vite.
 const BUILD_ASSETS = [];
 const APP_SCOPE = new URL(self.registration.scope);
+const BUILD_ASSET_URLS = new Set(BUILD_ASSETS.map((asset) => new URL(asset, APP_SCOPE).href));
 const scopePath = APP_SCOPE.pathname.endsWith('/') ? APP_SCOPE.pathname : `${APP_SCOPE.pathname}/`;
 const APP_INDEX = new URL('./index.html', APP_SCOPE).href;
 const APP_SHELL = [...new Set([
@@ -54,7 +55,7 @@ self.addEventListener('fetch', (event) => {
 
   event.respondWith((async () => {
     const cache = await caches.open(CACHE_NAME);
-    const cached = await cache.match(request);
+    const cached = await cache.match(request, { ignoreVary: BUILD_ASSET_URLS.has(request.url) });
     if (cached) return cached;
 
     const response = await fetch(request);

@@ -1,29 +1,33 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import {
-  answerPractice, completeMission, createTasks, freshProgress, lessonUnlocked,
+  answerPractice, completeMission, createTasks, freshProgress, lessonUnlocked, worldUnlocked,
   lessons, loadProgress, practiceQueue, saveProgress, shuffleTokens, starsFor,
   STORAGE_KEY, vocabulary, wordsById, wordVisualKey, worlds,
 } from './domain';
 
 describe('authored learning content', () => {
-  it('extends every district without changing the original 25-mission path', () => {
+  it('preserves all 30 existing missions and adds one new mission to every district', () => {
     const originalLessonIds = [
       'home-01', 'home-02', 'home-03', 'home-04', 'home-05',
       'market-01', 'market-02', 'market-03', 'market-04', 'market-05',
       'traffic-01', 'traffic-02', 'traffic-03', 'traffic-04', 'traffic-05',
       'work-01', 'work-02', 'work-03', 'work-04', 'work-05',
       'health-01', 'health-02', 'health-03', 'health-04', 'health-05',
+      'home-06', 'market-06', 'traffic-06', 'work-06', 'health-06',
     ];
 
     expect(worlds).toHaveLength(5);
-    expect(lessons).toHaveLength(30);
-    expect(vocabulary).toHaveLength(180);
-    expect(new Set(vocabulary.map((word) => word.id)).size).toBe(180);
-    expect(new Set(lessons.map((lesson) => lesson.id)).size).toBe(30);
-    expect(lessons.slice(0, 25).map((lesson) => lesson.id)).toEqual(originalLessonIds);
-    expect(lessons.map((lesson) => lesson.order)).toEqual(Array.from({ length: 30 }, (_, index) => index));
+    expect(lessons).toHaveLength(35);
+    expect(vocabulary).toHaveLength(210);
+    expect(new Set(vocabulary.map((word) => word.id)).size).toBe(210);
+    expect(new Set(lessons.map((lesson) => lesson.id)).size).toBe(35);
+    expect(lessons.slice(0, 30).map((lesson) => lesson.id)).toEqual(originalLessonIds);
+    expect(lessons.slice(30).map((lesson) => lesson.id)).toEqual([
+      'home-07', 'market-07', 'traffic-07', 'work-07', 'health-07',
+    ]);
+    expect(lessons.map((lesson) => lesson.order)).toEqual(Array.from({ length: 35 }, (_, index) => index));
     for (const world of worlds) {
-      expect(lessons.filter((lesson) => lesson.world === world.id), world.id).toHaveLength(6);
+      expect(lessons.filter((lesson) => lesson.world === world.id), world.id).toHaveLength(7);
     }
     for (const lesson of lessons) {
       expect(lesson.wordIds).toHaveLength(6);
@@ -32,6 +36,20 @@ describe('authored learning content', () => {
       expect(lesson.blank.options).toContain(lesson.blank.answer);
       expect(lesson.dialogue.options).toContain(lesson.dialogue.answer);
     }
+  });
+
+  it('keeps the added German-Arabic pairs clear and suitable for everyday A1/A2 scenes', () => {
+    expect(['home-07-01', 'market-07-02', 'traffic-07-02', 'work-07-01', 'health-07-02'].map((id) => {
+      const word = wordsById.get(id);
+      return [word?.german, word?.arabic];
+    })).toEqual([
+      ['Schule', 'مدرسة'], ['Suppe', 'حساء'], ['Radweg', 'مسار الدراجات'],
+      ['Feierabend', 'نهاية الدوام'], ['Fußball', 'كرة القدم'],
+    ]);
+  });
+
+  it('keeps the new fitness adjective in direct dictionary form', () => {
+    expect(wordsById.get('health-07-06')).toMatchObject({ german: 'fit', arabic: 'لائق بدنيًا' });
   });
 
   it('renders five tasks per mission and covers all eight task types', () => {
@@ -104,6 +122,20 @@ describe('progress', () => {
     expect(replay.xp).toBe(55);
     expect(replay.stars[lessons[0].id]).toBe(3);
     expect(replay.words[lessons[0].wordIds[0]]).toEqual(done.words[lessons[0].wordIds[0]]);
+  });
+
+  it('keeps city gates on the original five-mission path while bonus missions stay in sequence', () => {
+    const start = freshProgress();
+    expect(worldUnlocked(start, 'home')).toBe(true);
+    expect(worldUnlocked(start, 'market')).toBe(false);
+    expect(worldUnlocked(start, 'unknown')).toBe(false);
+    const afterFiveHomeMissions = { ...start, completed: lessons.slice(0, 5).map((lesson) => lesson.id) };
+    expect(worldUnlocked(afterFiveHomeMissions, 'market')).toBe(true);
+    expect(lessonUnlocked(afterFiveHomeMissions, lessons[5])).toBe(true);
+    expect(lessonUnlocked(afterFiveHomeMissions, lessons[30])).toBe(false);
+    const afterOldPath = { ...start, completed: lessons.slice(0, 30).map((lesson) => lesson.id) };
+    expect(lessonUnlocked(afterOldPath, lessons[30])).toBe(true);
+    expect(lessonUnlocked(afterOldPath, lessons[31])).toBe(false);
   });
 
   it('never lets replays inflate word mastery or push the review date', () => {

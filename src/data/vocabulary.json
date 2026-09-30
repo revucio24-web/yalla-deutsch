@@ -1475,5 +1475,245 @@
     "article": "die",
     "icon": "⚠️",
     "world": "health"
+  },
+  {
+    "id": "home-07-01",
+    "german": "Schule",
+    "arabic": "مدرسة",
+    "article": "die",
+    "icon": "🏫",
+    "world": "home"
+  },
+  {
+    "id": "home-07-02",
+    "german": "Buch",
+    "arabic": "كتاب",
+    "article": "das",
+    "icon": "📘",
+    "world": "home"
+  },
+  {
+    "id": "home-07-03",
+    "german": "Heft",
+    "arabic": "دفتر",
+    "article": "das",
+    "icon": "📓",
+    "world": "home"
+  },
+  {
+    "id": "home-07-04",
+    "german": "Stift",
+    "arabic": "قلم",
+    "article": "der",
+    "icon": "✏️",
+    "world": "home"
+  },
+  {
+    "id": "home-07-05",
+    "german": "lesen",
+    "arabic": "يقرأ",
+    "article": null,
+    "icon": "📖",
+    "world": "home"
+  },
+  {
+    "id": "home-07-06",
+    "german": "schreiben",
+    "arabic": "يكتب",
+    "article": null,
+    "icon": "✍️",
+    "world": "home"
+  },
+  {
+    "id": "market-07-01",
+    "german": "Speisekarte",
+    "arabic": "قائمة الطعام",
+    "article": "die",
+    "icon": "📋",
+    "world": "market"
+  },
+  {
+    "id": "market-07-02",
+    "german": "Suppe",
+    "arabic": "حساء",
+    "article": "die",
+    "icon": "🥣",
+    "world": "market"
+  },
+  {
+    "id": "market-07-03",
+    "german": "Reis",
+    "arabic": "أرز",
+    "article": "der",
+    "icon": "🍚",
+    "world": "market"
+  },
+  {
+    "id": "market-07-04",
+    "german": "bestellen",
+    "arabic": "يطلب",
+    "article": null,
+    "icon": "🗣️",
+    "world": "market"
+  },
+  {
+    "id": "market-07-05",
+    "german": "zahlen",
+    "arabic": "يدفع",
+    "article": null,
+    "icon": "💶",
+    "world": "market"
+  },
+  {
+    "id": "market-07-06",
+    "german": "Teller",
+    "arabic": "طبق",
+    "article": "der",
+    "icon": "🍽️",
+    "world": "market"
+  },
+  {
+    "id": "traffic-07-01",
+    "german": "Helm",
+    "arabic": "خوذة",
+    "article": "der",
+    "icon": "⛑️",
+    "world": "traffic"
+  },
+  {
+    "id": "traffic-07-02",
+    "german": "Radweg",
+    "arabic": "مسار الدراجات",
+    "article": "der",
+    "icon": "🚲",
+    "world": "traffic"
+  },
+  {
+    "id": "traffic-07-03",
+    "german": "langsam",
+    "arabic": "ببطء",
+    "article": null,
+    "icon": "🐢",
+    "world": "traffic"
+  },
+  {
+    "id": "traffic-07-04",
+    "german": "sicher",
+    "arabic": "بأمان",
+    "article": null,
+    "icon": "🛡️",
+    "world": "traffic"
+  },
+  {
+    "id": "traffic-07-05",
+    "german": "links",
+    "arabic": "يسار",
+    "article": null,
+    "icon": "⬅️",
+    "world": "traffic"
+  },
+  {
+    "id": "traffic-07-06",
+    "german": "rechts",
+    "arabic": "يمين",
+    "article": null,
+    "icon": "➡️",
+    "world": "traffic"
+  },
+  {
+    "id": "work-07-01",
+    "german": "Feierabend",
+    "arabic": "نهاية الدوام",
+    "article": "der",
+    "icon": "🌇",
+    "world": "work"
+  },
+  {
+    "id": "work-07-02",
+    "german": "pünktlich",
+    "arabic": "في الوقت المحدد",
+    "article": null,
+    "icon": "⏰",
+    "world": "work"
+  },
+  {
+    "id": "work-07-03",
+    "german": "anfangen",
+    "arabic": "يبدأ",
+    "article": null,
+    "icon": "▶️",
+    "world": "work"
+  },
+  {
+    "id": "work-07-04",
+    "german": "Pause",
+    "arabic": "استراحة",
+    "article": "die",
+    "icon": "☕",
+    "world": "work"
+  },
+  {
+    "id": "work-07-05",
+    "german": "fertig",
+    "arabic": "منتهٍ",
+    "article": null,
+    "icon": "✅",
+    "world": "work"
+  },
+  {
+    "id": "work-07-06",
+    "german": "arbeiten",
+    "arabic": "يعمل",
+    "article": null,
+    "icon": "💼",
+    "world": "work"
+  },
+  {
+    "id": "health-07-01",
+    "german": "Sport",
+    "arabic": "رياضة",
+    "article": "der",
+    "icon": "🏅",
+    "world": "health"
+  },
+  {
+    "id": "health-07-02",
+    "german": "Fußball",
+    "arabic": "كرة القدم",
+    "article": "der",
+    "icon": "⚽",
+    "world": "health"
+  },
+  {
+    "id": "health-07-03",
+    "german": "schwimmen",
+    "arabic": "يسبح",
+    "article": null,
+    "icon": "🏊",
+    "world": "health"
+  },
+  {
+    "id": "health-07-04",
+    "german": "laufen",
+    "arabic": "يركض",
+    "article": null,
+    "icon": "👟",
+    "world": "health"
+  },
+  {
+    "id": "health-07-05",
+    "german": "spielen",
+    "arabic": "يلعب",
+    "article": null,
+    "icon": "🎲",
+    "world": "health"
+  },
+  {
+    "id": "health-07-06",
+    "german": "fit",
+    "arabic": "لائق بدنيًا",
+    "article": null,
+    "icon": "💪",
+    "world": "health"
   }
 ]

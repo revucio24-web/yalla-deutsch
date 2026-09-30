@@ -171,6 +171,16 @@ export function lessonUnlocked(progress: Progress, lesson: Lesson): boolean {
   return lesson.order === 0 || progress.completed.includes(lessons[lesson.order - 1].id);
 }
 
+const CORE_LESSONS_PER_WORLD = 5;
+
+export function worldUnlocked(progress: Progress, worldId: string): boolean {
+  const worldIndex = worlds.findIndex((world) => world.id === worldId);
+  if (worldIndex === 0) return true;
+  if (worldIndex < 0) return false;
+  const gateLesson = lessons[worldIndex * CORE_LESSONS_PER_WORLD - 1];
+  return Boolean(gateLesson && progress.completed.includes(gateLesson.id));
+}
+
 export function nextLesson(progress: Progress): Lesson | undefined {
   return lessons.find((lesson) => !progress.completed.includes(lesson.id));
 }

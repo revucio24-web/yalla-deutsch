@@ -12,11 +12,11 @@ from pathlib import Path
 OUT = Path(__file__).resolve().parents[1] / "src" / "data"
 
 WORLDS = [
-    {"id": "home", "de": "Zuhause", "ar": "البيت والبداية", "subtitle": "Begrüßung, Wohnung und Alltag", "icon": "⌂", "color": "#2b9d95"},
-    {"id": "market", "de": "Supermarkt", "ar": "السوق", "subtitle": "Einkaufen, Essen und Preise", "icon": "◧", "color": "#efaa62"},
-    {"id": "traffic", "de": "Unterwegs", "ar": "في الطريق", "subtitle": "Bus, Bahn und Orientierung", "icon": "↗", "color": "#6b8fce"},
-    {"id": "work", "de": "Arbeit", "ar": "العمل", "subtitle": "Beruf, Termine und Gespräche", "icon": "▣", "color": "#9c83b9"},
-    {"id": "health", "de": "Gesundheit", "ar": "الصحة", "subtitle": "Körper, Arzt und Apotheke", "icon": "+", "color": "#de807e"},
+    {"id": "home", "de": "Zuhause", "ar": "البيت والبداية", "subtitle": "Begrüßung, Wohnung und Alltag", "icon": "🏠", "color": "#2b9d95"},
+    {"id": "market", "de": "Supermarkt", "ar": "السوق", "subtitle": "Einkaufen, Essen und Preise", "icon": "🛒", "color": "#efaa62"},
+    {"id": "traffic", "de": "Unterwegs", "ar": "في الطريق", "subtitle": "Bus, Bahn und Orientierung", "icon": "🚌", "color": "#6b8fce"},
+    {"id": "work", "de": "Arbeit", "ar": "العمل", "subtitle": "Beruf, Termine und Gespräche", "icon": "🧰", "color": "#9c83b9"},
+    {"id": "health", "de": "Gesundheit", "ar": "الصحة", "subtitle": "Körper, Arzt und Apotheke", "icon": "🩺", "color": "#de807e"},
 ]
 
 # German | Arabic | article (empty for expressions) | visual symbol.
@@ -120,7 +120,7 @@ Ampel|إشارة المرور|die|🚦
     ("traffic", "Fahrkarte", "تذكرة السفر", """
 Ticket|تذكرة|das|🎫
 Fahrkarte|تذكرة سفر|die|🎟️
-Automat|آلة البيع|der|🏧
+Automat|آلة التذاكر|der|🏧
 Fahrplan|جدول الرحلات|der|🗓️
 Abfahrt|مغادرة|die|↗️
 Ankunft|وصول|die|↘️
@@ -221,6 +221,86 @@ Ruhe|راحة|die|🛏️
 Hilfe|مساعدة|die|🆘
 Notruf|اتصال طوارئ|der|☎️
 """),
+    ("home", "Familie und Besuch", "العائلة والزيارة", """
+Familie|العائلة|die|👨‍👩‍👧
+Mutter|الأم|die|👩
+Vater|الأب|der|👨
+Kind|الطفل|das|🧒
+Besuch|الزيارة|der|🎁
+helfen|يساعد||🤝
+"""),
+    ("market", "Mengen und Preise", "الكميات والأسعار", """
+Angebot|العرض|das|🏷️
+Kilo|كيلوغرام|das|⚖️
+Gramm|غرام|das|🧂
+teuer|غالٍ||💎
+billig|رخيص||🪙
+bezahlen|يدفع||💳
+"""),
+    ("traffic", "Reise planen", "تخطيط الرحلة", """
+Reiseziel|وجهة السفر|das|🎯
+Rückfahrt|رحلة العودة|die|↩️
+umsteigen|يبدّل وسيلة النقل||🔄
+Verbindung|خط الرحلة|die|🔗
+reservieren|يحجز||🎫
+direkt|مباشر||➡️
+"""),
+    ("work", "Am Telefon", "على الهاتف", """
+Anruf|المكالمة|der|📞
+erreichbar|متاح للاتصال||📶
+vereinbaren|يحدّد موعداً||📅
+verschieben|يؤجّل||⏰
+Rückmeldung|الرد|die|📨
+zurückrufen|يعيد الاتصال||☎️
+"""),
+    ("health", "Gesund bleiben", "البقاء بصحة جيدة", """
+Untersuchung|الفحص|die|🩺
+Versicherungskarte|بطاقة التأمين|die|🪪
+allergisch|مصاب بالحساسية||🤧
+gesund|سليم||🍏
+Behandlung|العلاج|die|🏥
+Nebenwirkung|أثر جانبي|die|⚠️
+"""),
+    ("home", "In der Schule", "في المدرسة", """
+Schule|مدرسة|die|🏫
+Buch|كتاب|das|📘
+Heft|دفتر|das|📓
+Stift|قلم|der|✏️
+lesen|يقرأ||📖
+schreiben|يكتب||✍️
+"""),
+    ("market", "Im Restaurant", "في المطعم", """
+Speisekarte|قائمة الطعام|die|📋
+Suppe|حساء|die|🥣
+Reis|أرز|der|🍚
+bestellen|يطلب||🗣️
+zahlen|يدفع||💶
+Teller|طبق|der|🍽️
+"""),
+    ("traffic", "Mit dem Fahrrad", "بالدراجة", """
+Helm|خوذة|der|⛑️
+Radweg|مسار الدراجات|der|🚲
+langsam|ببطء||🐢
+sicher|بأمان||🛡️
+links|يسار||⬅️
+rechts|يمين||➡️
+"""),
+    ("work", "Mein Arbeitstag", "يوم عملي", """
+Feierabend|نهاية الدوام|der|🌇
+pünktlich|في الوقت المحدد||⏰
+anfangen|يبدأ||▶️
+Pause|استراحة|die|☕
+fertig|منتهٍ||✅
+arbeiten|يعمل||💼
+"""),
+    ("health", "Bewegung und Sport", "الحركة والرياضة", """
+Sport|رياضة|der|🏅
+Fußball|كرة القدم|der|⚽
+schwimmen|يسبح||🏊
+laufen|يركض||👟
+spielen|يلعب||🎲
+fit|لائق بدنيًا||💪
+"""),
 ]
 
 # Sentence building, gap filling, and dialogue content is authored per mission.
@@ -250,7 +330,56 @@ EXAMPLES = [
     ("Ich brauche einen Termin beim Arzt.", "أحتاج إلى موعد عند الطبيب.", "Ich brauche einen ___ beim Arzt.", "Termin", "Haben Sie einen Termin?", "هل لديك موعد؟", "Ja, um zehn Uhr."),
     ("Ich habe Fieber und Husten.", "لدي حمّى وسعال.", "Ich habe ___ und Husten.", "Fieber", "Was fehlt Ihnen?", "ما الذي تعاني منه؟", "Ich habe Fieber."),
     ("Ich brauche ein Medikament.", "أحتاج إلى دواء.", "Ich brauche ein ___.", "Medikament", "Brauchen Sie Hilfe?", "هل تحتاج إلى مساعدة؟", "Ja, bitte."),
+    ("Heute besucht uns meine Familie.", "تزورنا عائلتي اليوم.", "Meine ___ kommt heute zu Besuch.", "Familie", "Wann kommt deine Familie?", "متى تأتي عائلتك؟", "Sie kommt heute Abend."),
+    ("Das Angebot kostet zwei Euro pro Kilo.", "العرض يكلف يوروين للكيلو.", "Das Produkt ist heute im ___.", "Angebot", "Wie möchten Sie bezahlen?", "كيف تريد أن تدفع؟", "Mit Karte, bitte."),
+    ("Ich möchte eine direkte Verbindung reservieren.", "أريد حجز رحلة مباشرة.", "Muss ich in Köln ___?", "umsteigen", "Was ist Ihr Reiseziel?", "ما هي وجهة سفرك؟", "Mein Reiseziel ist Berlin."),
+    ("Wir vereinbaren einen Anruf für Dienstag.", "نحدد مكالمة ليوم الثلاثاء.", "Können Sie mich später ___?", "zurückrufen", "Ist Frau Keller erreichbar?", "هل يمكن الوصول إلى السيدة كيلر؟", "Nein, ich bitte um eine Rückmeldung."),
+    ("Die Untersuchung ist Teil der Behandlung.", "الفحص جزء من العلاج.", "Bitte bringen Sie Ihre ___ mit.", "Versicherungskarte", "Sind Sie gegen Penicillin allergisch?", "هل لديك حساسية من البنسلين؟", "Nein, ich bin nicht allergisch."),
+    ("Ich lerne heute in der Schule.", "أتعلم اليوم في المدرسة.", "Ich lese ein ___.", "Buch", "Was liest du heute?", "ماذا تقرأ اليوم؟", "Ich lese ein Buch."),
+    ("Ich bestelle eine Suppe und Reis.", "أطلب حساءً وأرزاً.", "Ich möchte eine ___, bitte.", "Suppe", "Was möchten Sie essen?", "ماذا تريد أن تأكل؟", "Eine Suppe mit Reis, bitte."),
+    ("Ich fahre langsam auf dem Radweg.", "أقود ببطء في مسار الدراجات.", "Ich fahre auf dem ___.", "Radweg", "Fährst du gern Rad?", "هل تحب ركوب الدراجة؟", "Ja, aber ich trage einen Helm."),
+    ("Wir fangen pünktlich um acht Uhr an.", "نبدأ في الساعة الثامنة في الوقت المحدد.", "Um vier Uhr ist ___.", "Feierabend", "Wann fängst du heute an?", "متى تبدأ اليوم؟", "Ich fange um acht Uhr an."),
+    ("Am Nachmittag spiele ich Fußball.", "ألعب كرة القدم بعد الظهر.", "Im Sommer gehe ich gern ___.", "schwimmen", "Was machst du gern?", "ماذا تحب أن تفعل؟", "Ich spiele gern Fußball."),
 ]
+
+LEGACY_OPTION_OVERRIDES = {
+    "home-06": {
+        "blank": ["Familie", "Verbindung", "Behandlung"],
+        "dialogue": ["Sie kommt heute Abend.", "Sie fährt mit dem Kilo.", "Sie arbeitet im Rezept."],
+    },
+    "market-06": {
+        "blank": ["Kilo", "Angebot", "Besuch"],
+        "dialogue": ["Das ist sehr teuer.", "Mit Karte, bitte.", "Ein Gramm, bitte."],
+    },
+    "traffic-06": {
+        "blank": ["bezahlen", "helfen", "umsteigen"],
+        "dialogue": ["Mein Reiseziel ist Berlin.", "Die Familie ist billig.", "Ich bin allergisch."],
+    },
+    "work-06": {
+        "blank": ["zurückrufen", "umsteigen", "bezahlen"],
+        "dialogue": ["Das Angebot ist billig.", "Nein, ich bitte um eine Rückmeldung.", "Das Reiseziel ist dort."],
+    },
+    "health-06": {
+        "blank": ["Rückfahrt", "Rückmeldung", "Versicherungskarte"],
+        "dialogue": ["Nein, ich bin nicht allergisch.", "Ich möchte zwei Kilo.", "Bitte rufen Sie zurück."],
+    },
+}
+
+ILLUSTRATIONS = {
+    "home-03-03": "room", "home-04-01": "table", "home-04-02": "chair",
+    "home-04-05": "wardrobe", "home-04-06": "lamp", "home-06-05": "visitor",
+    "market-03-02": "bread-roll", "market-03-05": "flour", "market-04-06": "bottle",
+    "market-05-02": "cash-register", "market-06-03": "gram", "market-06-06": "pay",
+    "traffic-02-03": "platform", "traffic-02-05": "intersection", "traffic-03-03": "ticket-machine",
+    "traffic-03-05": "departure", "traffic-03-06": "arrival", "traffic-04-02": "path",
+    "traffic-04-04": "corner", "traffic-05-04": "driver", "traffic-05-05": "delay",
+    "traffic-05-06": "transfer", "traffic-06-01": "destination", "traffic-06-05": "reserve",
+    "work-04-01": "profession", "work-04-05": "interview", "work-06-04": "reschedule",
+    "health-01-01": "head", "health-02-03": "abdomen", "health-02-04": "back",
+    "health-03-06": "pharmacy", "health-04-01": "pain", "health-04-03": "cough",
+    "health-05-01": "medicine", "health-05-02": "tablet", "health-06-03": "allergy",
+    "health-06-04": "healthy",
+}
 
 WRONG_REPLIES = [
     "Gute Nacht.", "Das kostet drei Euro.", "Ich nehme den Bus.",
@@ -265,23 +394,29 @@ def rotate(options: list[str], shift: int) -> list[str]:
 
 
 def build() -> None:
-    if len(GROUPS) != 25 or len(EXAMPLES) != 25:
-        raise ValueError("Expected exactly 25 authored missions")
+    if len(GROUPS) != 35 or len(EXAMPLES) != 35:
+        raise ValueError("Expected exactly 35 authored missions")
     vocabulary: list[dict] = []
     lessons: list[dict] = []
+    lesson_number_by_world: dict[str, int] = {}
     for index, ((world, title_de, title_ar, raw_words), example) in enumerate(zip(GROUPS, EXAMPLES, strict=True)):
         rows = [line.strip().split("|") for line in raw_words.strip().splitlines()]
         if len(rows) != 6 or any(len(row) != 4 for row in rows):
             raise ValueError(f"Mission {index + 1} needs six complete words")
-        lesson_id = f"{world}-{index % 5 + 1:02d}"
+        lesson_number = lesson_number_by_world.get(world, 0) + 1
+        lesson_number_by_world[world] = lesson_number
+        lesson_id = f"{world}-{lesson_number:02d}"
         word_ids = []
         for word_index, (german, arabic, article, icon) in enumerate(rows, start=1):
             word_id = f"{lesson_id}-{word_index:02d}"
             word_ids.append(word_id)
-            vocabulary.append({
+            word = {
                 "id": word_id, "german": german, "arabic": arabic,
                 "article": article or None, "icon": icon, "world": world,
-            })
+            }
+            if word_id in ILLUSTRATIONS:
+                word["illustration"] = ILLUSTRATIONS[word_id]
+            vocabulary.append(word)
         phrase, phrase_ar, blank_sentence, blank_answer, prompt, prompt_ar, reply = example
         distractors = [row[0] for row in rows if row[0] != blank_answer]
         if len(distractors) < 2:
@@ -289,8 +424,9 @@ def build() -> None:
         wrong = [item for item in WRONG_REPLIES if item != reply][:2]
         if len(wrong) < 2:
             raise ValueError(f"Mission {lesson_id} needs two wrong replies")
-        blank_options = rotate([blank_answer, *distractors[:2]], index)
-        dialogue_options = rotate([reply, *wrong], index + 1)
+        overrides = LEGACY_OPTION_OVERRIDES.get(lesson_id)
+        blank_options = overrides["blank"] if overrides else rotate([blank_answer, *distractors[:2]], index)
+        dialogue_options = overrides["dialogue"] if overrides else rotate([reply, *wrong], index + 1)
         if len(set(blank_options)) != 3 or len(set(dialogue_options)) != 3:
             raise ValueError(f"Mission {lesson_id} produced duplicate answer options")
         lessons.append({
@@ -302,8 +438,10 @@ def build() -> None:
             "dialogue": {"prompt": prompt, "promptAr": prompt_ar,
                          "answer": reply, "options": dialogue_options},
         })
-    if len(vocabulary) != 150 or len({word["id"] for word in vocabulary}) != 150:
-        raise ValueError("Expected 150 unique vocabulary entries")
+    if len(lesson_number_by_world) != len(WORLDS) or any(count != 7 for count in lesson_number_by_world.values()):
+        raise ValueError("Expected seven missions for every world")
+    if len(vocabulary) != 210 or len({word["id"] for word in vocabulary}) != 210:
+        raise ValueError("Expected 210 unique vocabulary entries")
     OUT.mkdir(parents=True, exist_ok=True)
     for filename, data in (("worlds.json", WORLDS), ("vocabulary.json", vocabulary), ("lessons.json", lessons)):
         (OUT / filename).write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")

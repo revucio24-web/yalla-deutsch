@@ -10,8 +10,9 @@ Keine Anmeldung, kein Backend, keine Tracking: der gesamte Lernfortschritt liegt
 
 ## Inhalt
 
-- **5 Stadtbereiche** mit **30 Missionen** und **180 Wörtern** auf A1/A2-Niveau
-- **8 Aufgabentypen**: choice, symbol, listen, match, build, blank, dialogue, basket
+- **5 Stadtbereiche** mit **35 Missionen** und **210 Wörtern** auf A1/A2-Niveau
+- **8 Aufgabentypen** in Missionen: choice, symbol, listen, match, build, blank, dialogue, basket
+- Ein zusätzliches, offlinefähiges **Wortpaare-Spiel** mit sechs deutsch-arabischen Paaren
 - Dialogtrainer mit **3 A1/A2-Alltagssituationen**: Café, Bäckerei und Supermarkt
 - Gesprächsoptionen mit arabischen Übersetzungen, Gerätestimme, Punkten und lokalem Bestwert
 - Level, XP, Sterne, Word-Mastery (1–5) und eine fälligkeitsbasierte Wiederholungsliste
@@ -74,5 +75,7 @@ python scripts/generate_content.py
   ergänzen. Das Skript prüft Längen, ID-Eindeutigkeit sowie doppelte
   Antwortoptionen und bricht bei einem Fehler ab.
 
-`src/domain.test.ts` sichert die Invarianten ab: 5 Wörter, 5 Ziele je Mission,
-Optionen ohne Duplikate, Antwort nicht immer an derselben Position.
+`src/domain.test.ts` sichert die Inhaltsinvarianten ab: 6 Wörter und 5 Aufgaben je
+Mission, eindeutige IDs, erhaltene bestehende Missionen und Antwortpositionen,
+die nicht immer gleich sind. `src/memoryGame.test.tsx` prüft die Regeln und
+Tastatur-/Sprachkennzeichnung des Wortpaare-Spiels.

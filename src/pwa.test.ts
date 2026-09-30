@@ -42,6 +42,12 @@ describe('PWA contract', () => {
     expect(packageJson.scripts.build).toContain('scripts/inject-precache.mjs');
   });
 
+  it('matches immutable precached bundles even when the server varies on Origin', () => {
+    const worker = readProjectFile('public/sw.js');
+    expect(worker).toContain('const BUILD_ASSET_URLS = new Set(BUILD_ASSETS.map((asset) => new URL(asset, APP_SCOPE).href));');
+    expect(worker).toContain('cache.match(request, { ignoreVary: BUILD_ASSET_URLS.has(request.url) })');
+  });
+
   it('keeps Arabic as the document language and RTL base direction', () => {
     const html = readProjectFile('index.html');
     expect(html).toContain('<html lang="ar" dir="rtl">');

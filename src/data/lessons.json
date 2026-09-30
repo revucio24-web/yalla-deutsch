@@ -1138,5 +1138,195 @@
         "Bitte rufen Sie zurück."
       ]
     }
+  },
+  {
+    "id": "home-07",
+    "world": "home",
+    "order": 30,
+    "titleDe": "In der Schule",
+    "titleAr": "في المدرسة",
+    "wordIds": [
+      "home-07-01",
+      "home-07-02",
+      "home-07-03",
+      "home-07-04",
+      "home-07-05",
+      "home-07-06"
+    ],
+    "phrase": {
+      "german": "Ich lerne heute in der Schule.",
+      "arabic": "أتعلم اليوم في المدرسة."
+    },
+    "blank": {
+      "sentence": "Ich lese ein ___.",
+      "answer": "Buch",
+      "options": [
+        "Buch",
+        "Schule",
+        "Heft"
+      ]
+    },
+    "dialogue": {
+      "prompt": "Was liest du heute?",
+      "promptAr": "ماذا تقرأ اليوم؟",
+      "answer": "Ich lese ein Buch.",
+      "options": [
+        "Gute Nacht.",
+        "Das kostet drei Euro.",
+        "Ich lese ein Buch."
+      ]
+    }
+  },
+  {
+    "id": "market-07",
+    "world": "market",
+    "order": 31,
+    "titleDe": "Im Restaurant",
+    "titleAr": "في المطعم",
+    "wordIds": [
+      "market-07-01",
+      "market-07-02",
+      "market-07-03",
+      "market-07-04",
+      "market-07-05",
+      "market-07-06"
+    ],
+    "phrase": {
+      "german": "Ich bestelle eine Suppe und Reis.",
+      "arabic": "أطلب حساءً وأرزاً."
+    },
+    "blank": {
+      "sentence": "Ich möchte eine ___, bitte.",
+      "answer": "Suppe",
+      "options": [
+        "Speisekarte",
+        "Reis",
+        "Suppe"
+      ]
+    },
+    "dialogue": {
+      "prompt": "Was möchten Sie essen?",
+      "promptAr": "ماذا تريد أن تأكل؟",
+      "answer": "Eine Suppe mit Reis, bitte.",
+      "options": [
+        "Das kostet drei Euro.",
+        "Eine Suppe mit Reis, bitte.",
+        "Gute Nacht."
+      ]
+    }
+  },
+  {
+    "id": "traffic-07",
+    "world": "traffic",
+    "order": 32,
+    "titleDe": "Mit dem Fahrrad",
+    "titleAr": "بالدراجة",
+    "wordIds": [
+      "traffic-07-01",
+      "traffic-07-02",
+      "traffic-07-03",
+      "traffic-07-04",
+      "traffic-07-05",
+      "traffic-07-06"
+    ],
+    "phrase": {
+      "german": "Ich fahre langsam auf dem Radweg.",
+      "arabic": "أقود ببطء في مسار الدراجات."
+    },
+    "blank": {
+      "sentence": "Ich fahre auf dem ___.",
+      "answer": "Radweg",
+      "options": [
+        "langsam",
+        "Radweg",
+        "Helm"
+      ]
+    },
+    "dialogue": {
+      "prompt": "Fährst du gern Rad?",
+      "promptAr": "هل تحب ركوب الدراجة؟",
+      "answer": "Ja, aber ich trage einen Helm.",
+      "options": [
+        "Ja, aber ich trage einen Helm.",
+        "Gute Nacht.",
+        "Das kostet drei Euro."
+      ]
+    }
+  },
+  {
+    "id": "work-07",
+    "world": "work",
+    "order": 33,
+    "titleDe": "Mein Arbeitstag",
+    "titleAr": "يوم عملي",
+    "wordIds": [
+      "work-07-01",
+      "work-07-02",
+      "work-07-03",
+      "work-07-04",
+      "work-07-05",
+      "work-07-06"
+    ],
+    "phrase": {
+      "german": "Wir fangen pünktlich um acht Uhr an.",
+      "arabic": "نبدأ في الساعة الثامنة في الوقت المحدد."
+    },
+    "blank": {
+      "sentence": "Um vier Uhr ist ___.",
+      "answer": "Feierabend",
+      "options": [
+        "Feierabend",
+        "pünktlich",
+        "anfangen"
+      ]
+    },
+    "dialogue": {
+      "prompt": "Wann fängst du heute an?",
+      "promptAr": "متى تبدأ اليوم؟",
+      "answer": "Ich fange um acht Uhr an.",
+      "options": [
+        "Gute Nacht.",
+        "Das kostet drei Euro.",
+        "Ich fange um acht Uhr an."
+      ]
+    }
+  },
+  {
+    "id": "health-07",
+    "world": "health",
+    "order": 34,
+    "titleDe": "Bewegung und Sport",
+    "titleAr": "الحركة والرياضة",
+    "wordIds": [
+      "health-07-01",
+      "health-07-02",
+      "health-07-03",
+      "health-07-04",
+      "health-07-05",
+      "health-07-06"
+    ],
+    "phrase": {
+      "german": "Am Nachmittag spiele ich Fußball.",
+      "arabic": "ألعب كرة القدم بعد الظهر."
+    },
+    "blank": {
+      "sentence": "Im Sommer gehe ich gern ___.",
+      "answer": "schwimmen",
+      "options": [
+        "Sport",
+        "Fußball",
+        "schwimmen"
+      ]
+    },
+    "dialogue": {
+      "prompt": "Was machst du gern?",
+      "promptAr": "ماذا تحب أن تفعل؟",
+      "answer": "Ich spiele gern Fußball.",
+      "options": [
+        "Das kostet drei Euro.",
+        "Ich spiele gern Fußball.",
+        "Gute Nacht."
+      ]
+    }
   }
 ]
