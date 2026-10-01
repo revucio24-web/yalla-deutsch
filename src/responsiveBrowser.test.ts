@@ -6,6 +6,7 @@ import { join } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { createServer } from 'vite';
 import { describe, expect, it } from 'vitest';
+import { speechFeedbackCopy } from './audio';
 
 const widths = [320, 700, 701, 768, 960, 961];
 const baseCss = readFileSync(new URL('./styles.css', import.meta.url), 'utf8');
@@ -288,6 +289,100 @@ async function launchChromium(pageUrl: string, profileDir: string) {
     },
   };
 }
+
+describe('mobile system speech feedback', () => {
+  it('keeps the full bilingual no-voice message readable and above quiz answers at 320px', async () => {
+    const tempDir = mkdtempSync(join(tmpdir(), 'yalla-audio-feedback-browser-'));
+    const server = await createServer({
+      base: './',
+      plugins: [react()],
+      server: { host: '127.0.0.1', port: 0, strictPort: false, hmr: false, watch: null },
+      logLevel: 'error',
+    });
+    let browser: Awaited<ReturnType<typeof launchChromium>> | undefined;
+
+    try {
+      await server.listen();
+      const address = server.httpServer?.address();
+      if (!address || typeof address === 'string') throw new Error('Vite test server did not expose its port');
+      browser = await launchChromium(`http://127.0.0.1:${address.port}/`, join(tempDir, 'chrome-profile'));
+      await browser.setViewport(320, 720);
+      await browser.evaluate(`localStorage.setItem('yalla-deutsch-progress-v1', JSON.stringify({version:1,nickname:'Test',avatar:'🐼',xp:0,completed:[],stars:{},words:{},settings:{sound:true,hints:true,reduceMotion:false,largeText:false},dialogTrainer:{}})); true`);
+      await browser.reload();
+      await browser.evaluate(`Object.defineProperty(window, 'speechSynthesis', { configurable: true, value: { getVoices: () => [], addEventListener: () => {}, removeEventListener: () => {}, speak: () => {}, cancel: () => {}, speaking: false } }); true`);
+      await browser.click('.hero .primary-btn');
+      expect(await browser.evaluate<string>(`document.querySelector('.task-type')?.textContent?.trim() ?? ''`)).toBe('CHOICE');
+      await browser.click('.task-card .option');
+      await new Promise((resolve) => setTimeout(resolve, 1_650));
+
+      const layout = await browser.evaluate<{
+        viewportWidth: number;
+        documentWidth: number;
+        toastPosition: string;
+        toastLeft: number;
+        toastRight: number;
+        toastTop: number;
+        toastBottom: number;
+        toastScrollHeight: number;
+        toastClientHeight: number;
+        arabicText: string;
+        germanText: string;
+        arabicDirection: string;
+        germanDirection: string;
+        paragraphOverflow: boolean[];
+        answers: Array<{ top: number; bottom: number; overlap: number }>;
+      }>(`(() => {
+        const toast = document.querySelector('.audio-feedback-toast');
+        const toastRect = toast.getBoundingClientRect();
+        const paragraphs = [...toast.querySelectorAll('p')];
+        const answers = [...document.querySelectorAll('.task-card .option')];
+        return {
+          viewportWidth: innerWidth,
+          documentWidth: document.documentElement.scrollWidth,
+          toastPosition: getComputedStyle(toast).position,
+          toastLeft: toastRect.left,
+          toastRight: toastRect.right,
+          toastTop: toastRect.top,
+          toastBottom: toastRect.bottom,
+          toastScrollHeight: toast.scrollHeight,
+          toastClientHeight: toast.clientHeight,
+          arabicText: toast.querySelector('[lang="ar"]')?.textContent?.trim() ?? '',
+          germanText: toast.querySelector('[lang="de"]')?.textContent?.trim() ?? '',
+          arabicDirection: getComputedStyle(toast.querySelector('[lang="ar"]')).direction,
+          germanDirection: getComputedStyle(toast.querySelector('[lang="de"]')).direction,
+          paragraphOverflow: paragraphs.map((paragraph) => paragraph.scrollWidth > paragraph.clientWidth),
+          answers: answers.map((answer) => {
+            const rect = answer.getBoundingClientRect();
+            return { top: rect.top, bottom: rect.bottom, overlap: Math.max(0, Math.min(rect.bottom, toastRect.bottom) - Math.max(rect.top, toastRect.top)) };
+          }),
+        };
+      })()`);
+
+      expect(layout.viewportWidth).toBe(320);
+      expect(layout.documentWidth, 'the 320px quiz has no horizontal overflow').toBeLessThanOrEqual(320);
+      expect(layout.toastPosition, 'the mobile message participates in document flow').toBe('static');
+      expect(layout.toastLeft).toBeGreaterThanOrEqual(0);
+      expect(layout.toastRight).toBeLessThanOrEqual(320);
+      expect(layout.toastTop).toBeGreaterThanOrEqual(0);
+      expect(layout.toastBottom).toBeLessThanOrEqual(720);
+      expect(layout.toastScrollHeight).toBeLessThanOrEqual(layout.toastClientHeight);
+      expect(layout.arabicText).toBe(speechFeedbackCopy['no-voice'].arabic);
+      expect(layout.germanText).toBe(speechFeedbackCopy['no-voice'].german);
+      expect(layout.arabicDirection).toBe('rtl');
+      expect(layout.germanDirection).toBe('ltr');
+      expect(layout.paragraphOverflow).toEqual([false, false]);
+      expect(layout.answers).toHaveLength(4);
+      for (const answer of layout.answers) {
+        expect(answer.overlap, 'the TTS message never covers a quiz answer').toBe(0);
+        expect(answer.top, 'answers follow the TTS message in document flow').toBeGreaterThanOrEqual(layout.toastBottom);
+      }
+    } finally {
+      await browser?.close();
+      await server.close();
+      rmSync(tempDir, { recursive: true, force: true });
+    }
+  });
+});
 
 describe('rendered responsive navigation', () => {
   it('uses the effective CSS media-query cascade at each breakpoint without label or page overflow', async () => {
