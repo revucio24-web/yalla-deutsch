@@ -298,6 +298,8 @@ button:focus-visible, input:focus-visible {
 .basket-word-illustration { width: 46px; height: 46px; padding: 3px; border-radius: 12px; font-size: 1.75rem; }
 .word-card button { background: #e7f0eb; color: var(--teal); }
 .word-pronunciation { text-align: start; }
+.mastery-dots { align-items: center; direction: ltr; }
+.mastery-value { color: var(--muted); font-size: .65rem; font-variant-numeric: tabular-nums; font-weight: 800; }
 .mastery-dots i { background: #dce5df; }
 .mastery-dots i.filled { background: var(--teal); }
 .empty-state { border-color: var(--line); background: var(--paper); border-radius: 17px; }
@@ -305,7 +307,7 @@ button:focus-visible, input:focus-visible {
 .stats-grid small { color: var(--muted); }
 .progress-panel { border-radius: 16px; padding: 22px; }
 .district-progress { border-radius: 16px; padding: 12px 18px; }
-.hint-stage { background: #eaf2ed; border: 1px solid #d8e5dc; border-radius: 14px; padding: 17px; }
+.hint-stage { background: #eaf2ed; border-color: var(--card-border); border-radius: 14px; padding: 17px; }
 .profile-panel { background: linear-gradient(115deg, #203f3d, #315d52); border-radius: 16px; }
 .profile-icon { border-radius: 14px; background: #e5d4ad; }
 .edit-panel, .settings-panel { border-radius: 16px; padding: 22px; }
@@ -336,7 +338,7 @@ button:focus-visible, input:focus-visible {
 .close-btn { border-radius: 11px; }
 .guide-card {
   background: #f0eadb;
-  border-color: #e2d8c1;
+  border-color: var(--card-border);
   border-radius: 17px;
 }
 .guide-avatar { background: #315650; border-radius: 50%; }
@@ -885,6 +887,8 @@ input::placeholder { color: var(--muted); opacity: 1; }
     overflow-wrap: normal;
   }
 }
+
+.mobile-nav small { font-size: max(.75rem, 12px); overflow-wrap: anywhere; }
 
 /* Keep the scenario action visible before the fixed mobile navigation. */
 .dialog-scenario-identity {

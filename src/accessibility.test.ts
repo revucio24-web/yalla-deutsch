@@ -3,6 +3,7 @@ import { createElement } from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
 import { describe, expect, it } from 'vitest';
 import WordIllustration from './WordIllustration';
+import MasteryIndicator from './MasteryIndicator';
 import { wordVisualKey, type Word } from './domain';
 
 const baseCss = readFileSync(new URL('./styles.css', import.meta.url), 'utf8');
@@ -239,7 +240,7 @@ describe('visual accessibility regressions', () => {
       '.progress-panel', '.district-progress', '.edit-panel', '.settings-panel', '.reset-panel',
       '.welcome-panel', '.finish-panel', '.review-panel', '.memory-game-panel', '.dialog-scenario-card',
       '.dialog-session-card', '.dialog-result-card', '.world-tile', '.city-scene', '.empty-state',
-      '.task-card', '.dialog-home-card', '.dialog-overview', '.memory-game-stats > div', '.memory-feedback',
+      '.task-card', '.guide-card', '.hint-stage', '.dialog-home-card', '.dialog-overview', '.memory-game-stats > div', '.memory-feedback',
     ];
     for (const selector of cards) {
       expect(cssProperty(selector, 'border-color'), `${selector} uses the contrast-safe card edge`).toBe('var(--card-border)');
@@ -260,6 +261,34 @@ describe('visual accessibility regressions', () => {
     const selectedAvatarEdge = cssProperty('.avatar-options button.selected', 'border-color');
     expect(selectedAvatarEdge).toBe('var(--answer-selected)');
     expectPair('selected avatar edge', selectedAvatarEdge, '#e7f0eb', 3);
+  });
+
+  it('measures the guide and hint-stage borders against their effective filled surfaces', () => {
+    expect(missionSource).toContain('<aside className="guide-card">');
+    for (const selector of ['.guide-card', '.hint-stage']) {
+      const border = cssProperty(selector, 'border-color');
+      const surface = cssProperty(selector, 'background');
+      expect(border, `${selector} uses the shared card edge`).toBe('var(--card-border)');
+      expectPair(`${selector} edge on its effective surface`, border, surface, 3);
+    }
+  });
+
+  it('renders mastery progress as a visible ratio and a semantic meter', () => {
+    expect(appSource).toContain('<MasteryIndicator value={progress.words[word.id].mastery} />');
+    for (const value of [0, 3, 5]) {
+      const markup = renderToStaticMarkup(createElement(MasteryIndicator, { value }));
+      expect(markup).toContain('role="meter"');
+      expect(markup).toContain('aria-label="Lernstand"');
+      expect(markup).toContain('aria-valuemin="0"');
+      expect(markup).toContain('aria-valuemax="5"');
+      expect(markup).toContain(`aria-valuenow="${value}"`);
+      expect(markup).toContain(`aria-valuetext="${value} von 5"`);
+      expect(markup).toContain(`class="mastery-value" aria-hidden="true">${value}/5</span>`);
+      expect(markup.match(/<i aria-hidden="true"/g)).toHaveLength(5);
+    }
+    const valueColor = cssProperty('.mastery-value', 'color');
+    expect(valueColor).toBe('var(--muted)');
+    expectPair('visible mastery ratio on a word card', valueColor, token('paper'), 4.5);
   });
 
   it('keeps the profile avatar marker and pressed state synced to the selected avatar with an empty name draft', () => {
@@ -326,8 +355,8 @@ describe('visual accessibility regressions', () => {
 
   it('keeps mobile labels readable without ellipsis and reserves space above the fixed navigation', () => {
     expect(themeCss).toMatch(/\.mobile-nav small\s*\{[^}]*text-overflow:\s*clip;[^}]*white-space:\s*normal/);
-    expect(cssProperty('.mobile-nav small', 'font-size')).toBe('.75rem');
-    expect(cssProperty('.mobile-nav small', 'overflow-wrap')).toBe('normal');
+    expect(cssProperty('.mobile-nav small', 'font-size')).toBe('max(.75rem, 12px)');
+    expect(cssProperty('.mobile-nav small', 'overflow-wrap')).toBe('anywhere');
     expect(cssProperty('.mobile-nav button', 'min-height')).toBe('60px');
     expect(cssProperty('.mobile-nav', 'min-height')).toBe('76px');
     expect(cssProperty('.mobile-nav', 'background')).toMatch(/^rgba\(\s*255,\s*254,\s*250,\s*\.96\s*\)$/);
@@ -341,6 +370,19 @@ describe('visual accessibility regressions', () => {
     expect(themeCss).toMatch(/\.main-area\s*\{[^}]*padding:\s*0 15px 96px/);
     expect(themeCss).toMatch(/\.mobile-nav\s*\{[^}]*position:\s*fixed/);
     expect(appSource).toContain('<nav className="mobile-nav" aria-label="Mobile Hauptnavigation"');
+  });
+
+  it('keeps mobile navigation labels at least 12px at 768px and each visible breakpoint', () => {
+    const visibleWidths = [320, 370, 371, 390, 391, 700, 701, 768, 960];
+    expect(visibleWidths).toContain(768);
+    expect(baseCss).toMatch(/@media\s*\(max-width:\s*960px\)[\s\S]*?\.mobile-nav\s*\{[^}]*display:\s*flex/);
+    expect(cssProperty('.mobile-nav small', 'font-size')).toBe('max(.75rem, 12px)');
+    const computedFloorAtDefaultRootSize = Math.max(0.75 * 16, 12);
+    for (const width of visibleWidths) {
+      expect(width, `mobile navigation is visible at ${width}px`).toBeLessThanOrEqual(960);
+      expect(computedFloorAtDefaultRootSize, `mobile label floor at ${width}px`).toBeGreaterThanOrEqual(12);
+    }
+    expect(961).toBeGreaterThan(960);
   });
 
   it('keeps the mobile dialog start action ahead of detail copy with both language labels intact', () => {
