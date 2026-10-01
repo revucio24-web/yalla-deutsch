@@ -135,19 +135,21 @@ async function launchChromium(pageUrl: string, profileDir: string) {
   const debugUrl = new URL(browserSocketUrl);
   const targetsUrl = `http://${debugUrl.host}/json/list`;
   let targets: Array<{ type: string; webSocketDebuggerUrl: string }> = [];
-  for (let attempt = 0; attempt < 30; attempt += 1) {
+  for (let attempt = 0; attempt < 150; attempt += 1) {
     try {
       const response = await fetch(targetsUrl);
       targets = await response.json() as typeof targets;
       if (targets.some((target) => target.type === 'page')) break;
     } catch {
-      await new Promise((resolve) => setTimeout(resolve, 100));
+      targets = [];
     }
+    if (child.exitCode !== null || child.signalCode !== null) break;
+    if (attempt < 149) await new Promise((resolve) => setTimeout(resolve, 100));
   }
   const pageTarget = targets.find((target) => target.type === 'page');
   if (!pageTarget) {
     child.kill('SIGTERM');
-    throw new Error(`Chromium created no page target: ${startupLog.slice(-1000)}`);
+    throw new Error(`Chromium created no page target within 15 seconds: ${startupLog.slice(-1000)}`);
   }
 
   const socket = new WebSocket(pageTarget.webSocketDebuggerUrl);
