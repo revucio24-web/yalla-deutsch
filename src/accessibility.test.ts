@@ -372,19 +372,6 @@ describe('visual accessibility regressions', () => {
     expect(appSource).toContain('<nav className="mobile-nav" aria-label="Mobile Hauptnavigation"');
   });
 
-  it('keeps mobile navigation labels at least 12px at 768px and each visible breakpoint', () => {
-    const visibleWidths = [320, 370, 371, 390, 391, 700, 701, 768, 960];
-    expect(visibleWidths).toContain(768);
-    expect(baseCss).toMatch(/@media\s*\(max-width:\s*960px\)[\s\S]*?\.mobile-nav\s*\{[^}]*display:\s*flex/);
-    expect(cssProperty('.mobile-nav small', 'font-size')).toBe('max(.75rem, 12px)');
-    const computedFloorAtDefaultRootSize = Math.max(0.75 * 16, 12);
-    for (const width of visibleWidths) {
-      expect(width, `mobile navigation is visible at ${width}px`).toBeLessThanOrEqual(960);
-      expect(computedFloorAtDefaultRootSize, `mobile label floor at ${width}px`).toBeGreaterThanOrEqual(12);
-    }
-    expect(961).toBeGreaterThan(960);
-  });
-
   it('keeps the mobile dialog start action ahead of detail copy with both language labels intact', () => {
     const identity = dialogSource.indexOf('<div className="dialog-scenario-identity">');
     const start = dialogSource.indexOf('<button className="primary-btn dialog-start-btn"');

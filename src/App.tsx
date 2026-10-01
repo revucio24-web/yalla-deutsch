@@ -66,7 +66,7 @@ function App() {
   const [activeLesson, setActiveLesson] = useState<Lesson | null>(null);
   const [result, setResult] = useState<{ lesson: Lesson; stars: number; xp: number; first: boolean } | null>(null);
   const [nickname, setNickname] = useState('');
-  const [avatar, setAvatar] = useState(avatars[0]);
+  const [avatar, setAvatar] = useState(() => avatars.includes(progress.avatar) ? progress.avatar : avatars[0]);
   const [wordSearch, setWordSearch] = useState('');
   const [resetPending, setResetPending] = useState(false);
   const [reviewQueue, setReviewQueue] = useState<Word[]>([]);

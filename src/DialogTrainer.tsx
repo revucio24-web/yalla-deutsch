@@ -10,7 +10,7 @@ type Props = {
   progress: DialogTrainerProgress;
   onRecordAttempt: (scenarioId: string, score: number) => void;
 };
-type Feedback = { correct: boolean; text: string };
+type Feedback = { correct: boolean; text: string; germanAnswer?: string; arabicAnswer?: string };
 
 function AudioButton({ text, enabled }: { text: string; enabled: boolean }) {
   return <button
@@ -71,9 +71,9 @@ export default function DialogTrainer({ hints, sound, progress, onRecordAttempt 
     setMadeMistake(true);
     setFeedback({
       correct: false,
-      text: correctChoice
-        ? `ليس هذا الرد الأنسب. جرّب مرة أخرى. الأنسب: ${correctChoice.text} · ${correctChoice.translationAr}`
-        : 'حاول مرة أخرى.',
+      text: correctChoice ? 'ليس هذا الرد الأنسب. جرّب مرة أخرى. الأنسب:' : 'حاول مرة أخرى.',
+      germanAnswer: correctChoice?.text,
+      arabicAnswer: correctChoice?.translationAr,
     });
   };
 
@@ -144,8 +144,11 @@ export default function DialogTrainer({ hints, sound, progress, onRecordAttempt 
             <AudioButton text={choice.text} enabled={sound} />
           </div>)}
         </div>
-        <div className={`dialog-feedback ${feedback?.correct ? 'is-correct' : 'is-try-again'}`} role="status" aria-live="polite">
-          {feedback?.text ?? ' '}
+        <div className={`dialog-feedback ${feedback?.correct ? 'is-correct' : 'is-try-again'}`} role="status" aria-live="polite" dir="rtl" lang="ar">
+          {feedback ? <>
+            <span dir="rtl" lang="ar">{feedback.text}</span>
+            {feedback.germanAnswer && <><span aria-hidden="true"> </span><b dir="ltr" lang="de">{feedback.germanAnswer}</b><span aria-hidden="true"> · </span><span dir="rtl" lang="ar">{feedback.arabicAnswer}</span></>}
+          </> : ' '}
         </div>
         {solved && <button className="primary-btn dialog-next-btn" type="button" onClick={advance}>
           <span lang="ar">{step === scenario.turns.length ? 'النتيجة' : 'التالي'}</span> · <span lang="de">{step === scenario.turns.length ? 'Ergebnis' : 'Weiter'}</span> <span aria-hidden="true">←</span>
