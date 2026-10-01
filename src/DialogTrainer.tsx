@@ -136,6 +136,7 @@ export default function DialogTrainer({ hints, sound, progress, onRecordAttempt 
               className={`dialog-choice ${solved && choice.id === turn.answerId ? 'is-correct' : ''}`}
               type="button"
               disabled={solved}
+              aria-pressed={solved && choice.id === turn.answerId}
               onClick={() => answer(choice.id)}
             >
               <span className="dialog-choice-copy"><b dir="ltr" lang="de">{choice.text}</b>{hints && <small lang="ar">{choice.translationAr}</small>}</span>

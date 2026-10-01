@@ -21,7 +21,7 @@ const navigation: { id: Screen; ar: string; mobileAr?: string; de: string; icon:
   { id: 'missions', ar: 'المهام', de: 'Missionen', icon: '🎯' },
   { id: 'dialog', ar: 'الحوارات', de: 'Dialogtrainer', icon: '💬' },
   { id: 'words', ar: 'الكلمات', de: 'Wörter', icon: '🔤' },
-  { id: 'game', ar: 'لعبة الأزواج', mobileAr: 'لعبة', de: 'Paare-Spiel', icon: '🃏' },
+  { id: 'game', ar: 'لعبة الأزواج', de: 'Paare-Spiel', icon: '🃏' },
   { id: 'progress', ar: 'تقدمي', de: 'Fortschritt', icon: '⭐' },
   { id: 'profile', ar: 'الملف', de: 'Profil', icon: '🙂' },
   { id: 'settings', ar: 'الإعدادات', de: 'Einstellungen', icon: '⚙' },
