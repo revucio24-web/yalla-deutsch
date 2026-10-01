@@ -25,10 +25,41 @@ Keine Anmeldung, kein Backend, keine Tracking: der gesamte Lernfortschritt liegt
 ```bash
 pnpm install
 pnpm dev        # Entwicklungsserver
-pnpm test       # Vitest
+pnpm test       # Vitest ohne Systembrowser-Voraussetzung
+pnpm test:browser # verpflichtende Chromium-Viewport-Regression für den PR-Nachweis
 pnpm lint       # ESLint
 pnpm build      # Typecheck + Produktionsbuild nach dist/
 ```
+
+`pnpm test` führt die Node-basierten Tests aus und benötigt kein installiertes Chromium/Chrome.
+Die echte Browser-Regression läuft separat mit `pnpm test:browser`; sie ist ein verpflichtender
+QA-Schritt und muss im PR-Nachweis mit dem Befehl und dem erfolgreichen Ergebnis aufgeführt werden.
+Sie startet ein bereits installiertes System-Chromium/Chrome direkt, ohne Playwright oder einen
+Browser-Download. Gemessen werden echte Viewportwerte, berechnete Schriftgröße, Sichtbarkeit,
+Label-/Button-Grenzen sowie horizontaler Text-, Dokument- und Body-Overflow bei **320, 700, 701,
+768, 960 und 961 px**.
+Im echten Dialog prüft derselbe Lauf mit echten Chromium-Touch-Eingaben bei **320×640 und 320×720** außerdem,
+dass die vollständige Rückmeldung und die dritte Antwort sofort über der fixen Bottom-Navigation
+ohne weiteres Scrollen sichtbar sind. Der Touch-Fokus bleibt erhalten; Tab und Enter erreichen an
+beiden Höhen die nächste Antwort mit sichtbarem 3px-Fokusring.
+
+Der Browser-Test erkennt `chromium`, `chromium-browser`, `google-chrome` oder
+`google-chrome-stable` auf `PATH`. Für eine nicht standardmäßige Installation kann der Pfad explizit
+gesetzt werden:
+
+```bash
+CHROME_BIN=/absoluter/pfad/zu/chromium pnpm test:browser
+```
+
+`CHROMIUM_BIN` wird als bisheriger Alias ebenfalls akzeptiert. Fehlt das Binary, schlägt nur
+`pnpm test:browser` mit einer konkreten Installations-/Konfigurationsmeldung fehl; es gibt keinen
+stillschweigenden Skip. `pnpm test` bleibt davon unabhängig.
+GitHub Actions führt beide Schritte zusätzlich auf einem sauberen Checkout ausschließlich bei
+Pull Requests nach `main` aus. Dafür wird Chrome for Testing **154.0.8037.92** auf `ubuntu-24.04`
+bereitgestellt; `browser-actions/setup-chrome` ist auf Commit
+`48ad923757ca74d66703209fe939badbdf80f2f4` fixiert und die installierte Browserversion wird
+verifiziert. Dieser Workflow hat nur Lesezugriff und enthält keine Pages-, Deploy- oder Release-
+Schritte; der bestehende Pages-Workflow bleibt unverändert.
 
 ## PWA und Offline-Nutzung
 

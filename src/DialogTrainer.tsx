@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useLayoutEffect, useRef, useState } from 'react';
 import { speakGerman, stopSpeaking } from './audio';
 import { dialogScenarios } from './dialogTrainer';
 import type { DialogScenario, DialogTrainerProgress } from './dialogTrainer';
@@ -10,7 +10,7 @@ type Props = {
   progress: DialogTrainerProgress;
   onRecordAttempt: (scenarioId: string, score: number) => void;
 };
-type Feedback = { correct: boolean; text: string };
+type Feedback = { correct: boolean; text: string; germanAnswer?: string; arabicAnswer?: string };
 
 function AudioButton({ text, enabled }: { text: string; enabled: boolean }) {
   return <button
@@ -32,11 +32,23 @@ export default function DialogTrainer({ hints, sound, progress, onRecordAttempt 
   const [madeMistake, setMadeMistake] = useState(false);
   const [solved, setSolved] = useState(false);
   const [feedback, setFeedback] = useState<Feedback | null>(null);
+  const feedbackRef = useRef<HTMLDivElement>(null);
   const [lastScore, setLastScore] = useState(0);
   const scenario = dialogScenarios.find((item) => item.id === activeId) ?? null;
   const turn = scenario?.turns[turnIndex];
   const totalPoints = dialogScenarios.reduce((sum, item) => sum + (progress[item.id]?.bestScore ?? 0), 0);
   const completedCount = dialogScenarios.filter((item) => progress[item.id]?.completed).length;
+
+  useLayoutEffect(() => {
+    if (!feedback || feedback.correct) return;
+    const message = feedbackRef.current;
+    const navigation = document.querySelector<HTMLElement>('.mobile-nav');
+    if (!message || !navigation || getComputedStyle(navigation).display === 'none') return;
+
+    const safeBottom = navigation.getBoundingClientRect().top - 12;
+    const overflow = message.getBoundingClientRect().bottom - safeBottom;
+    if (overflow > 0) window.scrollBy({ top: overflow, behavior: 'instant' });
+  }, [feedback]);
 
   const startScenario = (item: DialogScenario) => {
     stopSpeaking();
@@ -71,9 +83,9 @@ export default function DialogTrainer({ hints, sound, progress, onRecordAttempt 
     setMadeMistake(true);
     setFeedback({
       correct: false,
-      text: correctChoice
-        ? `ليس هذا الرد الأنسب. جرّب مرة أخرى. الأنسب: ${correctChoice.text} · ${correctChoice.translationAr}`
-        : 'حاول مرة أخرى.',
+      text: correctChoice ? 'ليس هذا الرد الأنسب. جرّب مرة أخرى. الأنسب:' : 'حاول مرة أخرى.',
+      germanAnswer: correctChoice?.text,
+      arabicAnswer: correctChoice?.translationAr,
     });
   };
 
@@ -136,6 +148,7 @@ export default function DialogTrainer({ hints, sound, progress, onRecordAttempt 
               className={`dialog-choice ${solved && choice.id === turn.answerId ? 'is-correct' : ''}`}
               type="button"
               disabled={solved}
+              aria-pressed={solved && choice.id === turn.answerId}
               onClick={() => answer(choice.id)}
             >
               <span className="dialog-choice-copy"><b dir="ltr" lang="de">{choice.text}</b>{hints && <small lang="ar">{choice.translationAr}</small>}</span>
@@ -143,8 +156,11 @@ export default function DialogTrainer({ hints, sound, progress, onRecordAttempt 
             <AudioButton text={choice.text} enabled={sound} />
           </div>)}
         </div>
-        <div className={`dialog-feedback ${feedback?.correct ? 'is-correct' : 'is-try-again'}`} role="status" aria-live="polite">
-          {feedback?.text ?? ' '}
+        <div ref={feedbackRef} className={`dialog-feedback ${feedback?.correct ? 'is-correct' : 'is-try-again'}`} role="status" aria-live="polite" dir="rtl" lang="ar">
+          {feedback ? <>
+            <span dir="rtl" lang="ar">{feedback.text}</span>
+            {feedback.germanAnswer && <><span aria-hidden="true"> </span><b dir="ltr" lang="de">{feedback.germanAnswer}</b><span aria-hidden="true"> · </span><span dir="rtl" lang="ar">{feedback.arabicAnswer}</span></>}
+          </> : ' '}
         </div>
         {solved && <button className="primary-btn dialog-next-btn" type="button" onClick={advance}>
           <span lang="ar">{step === scenario.turns.length ? 'النتيجة' : 'التالي'}</span> · <span lang="de">{step === scenario.turns.length ? 'Ergebnis' : 'Weiter'}</span> <span aria-hidden="true">←</span>
@@ -189,9 +205,17 @@ export default function DialogTrainer({ hints, sound, progress, onRecordAttempt 
         const saved = progress[item.id];
         const completed = Boolean(saved?.completed);
         return <article className="dialog-scenario-card" key={item.id}>
-          <div className="dialog-scenario-top"><span className="dialog-scenario-icon" aria-hidden="true">{item.icon}</span><span className="dialog-level" lang="de">{item.level}</span></div>
-          <h2 dir="ltr" lang="de">{item.title}</h2>
-          <h3 lang="ar">{item.titleAr}</h3>
+          <div className="dialog-scenario-identity">
+            <span className="dialog-scenario-icon" aria-hidden="true">{item.icon}</span>
+            <span className="dialog-level" lang="de">{item.level}</span>
+            <div className="dialog-scenario-title">
+              <h2 dir="ltr" lang="de">{item.title}</h2>
+              <h3 lang="ar">{item.titleAr}</h3>
+            </div>
+          </div>
+          <button className="primary-btn dialog-start-btn" type="button" onClick={() => startScenario(item)}>
+            <span lang="ar">{completed ? 'العب من جديد' : 'ابدأ الحوار'}</span> · <span lang="de">{completed ? 'Nochmal' : 'Starten'}</span> <span aria-hidden="true">←</span>
+          </button>
           <p dir="ltr" lang="de">{item.description}</p>
           <p lang="ar">{item.descriptionAr}</p>
           {saved && <div className="dialog-saved-progress">
@@ -199,9 +223,6 @@ export default function DialogTrainer({ hints, sound, progress, onRecordAttempt 
             <div className="dialog-progress-track" role="progressbar" aria-label={`${item.title}: ${saved.bestScore} von ${item.turns.length} Punkten`} lang="de" aria-valuenow={Math.round(saved.bestScore / item.turns.length * 100)} aria-valuemin={0} aria-valuemax={100}><span style={{ width: `${saved.bestScore / item.turns.length * 100}%` }} /></div>
             <small lang="ar">{saved.attempts} محاولة · <span lang="de">{saved.attempts} {saved.attempts === 1 ? 'Versuch' : 'Versuche'}</span></small>
           </div>}
-          <button className="primary-btn dialog-start-btn" type="button" onClick={() => startScenario(item)}>
-            <span lang="ar">{completed ? 'العب من جديد' : 'ابدأ الحوار'}</span> · <span lang="de">{completed ? 'Nochmal' : 'Starten'}</span> <span aria-hidden="true">←</span>
-          </button>
         </article>;
       })}
     </div>

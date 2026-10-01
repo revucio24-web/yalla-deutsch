@@ -11,7 +11,9 @@ function readProjectFile(path: string) {
 describe('PWA contract', () => {
   it('defines an installable standalone manifest', () => {
     const manifest = JSON.parse(readProjectFile('public/manifest.webmanifest'));
+    const html = readProjectFile('index.html');
     expect(manifest.name).toBe('Yalla Deutsch');
+    expect(html.match(/<meta name="theme-color" content="(#[0-9a-f]{6})"/i)?.[1]).toBe(manifest.theme_color);
     expect(manifest.start_url).toBe('./');
     expect(manifest.display).toBe('standalone');
     expect(manifest.icons.some((icon: { sizes: string }) => icon.sizes === '192x192')).toBe(true);

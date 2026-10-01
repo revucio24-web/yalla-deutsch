@@ -8,7 +8,8 @@
     "dev": "vite --configLoader runner --host 0.0.0.0",
     "build": "tsc --noEmit && vite build --configLoader runner && node scripts/inject-precache.mjs",
     "preview": "vite preview --configLoader runner --host 0.0.0.0",
-    "test": "vitest run --configLoader runner",
+    "test": "vitest run --configLoader runner --exclude src/responsiveBrowser.test.ts",
+    "test:browser": "vitest run --configLoader runner src/responsiveBrowser.test.ts",
     "lint": "eslint ."
   },
   "dependencies": {

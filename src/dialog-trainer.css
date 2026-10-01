@@ -4,7 +4,7 @@
 .dialog-choice-row{display:flex;align-items:center;gap:8px}.dialog-choice-row>.dialog-audio-btn{flex:none}
 
 
-/* Kindgerechte Dialogkarten, konsistent mit dem übrigen Lernabenteuer. */
+/* Touchfreundliche Dialogflächen mit gut erkennbaren Antwortzuständen. */
 .dialog-overview { border-radius: 22px; background: linear-gradient(115deg, #fff1d3, #fffef9 74%); border-color: #e3e6dc; }
 .dialog-overview-stat > span { background: #f7e7bf; color: #78530d; }
 .dialog-overview-stat:nth-child(2) > span { background: #e2f1e8; color: #155f53; }
