@@ -190,9 +190,17 @@ export default function DialogTrainer({ hints, sound, progress, onRecordAttempt 
         const saved = progress[item.id];
         const completed = Boolean(saved?.completed);
         return <article className="dialog-scenario-card" key={item.id}>
-          <div className="dialog-scenario-top"><span className="dialog-scenario-icon" aria-hidden="true">{item.icon}</span><span className="dialog-level" lang="de">{item.level}</span></div>
-          <h2 dir="ltr" lang="de">{item.title}</h2>
-          <h3 lang="ar">{item.titleAr}</h3>
+          <div className="dialog-scenario-identity">
+            <span className="dialog-scenario-icon" aria-hidden="true">{item.icon}</span>
+            <span className="dialog-level" lang="de">{item.level}</span>
+            <div className="dialog-scenario-title">
+              <h2 dir="ltr" lang="de">{item.title}</h2>
+              <h3 lang="ar">{item.titleAr}</h3>
+            </div>
+          </div>
+          <button className="primary-btn dialog-start-btn" type="button" onClick={() => startScenario(item)}>
+            <span lang="ar">{completed ? 'العب من جديد' : 'ابدأ الحوار'}</span> · <span lang="de">{completed ? 'Nochmal' : 'Starten'}</span> <span aria-hidden="true">←</span>
+          </button>
           <p dir="ltr" lang="de">{item.description}</p>
           <p lang="ar">{item.descriptionAr}</p>
           {saved && <div className="dialog-saved-progress">
@@ -200,9 +208,6 @@ export default function DialogTrainer({ hints, sound, progress, onRecordAttempt 
             <div className="dialog-progress-track" role="progressbar" aria-label={`${item.title}: ${saved.bestScore} von ${item.turns.length} Punkten`} lang="de" aria-valuenow={Math.round(saved.bestScore / item.turns.length * 100)} aria-valuemin={0} aria-valuemax={100}><span style={{ width: `${saved.bestScore / item.turns.length * 100}%` }} /></div>
             <small lang="ar">{saved.attempts} محاولة · <span lang="de">{saved.attempts} {saved.attempts === 1 ? 'Versuch' : 'Versuche'}</span></small>
           </div>}
-          <button className="primary-btn dialog-start-btn" type="button" onClick={() => startScenario(item)}>
-            <span lang="ar">{completed ? 'العب من جديد' : 'ابدأ الحوار'}</span> · <span lang="de">{completed ? 'Nochmal' : 'Starten'}</span> <span aria-hidden="true">←</span>
-          </button>
         </article>;
       })}
     </div>

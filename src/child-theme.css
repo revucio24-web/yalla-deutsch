@@ -885,3 +885,31 @@ input::placeholder { color: var(--muted); opacity: 1; }
     overflow-wrap: normal;
   }
 }
+
+/* Keep the scenario action visible before the fixed mobile navigation. */
+.dialog-scenario-identity {
+  display: grid;
+  grid-template-columns: 47px minmax(0, 1fr);
+  grid-template-areas:
+    "icon level"
+    "title title";
+  align-items: start;
+}
+.dialog-scenario-icon { grid-area: icon; }
+.dialog-level { grid-area: level; justify-self: end; }
+.dialog-scenario-title { grid-area: title; min-width: 0; }
+
+@media (max-width: 700px) {
+  .dialog-scenario-identity {
+    grid-template-columns: 47px minmax(0, 1fr) auto;
+    grid-template-areas: "icon title level";
+    column-gap: 10px;
+    align-items: center;
+  }
+  .dialog-scenario-title h2 { margin: 0 0 2px; }
+  .dialog-scenario-title h3 { margin: 0; }
+  .dialog-start-btn { margin-top: 6px; }
+  .dialog-page-top p { font-size: .82rem; line-height: 1.4; }
+  .dialog-session-card { padding: 14px 12px; }
+  .dialog-conversation { margin: 16px 0; }
+}

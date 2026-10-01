@@ -328,6 +328,22 @@ describe('visual accessibility regressions', () => {
     expect(appSource).toContain('<nav className="mobile-nav" aria-label="Mobile Hauptnavigation"');
   });
 
+  it('keeps the mobile dialog start action ahead of detail copy with both language labels intact', () => {
+    const identity = dialogSource.indexOf('<div className="dialog-scenario-identity">');
+    const start = dialogSource.indexOf('<button className="primary-btn dialog-start-btn"');
+    const description = dialogSource.indexOf('<p dir="ltr" lang="de">{item.description}</p>');
+    expect(identity).toBeGreaterThanOrEqual(0);
+    expect(start).toBeGreaterThan(identity);
+    expect(description).toBeGreaterThan(start);
+    expect(dialogSource).toContain('<h2 dir="ltr" lang="de">{item.title}</h2>');
+    expect(dialogSource).toContain('<h3 lang="ar">{item.titleAr}</h3>');
+    expect(themeCss).toContain('grid-template-areas: "icon title level";');
+    expect(themeCss).toContain('.dialog-start-btn { margin-top: 6px; }');
+    expect(themeCss).toContain('.dialog-page-top p { font-size: .82rem; line-height: 1.4; }');
+    expect(themeCss).toContain('.dialog-session-card { padding: 14px 12px; }');
+    expect(themeCss).toContain('.dialog-conversation { margin: 16px 0; }');
+  });
+
   it('preserves Arabic typography, compact navigation, and reduced motion', () => {
     expect(themeCss).toMatch(/:lang\(ar\)\s*\{[^}]*letter-spacing:\s*normal/);
     expect(themeCss).toMatch(/\.mobile-logo > span\[lang="de"\]\s*\{[^}]*background:\s*transparent/);
