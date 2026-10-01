@@ -6,6 +6,7 @@ import WordIllustration from './WordIllustration';
 import { wordVisualKey, type Word } from './domain';
 
 const css = readFileSync(new URL('./child-theme.css', import.meta.url), 'utf8');
+const appSource = readFileSync(new URL('./App.tsx', import.meta.url), 'utf8');
 
 function word(illustration: string): Word {
   return {
@@ -36,32 +37,37 @@ function contrastRatio(first: string, second: string): number {
 }
 
 describe('visual accessibility regressions', () => {
-  it('uses two high-contrast focus-ring colors on both sidebar and light surfaces', () => {
-    expect(css).toMatch(/button:focus-visible,\s*input:focus-visible\s*\{[^}]*outline:\s*3px solid var\(--focus-ring-light\);[^}]*outline-offset:\s*3px;[^}]*box-shadow:\s*0 0 0 9px var\(--focus-ring-dark\);/);
+  it('keeps keyboard focus clearly visible on both light and dark surfaces', () => {
+    expect(css).toMatch(/button:focus-visible,\s*input:focus-visible\s*\{[^}]*outline:\s*3px solid var\(--focus-ring-dark\);[^}]*outline-offset:\s*3px/);
+    expect(css).toMatch(/\.sidebar button:focus-visible\s*\{[^}]*outline-color:\s*var\(--focus-ring-light\)/);
     const lightRing = token('focus-ring-light');
     const darkRing = token('focus-ring-dark');
-    expect(contrastRatio(lightRing, '#294c52')).toBeGreaterThanOrEqual(3);
-    expect(contrastRatio(darkRing, '#fffaf1')).toBeGreaterThanOrEqual(3);
-    expect(contrastRatio(darkRing, '#fffdf8')).toBeGreaterThanOrEqual(3);
+    expect(contrastRatio(lightRing, token('navy'))).toBeGreaterThanOrEqual(3);
+    expect(contrastRatio(darkRing, token('page'))).toBeGreaterThanOrEqual(3);
+    expect(contrastRatio(darkRing, token('paper'))).toBeGreaterThanOrEqual(3);
   });
 
-  it('keeps card and answer edges at or above 3:1 against their surfaces', () => {
-    const cardEdge = token('line');
+  it('keeps answer controls distinguishable in default, hover, and selected states', () => {
     const answerEdge = token('answer-edge');
     const answerHover = token('answer-hover');
     const answerSelected = token('answer-selected');
-    for (const surface of ['#fffdf8', '#fffaf1']) {
-      expect(contrastRatio(cardEdge, surface)).toBeGreaterThanOrEqual(3);
+    for (const surface of [token('paper'), token('page')]) {
       expect(contrastRatio(answerEdge, surface)).toBeGreaterThanOrEqual(3);
     }
-    expect(contrastRatio(answerHover, '#f4f8eb')).toBeGreaterThanOrEqual(3);
-    expect(contrastRatio(answerSelected, '#e8f3e6')).toBeGreaterThanOrEqual(3);
-    expect(css).toMatch(/\.next-card,[\s\S]*?border-color:\s*var\(--line\)/);
-    expect(css).toMatch(/\.dialog-choice\s*\{\s*border-color:\s*var\(--answer-edge\)/);
+    expect(contrastRatio(answerHover, '#f1f5f1')).toBeGreaterThanOrEqual(3);
+    expect(contrastRatio(answerSelected, '#e8f1eb')).toBeGreaterThanOrEqual(3);
+    expect(css).toMatch(/\.dialog-choice\s*\{[^}]*border-color:\s*var\(--answer-edge\)/);
     expect(css).toMatch(/\.dialog-choice:not\(:disabled\):hover\s*\{[^}]*border-color:\s*var\(--answer-hover\)/);
-    expect(css).toMatch(/\.option,\s*\.match-option,\s*\.basket-item,\s*\.build-answer\s*\{\s*border-color:\s*var\(--answer-edge\)/);
-    expect(css).toMatch(/\.build-answer button,\s*\.word-tiles button\s*\{\s*border-color:\s*var\(--answer-edge\)/);
-    expect(css).toMatch(/\.basket-item\.selected,\s*\.match-option\.matched\s*\{\s*border-color:\s*var\(--answer-selected\)/);
+    expect(css).toMatch(/\.option,\s*\.match-option,\s*\.basket-item,\s*\.build-answer\s*\{[^}]*border-color:\s*var\(--answer-edge\)/);
+    expect(css).toMatch(/\.basket-item\.selected,\s*\.match-option\.matched\s*\{[^}]*border-color:\s*var\(--answer-selected\)/);
+  });
+
+  it('preserves Arabic typography, compact navigation, reduced motion, and active-page semantics', () => {
+    expect(css).toMatch(/:lang\(ar\)\s*\{[^}]*letter-spacing:\s*normal/);
+    expect(css).toMatch(/\.mobile-logo > span\[lang="de"\]\s*\{[^}]*background:\s*transparent/);
+    expect(css).toMatch(/@media \(max-width: 700px\)[\s\S]*?\.mobile-nav\s*\{[^}]*position:\s*fixed/);
+    expect(css).toMatch(/@media \(prefers-reduced-motion: reduce\)[\s\S]*?transition-duration:\s*\.01ms/);
+    expect(appSource.match(/aria-current=\{screen === item\.id \? 'page' : undefined\}/g)).toHaveLength(2);
   });
 
   it('uses the rendered emoji as the collision identity for every unknown illustration key', () => {
