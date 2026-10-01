@@ -33,6 +33,17 @@ export function wordVisualKey(word: Pick<Word, 'icon' | 'illustration'>): string
   return isWordIllustrationKey(word.illustration) ? `illustration:${word.illustration}` : `emoji:${word.icon}`;
 }
 
+const arabicSearchMarks = /[\u0610-\u061a\u064b-\u065f\u0670\u06d6-\u06ed\u0640]/gu;
+
+function normalizeSearchText(value: string): string {
+  return value.normalize('NFKC').toLocaleLowerCase().replace(arabicSearchMarks, '').trim();
+}
+
+export function matchesWordSearch(word: Pick<Word, 'german' | 'arabic'>, query: string): boolean {
+  const normalizedQuery = normalizeSearchText(query);
+  return !normalizedQuery || [word.german, word.arabic].some((label) => normalizeSearchText(label).includes(normalizedQuery));
+}
+
 const taskPatterns: TaskType[][] = [
   ['choice', 'listen', 'match', 'build', 'dialogue'],
   ['symbol', 'choice', 'blank', 'basket', 'dialogue'],
