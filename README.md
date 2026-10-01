@@ -38,9 +38,10 @@ Sie startet ein bereits installiertes System-Chromium/Chrome direkt, ohne Playwr
 Browser-Download. Gemessen werden echte Viewportwerte, berechnete Schriftgröße, Sichtbarkeit,
 Label-/Button-Grenzen sowie horizontaler Text-, Dokument- und Body-Overflow bei **320, 700, 701,
 768, 960 und 961 px**.
-Im echten Dialog prüft derselbe Lauf nach einem Fehl-Tap bei **320×640 und 320×720** außerdem,
+Im echten Dialog prüft derselbe Lauf mit echten Chromium-Touch-Eingaben bei **320×640 und 320×720** außerdem,
 dass die vollständige Rückmeldung und die dritte Antwort sofort über der fixen Bottom-Navigation
-sichtbar sind. Der Tap-Fokus bleibt sichtbar; Tab und Enter können die nächste Antwort bedienen.
+ohne weiteres Scrollen sichtbar sind. Der Touch-Fokus bleibt erhalten; Tab und Enter erreichen an
+beiden Höhen die nächste Antwort mit sichtbarem 3px-Fokusring.
 
 Der Browser-Test erkennt `chromium`, `chromium-browser`, `google-chrome` oder
 `google-chrome-stable` auf `PATH`. Für eine nicht standardmäßige Installation kann der Pfad explizit

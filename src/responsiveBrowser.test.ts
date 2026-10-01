@@ -226,10 +226,11 @@ async function launchChromium(pageUrl: string, profileDir: string) {
     await evaluate('new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve)))');
   }
 
-  async function tap(selector: string) {
+  async function touchTap(selector: string) {
     const point = await evaluate<{ x: number; y: number }>(`(() => { const element = document.querySelector(${JSON.stringify(selector)}); if (!(element instanceof HTMLElement)) throw new Error('Missing element: ' + ${JSON.stringify(selector)}); const rect = element.getBoundingClientRect(); return { x: rect.left + rect.width / 2, y: rect.top + rect.height / 2 }; })()`);
-    await command('Input.dispatchMouseEvent', { type: 'mousePressed', x: point.x, y: point.y, button: 'left', clickCount: 1 });
-    await command('Input.dispatchMouseEvent', { type: 'mouseReleased', x: point.x, y: point.y, button: 'left', clickCount: 1 });
+    await command('Emulation.setTouchEmulationEnabled', { enabled: true, maxTouchPoints: 1 });
+    await command('Input.dispatchTouchEvent', { type: 'touchStart', touchPoints: [{ x: point.x, y: point.y, id: 1, radiusX: 1, radiusY: 1, force: 1 }] });
+    await command('Input.dispatchTouchEvent', { type: 'touchEnd', touchPoints: [] });
     await evaluate('new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve)))');
   }
 
@@ -257,7 +258,7 @@ async function launchChromium(pageUrl: string, profileDir: string) {
     evaluate,
     setViewport,
     click,
-    tap,
+    touchTap,
     pressKey,
     reload,
     async resultAt(width: number): Promise<RenderedResult> {
@@ -416,7 +417,7 @@ describe('rendered responsive navigation', () => {
       const beforeWrongTap = await readDialogGeometry();
       expect(beforeWrongTap.choices[1].top).toBeGreaterThanOrEqual(0);
       expect(beforeWrongTap.choices[1].bottom).toBeLessThanOrEqual(beforeWrongTap.navTop - 8);
-      await browser.tap('.dialog-choice-row:nth-child(2) .dialog-choice');
+      await browser.touchTap('.dialog-choice-row:nth-child(2) .dialog-choice');
       const feedbackAt640 = await readDialogGeometry();
       expect(feedbackAt640.width).toBe(320);
       expect(feedbackAt640.height).toBe(640);
@@ -445,7 +446,7 @@ describe('rendered responsive navigation', () => {
       expect(keyboardAnswerAt640.feedbackBottom).toBeLessThanOrEqual(keyboardAnswerAt640.navTop - 8);
 
       await browser.setViewport(320, 720);
-      await browser.tap('.dialog-choice-row:nth-child(3) .dialog-choice');
+      await browser.touchTap('.dialog-choice-row:nth-child(2) .dialog-choice');
       const feedbackAt720 = await readDialogGeometry();
       expect(feedbackAt720.width).toBe(320);
       expect(feedbackAt720.height).toBe(720);
@@ -455,9 +456,21 @@ describe('rendered responsive navigation', () => {
       expect(feedbackAt720.choices[2].disabled).toBe(false);
       expect(feedbackAt720.choices[2].top).toBeGreaterThanOrEqual(0);
       expect(feedbackAt720.choices[2].bottom).toBeLessThanOrEqual(feedbackAt720.navTop - 8);
-      expect(feedbackAt720.focusedChoice).toBe(2);
+      expect(feedbackAt720.focusedChoice).toBe(1);
       expect(feedbackAt720.focusTop).toBeGreaterThanOrEqual(0);
       expect(feedbackAt720.focusBottom).toBeLessThanOrEqual(feedbackAt720.navTop - 8);
+      await browser.pressKey('Tab');
+      const keyboardAt720 = await readDialogGeometry();
+      expect(keyboardAt720.focusedChoice).toBe(2);
+      expect(keyboardAt720.focusVisible).toBe(true);
+      expect(keyboardAt720.focusOutlineWidth).toBeGreaterThanOrEqual(3);
+      expect(keyboardAt720.focusTop).toBeGreaterThanOrEqual(0);
+      expect(keyboardAt720.focusBottom).toBeLessThanOrEqual(keyboardAt720.navTop - 8);
+      expect(keyboardAt720.feedbackBottom).toBeLessThanOrEqual(keyboardAt720.navTop - 8);
+      await browser.pressKey('Enter');
+      const keyboardAnswerAt720 = await readDialogGeometry();
+      expect(keyboardAnswerAt720.focusedChoice).toBe(2);
+      expect(keyboardAnswerAt720.feedbackBottom).toBeLessThanOrEqual(keyboardAnswerAt720.navTop - 8);
 
       const feedback = await browser.evaluate<{ outerDir: string | null; outerLang: string | null; outerComputedDirection: string; germanText: string | null; germanDir: string | null; germanLang: string | null; germanComputedDirection: string | null; arabicText: string | null; arabicLang: string | null }>(`(() => { const outer = document.querySelector('.dialog-feedback'); const german = outer?.querySelector('[lang="de"]'); const arabic = outer?.querySelector('span[lang="ar"]:last-child'); return { outerDir: outer?.getAttribute('dir') ?? null, outerLang: outer?.getAttribute('lang') ?? null, outerComputedDirection: outer ? getComputedStyle(outer).direction : '', germanText: german?.textContent ?? null, germanDir: german?.getAttribute('dir') ?? null, germanLang: german?.getAttribute('lang') ?? null, germanComputedDirection: german ? getComputedStyle(german).direction : null, arabicText: arabic?.textContent ?? null, arabicLang: arabic?.getAttribute('lang') ?? null }; })()`);
       expect(feedback.outerDir).toBe('rtl');
