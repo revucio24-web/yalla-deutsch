@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useLayoutEffect, useRef, useState } from 'react';
 import { speakGerman, stopSpeaking } from './audio';
 import { dialogScenarios } from './dialogTrainer';
 import type { DialogScenario, DialogTrainerProgress } from './dialogTrainer';
@@ -32,11 +32,23 @@ export default function DialogTrainer({ hints, sound, progress, onRecordAttempt 
   const [madeMistake, setMadeMistake] = useState(false);
   const [solved, setSolved] = useState(false);
   const [feedback, setFeedback] = useState<Feedback | null>(null);
+  const feedbackRef = useRef<HTMLDivElement>(null);
   const [lastScore, setLastScore] = useState(0);
   const scenario = dialogScenarios.find((item) => item.id === activeId) ?? null;
   const turn = scenario?.turns[turnIndex];
   const totalPoints = dialogScenarios.reduce((sum, item) => sum + (progress[item.id]?.bestScore ?? 0), 0);
   const completedCount = dialogScenarios.filter((item) => progress[item.id]?.completed).length;
+
+  useLayoutEffect(() => {
+    if (!feedback || feedback.correct) return;
+    const message = feedbackRef.current;
+    const navigation = document.querySelector<HTMLElement>('.mobile-nav');
+    if (!message || !navigation || getComputedStyle(navigation).display === 'none') return;
+
+    const safeBottom = navigation.getBoundingClientRect().top - 12;
+    const overflow = message.getBoundingClientRect().bottom - safeBottom;
+    if (overflow > 0) window.scrollBy({ top: overflow, behavior: 'instant' });
+  }, [feedback]);
 
   const startScenario = (item: DialogScenario) => {
     stopSpeaking();
@@ -144,7 +156,7 @@ export default function DialogTrainer({ hints, sound, progress, onRecordAttempt 
             <AudioButton text={choice.text} enabled={sound} />
           </div>)}
         </div>
-        <div className={`dialog-feedback ${feedback?.correct ? 'is-correct' : 'is-try-again'}`} role="status" aria-live="polite" dir="rtl" lang="ar">
+        <div ref={feedbackRef} className={`dialog-feedback ${feedback?.correct ? 'is-correct' : 'is-try-again'}`} role="status" aria-live="polite" dir="rtl" lang="ar">
           {feedback ? <>
             <span dir="rtl" lang="ar">{feedback.text}</span>
             {feedback.germanAnswer && <><span aria-hidden="true"> </span><b dir="ltr" lang="de">{feedback.germanAnswer}</b><span aria-hidden="true"> · </span><span dir="rtl" lang="ar">{feedback.arabicAnswer}</span></>}

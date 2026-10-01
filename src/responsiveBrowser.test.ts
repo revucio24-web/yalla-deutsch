@@ -226,6 +226,20 @@ async function launchChromium(pageUrl: string, profileDir: string) {
     await evaluate('new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve)))');
   }
 
+  async function tap(selector: string) {
+    const point = await evaluate<{ x: number; y: number }>(`(() => { const element = document.querySelector(${JSON.stringify(selector)}); if (!(element instanceof HTMLElement)) throw new Error('Missing element: ' + ${JSON.stringify(selector)}); const rect = element.getBoundingClientRect(); return { x: rect.left + rect.width / 2, y: rect.top + rect.height / 2 }; })()`);
+    await command('Input.dispatchMouseEvent', { type: 'mousePressed', x: point.x, y: point.y, button: 'left', clickCount: 1 });
+    await command('Input.dispatchMouseEvent', { type: 'mouseReleased', x: point.x, y: point.y, button: 'left', clickCount: 1 });
+    await evaluate('new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve)))');
+  }
+
+  async function pressKey(key: 'Tab' | 'Enter') {
+    const keyCode = key === 'Tab' ? 9 : 13;
+    await command('Input.dispatchKeyEvent', { type: 'keyDown', key, code: key, windowsVirtualKeyCode: keyCode, nativeVirtualKeyCode: keyCode });
+    await command('Input.dispatchKeyEvent', { type: 'keyUp', key, code: key, windowsVirtualKeyCode: keyCode, nativeVirtualKeyCode: keyCode });
+    await evaluate('new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve)))');
+  }
+
   async function reload() {
     const loaded = waitForEvent('Page.loadEventFired');
     await command('Page.reload');
@@ -243,6 +257,8 @@ async function launchChromium(pageUrl: string, profileDir: string) {
     evaluate,
     setViewport,
     click,
+    tap,
+    pressKey,
     reload,
     async resultAt(width: number): Promise<RenderedResult> {
       await setViewport(width, 900);
@@ -297,7 +313,7 @@ describe('rendered responsive navigation', () => {
     }
   });
 
-  it('preserves the saved first-run avatar and makes bilingual dialog answers scroll-reachable in the real React app', async () => {
+  it('preserves first-run state and keeps wrong-answer feedback, answer controls, and keyboard focus visible in Chromium', async () => {
     const tempDir = mkdtempSync(join(tmpdir(), 'yalla-app-browser-'));
     const server = await createServer({
       base: './',
@@ -311,7 +327,8 @@ describe('rendered responsive navigation', () => {
       await server.listen();
       const address = server.httpServer?.address();
       if (!address || typeof address === 'string') throw new Error('Vite test server did not expose its port');
-      browser = await launchChromium(`http://127.0.0.1:${address.port}/`, join(tempDir, 'chrome-profile'));
+      const activeBrowser = await launchChromium(`http://127.0.0.1:${address.port}/`, join(tempDir, 'chrome-profile'));
+      browser = activeBrowser;
       await browser.setViewport(320, 640);
       await browser.evaluate(`localStorage.setItem('yalla-deutsch-progress-v1', JSON.stringify({version:1,nickname:'',avatar:'🐼',xp:0,completed:[],stars:{},words:{},settings:{sound:false,hints:true,reduceMotion:false,largeText:false},dialogTrainer:{}})); true`);
       await browser.reload();
@@ -348,7 +365,100 @@ describe('rendered responsive navigation', () => {
       expect(scenarioStartReachability.lastButtonNavOverlap, 'the last scenario action clears the fixed bar at scroll end').toBe(0);
       await browser.evaluate(`window.scrollTo({ top: 0, behavior: 'instant' }); true`);
       await browser.click('.dialog-start-btn');
-      await browser.click('.dialog-choice-row:nth-child(2) .dialog-choice');
+      const readDialogGeometry = () => activeBrowser.evaluate<{
+        width: number;
+        height: number;
+        scrollY: number;
+        navTop: number;
+        feedbackTop: number;
+        feedbackBottom: number;
+        feedbackText: string;
+        choices: Array<{ top: number; bottom: number; disabled: boolean }>;
+        focusedChoice: number;
+        focusTop: number | null;
+        focusBottom: number | null;
+        focusVisible: boolean;
+        focusOutlineWidth: number;
+      }>(`(() => {
+        const navigation = document.querySelector('.mobile-nav');
+        const message = document.querySelector('.dialog-feedback');
+        const choices = [...document.querySelectorAll('.dialog-choice')];
+        const focused = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+        const feedbackRect = message?.getBoundingClientRect();
+        const focusRect = focused?.getBoundingClientRect();
+        return {
+          width: innerWidth,
+          height: innerHeight,
+          scrollY,
+          navTop: navigation?.getBoundingClientRect().top ?? innerHeight,
+          feedbackTop: feedbackRect?.top ?? -1,
+          feedbackBottom: feedbackRect?.bottom ?? -1,
+          feedbackText: message?.textContent?.trim() ?? '',
+          choices: choices.map((choice) => {
+            const rect = choice.getBoundingClientRect();
+            return { top: rect.top, bottom: rect.bottom, disabled: choice.disabled };
+          }),
+          focusedChoice: choices.indexOf(focused),
+          focusTop: focusRect?.top ?? null,
+          focusBottom: focusRect?.bottom ?? null,
+          focusVisible: focused?.matches(':focus-visible') ?? false,
+          focusOutlineWidth: focused ? Number.parseFloat(getComputedStyle(focused).outlineWidth) : 0,
+        };
+      })()`);
+
+      await browser.evaluate(`(() => {
+        window.scrollTo({ top: 0, behavior: 'instant' });
+        const navigation = document.querySelector('.mobile-nav').getBoundingClientRect();
+        const answer = document.querySelector('.dialog-choice-row:nth-child(2) .dialog-choice').getBoundingClientRect();
+        window.scrollBy({ top: Math.max(0, answer.bottom - (navigation.top - 12)), behavior: 'instant' });
+        return true;
+      })()`);
+      const beforeWrongTap = await readDialogGeometry();
+      expect(beforeWrongTap.choices[1].top).toBeGreaterThanOrEqual(0);
+      expect(beforeWrongTap.choices[1].bottom).toBeLessThanOrEqual(beforeWrongTap.navTop - 8);
+      await browser.tap('.dialog-choice-row:nth-child(2) .dialog-choice');
+      const feedbackAt640 = await readDialogGeometry();
+      expect(feedbackAt640.width).toBe(320);
+      expect(feedbackAt640.height).toBe(640);
+      expect(feedbackAt640.feedbackText).toContain('ليس هذا الرد الأنسب');
+      expect(feedbackAt640.feedbackTop).toBeGreaterThanOrEqual(0);
+      expect(feedbackAt640.feedbackBottom, 'the complete wrong-answer message is above the fixed navigation at 320×640').toBeLessThanOrEqual(feedbackAt640.navTop - 8);
+      expect(feedbackAt640.scrollY, 'the app automatically brings feedback into view after the tap').toBeGreaterThan(beforeWrongTap.scrollY);
+      expect(feedbackAt640.choices[2].disabled, 'the third answer remains enabled after a wrong tap').toBe(false);
+      expect(feedbackAt640.choices[2].top).toBeGreaterThanOrEqual(0);
+      expect(feedbackAt640.choices[2].bottom, 'the third answer clears the fixed navigation at 320×640').toBeLessThanOrEqual(feedbackAt640.navTop - 8);
+      expect(feedbackAt640.focusedChoice, 'the tapped answer retains keyboard focus after automatic scrolling').toBe(1);
+      expect(feedbackAt640.focusTop).toBeGreaterThanOrEqual(0);
+      expect(feedbackAt640.focusBottom).toBeLessThanOrEqual(feedbackAt640.navTop - 8);
+
+      await browser.pressKey('Tab');
+      const keyboardAt640 = await readDialogGeometry();
+      expect(keyboardAt640.focusedChoice, 'Tab reaches the next available answer').toBe(2);
+      expect(keyboardAt640.focusVisible).toBe(true);
+      expect(keyboardAt640.focusOutlineWidth).toBeGreaterThanOrEqual(3);
+      expect(keyboardAt640.focusTop).toBeGreaterThanOrEqual(0);
+      expect(keyboardAt640.focusBottom).toBeLessThanOrEqual(keyboardAt640.navTop - 8);
+      expect(keyboardAt640.feedbackBottom).toBeLessThanOrEqual(keyboardAt640.navTop - 8);
+      await browser.pressKey('Enter');
+      const keyboardAnswerAt640 = await readDialogGeometry();
+      expect(keyboardAnswerAt640.focusedChoice).toBe(2);
+      expect(keyboardAnswerAt640.feedbackBottom).toBeLessThanOrEqual(keyboardAnswerAt640.navTop - 8);
+
+      await browser.setViewport(320, 720);
+      await browser.tap('.dialog-choice-row:nth-child(3) .dialog-choice');
+      const feedbackAt720 = await readDialogGeometry();
+      expect(feedbackAt720.width).toBe(320);
+      expect(feedbackAt720.height).toBe(720);
+      expect(feedbackAt720.feedbackText).toContain('ليس هذا الرد الأنسب');
+      expect(feedbackAt720.feedbackTop).toBeGreaterThanOrEqual(0);
+      expect(feedbackAt720.feedbackBottom, 'the complete wrong-answer message is above the fixed navigation at 320×720').toBeLessThanOrEqual(feedbackAt720.navTop - 8);
+      expect(feedbackAt720.choices[2].disabled).toBe(false);
+      expect(feedbackAt720.choices[2].top).toBeGreaterThanOrEqual(0);
+      expect(feedbackAt720.choices[2].bottom).toBeLessThanOrEqual(feedbackAt720.navTop - 8);
+      expect(feedbackAt720.focusedChoice).toBe(2);
+      expect(feedbackAt720.focusTop).toBeGreaterThanOrEqual(0);
+      expect(feedbackAt720.focusBottom).toBeLessThanOrEqual(feedbackAt720.navTop - 8);
+
       const feedback = await browser.evaluate<{ outerDir: string | null; outerLang: string | null; outerComputedDirection: string; germanText: string | null; germanDir: string | null; germanLang: string | null; germanComputedDirection: string | null; arabicText: string | null; arabicLang: string | null }>(`(() => { const outer = document.querySelector('.dialog-feedback'); const german = outer?.querySelector('[lang="de"]'); const arabic = outer?.querySelector('span[lang="ar"]:last-child'); return { outerDir: outer?.getAttribute('dir') ?? null, outerLang: outer?.getAttribute('lang') ?? null, outerComputedDirection: outer ? getComputedStyle(outer).direction : '', germanText: german?.textContent ?? null, germanDir: german?.getAttribute('dir') ?? null, germanLang: german?.getAttribute('lang') ?? null, germanComputedDirection: german ? getComputedStyle(german).direction : null, arabicText: arabic?.textContent ?? null, arabicLang: arabic?.getAttribute('lang') ?? null }; })()`);
       expect(feedback.outerDir).toBe('rtl');
       expect(feedback.outerLang).toBe('ar');
