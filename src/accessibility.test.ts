@@ -6,6 +6,7 @@ import WordIllustration from './WordIllustration';
 import { wordVisualKey, type Word } from './domain';
 
 const css = readFileSync(new URL('./child-theme.css', import.meta.url), 'utf8');
+const app = readFileSync(new URL('./App.tsx', import.meta.url), 'utf8');
 
 function word(illustration: string): Word {
   return {
@@ -73,6 +74,10 @@ describe('visual accessibility regressions', () => {
     const markup = renderToStaticMarkup(createElement(WordIllustration, { word: first, decorative: true }));
     expect(markup).toContain('🧪');
     expect(markup).not.toContain('<svg');
+  });
+
+  it('labels the vocabulary search in Arabic and follows the entered script direction', () => {
+    expect(app).toMatch(/<input aria-label="ابحث عن كلمة بالألمانية أو العربية" dir="auto" value=\{wordSearch\}/);
   });
 
   it('marks repeated illustrations decorative and language-tags informative labels separately', () => {

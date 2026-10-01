@@ -1,9 +1,24 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import {
-  answerPractice, completeMission, createTasks, freshProgress, lessonUnlocked, worldUnlocked,
+  answerPractice, completeMission, createTasks, freshProgress, lessonUnlocked, matchesWordSearch, worldUnlocked,
   lessons, loadProgress, practiceQueue, saveProgress, shuffleTokens, starsFor,
   STORAGE_KEY, vocabulary, wordsById, wordVisualKey, worlds,
 } from './domain';
+
+describe('Wörter suchen', () => {
+  it('findet arabische Wörter unabhängig von optionalen Vokalzeichen oder Tatweel', () => {
+    expect(matchesWordSearch({ german: 'Brot', arabic: 'خُبْز' }, 'خبز')).toBe(true);
+    expect(matchesWordSearch({ german: 'Tisch', arabic: 'طاولة' }, 'طَاوِلَة')).toBe(true);
+    expect(matchesWordSearch({ german: 'Brot', arabic: 'خـبز' }, 'خبز')).toBe(true);
+  });
+
+  it('sucht deutsche Wörter ohne Beachtung der Groß-/Kleinschreibung und lässt leere Suchen durch', () => {
+    const word = { german: 'Brot', arabic: 'خبز' };
+    expect(matchesWordSearch(word, 'BROT')).toBe(true);
+    expect(matchesWordSearch(word, '   ')).toBe(true);
+    expect(matchesWordSearch(word, 'Apfel')).toBe(false);
+  });
+});
 
 describe('authored learning content', () => {
   it('preserves all 30 existing missions and adds one new mission to every district', () => {
