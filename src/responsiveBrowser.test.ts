@@ -214,7 +214,7 @@ async function launchChromium(pageUrl: string, profileDir: string) {
       width,
       height,
       deviceScaleFactor: 1,
-      mobile: false,
+      mobile: true,
       screenWidth: width,
       screenHeight: height,
     });
@@ -228,17 +228,25 @@ async function launchChromium(pageUrl: string, profileDir: string) {
 
   async function touchTap(selector: string) {
     const point = await evaluate<{ x: number; y: number }>(`(() => { const element = document.querySelector(${JSON.stringify(selector)}); if (!(element instanceof HTMLElement)) throw new Error('Missing element: ' + ${JSON.stringify(selector)}); const rect = element.getBoundingClientRect(); return { x: rect.left + rect.width / 2, y: rect.top + rect.height / 2 }; })()`);
-    await command('Emulation.setTouchEmulationEnabled', { enabled: true, maxTouchPoints: 1 });
+    await command('Emulation.setTouchEmulationEnabled', { enabled: true, maxTouchPoints: 1, configuration: 'mobile' });
     await command('Input.dispatchTouchEvent', { type: 'touchStart', touchPoints: [{ x: point.x, y: point.y, id: 1, radiusX: 1, radiusY: 1, force: 1 }] });
     await command('Input.dispatchTouchEvent', { type: 'touchEnd', touchPoints: [] });
-    await evaluate('new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve)))');
+    await evaluate('new Promise((resolve) => requestAnimationFrame(resolve))');
   }
 
   async function pressKey(key: 'Tab' | 'Enter') {
     const keyCode = key === 'Tab' ? 9 : 13;
-    await command('Input.dispatchKeyEvent', { type: 'keyDown', key, code: key, windowsVirtualKeyCode: keyCode, nativeVirtualKeyCode: keyCode });
+    await command('Input.dispatchKeyEvent', { type: 'keyDown', key, code: key, windowsVirtualKeyCode: keyCode, nativeVirtualKeyCode: keyCode, ...(key === 'Enter' ? { text: '\r', unmodifiedText: '\r' } : {}) });
     await command('Input.dispatchKeyEvent', { type: 'keyUp', key, code: key, windowsVirtualKeyCode: keyCode, nativeVirtualKeyCode: keyCode });
     await evaluate('new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve)))');
+  }
+
+  async function tabUntil(selector: string, maxTabs = 20): Promise<boolean> {
+    for (let index = 0; index < maxTabs; index += 1) {
+      await pressKey('Tab');
+      if (await evaluate<boolean>(`document.activeElement instanceof HTMLElement && document.activeElement.matches(${JSON.stringify(selector)})`)) return true;
+    }
+    return false;
   }
 
   async function reload() {
@@ -260,6 +268,7 @@ async function launchChromium(pageUrl: string, profileDir: string) {
     click,
     touchTap,
     pressKey,
+    tabUntil,
     reload,
     async resultAt(width: number): Promise<RenderedResult> {
       await setViewport(width, 900);
@@ -547,6 +556,37 @@ describe('rendered responsive navigation', () => {
         expect(nextReachability.nextBottom, `Next clears the viewport at ${width}×640`).toBeLessThanOrEqual(640);
         expect(nextReachability.nextNavOverlap, `Next is not covered by the fixed bar at ${width}×640`).toBe(0);
       }
+
+      await browser.setViewport(320, 720);
+      await browser.evaluate(`window.scrollTo({ top: 0, behavior: 'instant' }); true`);
+      expect(await browser.tabUntil('.dialog-next-btn'), 'Tab reaches Weiter after a correct answer at 320×720').toBe(true);
+      const nextAt720 = await browser.evaluate<{ text: string; disabled: boolean; top: number; bottom: number; navTop: number; focused: boolean; focusVisible: boolean; outlineWidth: number }>(`(() => {
+        const next = document.querySelector('.dialog-next-btn');
+        const nav = document.querySelector('.mobile-nav');
+        const rect = next.getBoundingClientRect();
+        return {
+          text: next.textContent?.trim() ?? '',
+          disabled: next.disabled,
+          top: rect.top,
+          bottom: rect.bottom,
+          navTop: nav.getBoundingClientRect().top,
+          focused: document.activeElement === next,
+          focusVisible: next.matches(':focus-visible'),
+          outlineWidth: Number.parseFloat(getComputedStyle(next).outlineWidth),
+        };
+      })()`);
+      expect(nextAt720.text).toContain('Weiter');
+      expect(nextAt720.disabled).toBe(false);
+      expect(nextAt720.focused).toBe(true);
+      expect(nextAt720.focusVisible).toBe(true);
+      expect(nextAt720.outlineWidth).toBeGreaterThanOrEqual(3);
+      expect(nextAt720.top).toBeGreaterThanOrEqual(0);
+      expect(nextAt720.bottom).toBeLessThanOrEqual(nextAt720.navTop - 8);
+
+      await browser.pressKey('Enter');
+      const advancedByKeyboard = await browser.evaluate<{ heading: string; nextExists: boolean }>(`(() => ({ heading: document.querySelector('.dialog-step-label')?.textContent?.trim() ?? '', nextExists: Boolean(document.querySelector('.dialog-next-btn')) }))()`);
+      expect(advancedByKeyboard.heading).toContain('SCHRITT 2 / 3');
+      expect(advancedByKeyboard.nextExists).toBe(false);
     } finally {
       await browser?.close();
       await server.close();
