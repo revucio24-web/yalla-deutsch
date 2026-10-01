@@ -25,10 +25,31 @@ Keine Anmeldung, kein Backend, keine Tracking: der gesamte Lernfortschritt liegt
 ```bash
 pnpm install
 pnpm dev        # Entwicklungsserver
-pnpm test       # Vitest
+pnpm test       # Vitest ohne Systembrowser-Voraussetzung
+pnpm test:browser # verpflichtende Chromium-Viewport-Regression für den PR-Nachweis
 pnpm lint       # ESLint
 pnpm build      # Typecheck + Produktionsbuild nach dist/
 ```
+
+`pnpm test` führt die Node-basierten Tests aus und benötigt kein installiertes Chromium/Chrome.
+Die echte Browser-Regression läuft separat mit `pnpm test:browser`; sie ist ein verpflichtender
+QA-Schritt und muss im PR-Nachweis mit dem Befehl und dem erfolgreichen Ergebnis aufgeführt werden.
+Sie startet ein bereits installiertes System-Chromium/Chrome direkt, ohne Playwright oder einen
+Browser-Download. Gemessen werden echte Viewportwerte, berechnete Schriftgröße, Sichtbarkeit,
+Label-/Button-Grenzen sowie horizontaler Text-, Dokument- und Body-Overflow bei **320, 700, 701,
+768, 960 und 961 px**.
+
+Der Browser-Test erkennt `chromium`, `chromium-browser`, `google-chrome` oder
+`google-chrome-stable` auf `PATH`. Für eine nicht standardmäßige Installation kann der Pfad explizit
+gesetzt werden:
+
+```bash
+CHROME_BIN=/absoluter/pfad/zu/chromium pnpm test:browser
+```
+
+`CHROMIUM_BIN` wird als bisheriger Alias ebenfalls akzeptiert. Fehlt das Binary, schlägt nur
+`pnpm test:browser` mit einer konkreten Installations-/Konfigurationsmeldung fehl; es gibt keinen
+stillschweigenden Skip. `pnpm test` bleibt davon unabhängig.
 
 ## PWA und Offline-Nutzung
 

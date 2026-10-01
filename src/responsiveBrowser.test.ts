@@ -39,11 +39,17 @@ interface CdpMessage {
 }
 
 function chromiumBinary(): string {
-  const candidates = process.env.CHROMIUM_BIN
-    ? [process.env.CHROMIUM_BIN]
+  const configured = process.env.CHROME_BIN ?? process.env.CHROMIUM_BIN;
+  const candidates = configured
+    ? [configured]
     : ['chromium', 'chromium-browser', 'google-chrome', 'google-chrome-stable'];
   const available = candidates.find((candidate) => spawnSync(candidate, ['--version'], { stdio: 'ignore' }).status === 0);
-  if (!available) throw new Error('Chromium is required for the rendered browser regressions; set CHROMIUM_BIN to its executable path.');
+  if (!available) {
+    const reason = configured
+      ? `Configured browser "${configured}" did not start successfully.`
+      : 'No Chromium/Chrome binary was found on PATH.';
+    throw new Error(`${reason} The responsive browser suite requires an installed system browser; install Chromium/Chrome or set CHROME_BIN to its executable path (CHROMIUM_BIN is also accepted). Run it with pnpm test:browser.`);
+  }
   return available;
 }
 
