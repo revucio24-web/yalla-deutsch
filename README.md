@@ -53,6 +53,12 @@ CHROME_BIN=/absoluter/pfad/zu/chromium pnpm test:browser
 `CHROMIUM_BIN` wird als bisheriger Alias ebenfalls akzeptiert. Fehlt das Binary, schlägt nur
 `pnpm test:browser` mit einer konkreten Installations-/Konfigurationsmeldung fehl; es gibt keinen
 stillschweigenden Skip. `pnpm test` bleibt davon unabhängig.
+GitHub Actions führt beide Schritte zusätzlich auf einem sauberen Checkout ausschließlich bei
+Pull Requests nach `main` aus. Dafür wird Chrome for Testing **154.0.8037.92** auf `ubuntu-24.04`
+bereitgestellt; `browser-actions/setup-chrome` ist auf Commit
+`48ad923757ca74d66703209fe939badbdf80f2f4` fixiert und die installierte Browserversion wird
+verifiziert. Dieser Workflow hat nur Lesezugriff und enthält keine Pages-, Deploy- oder Release-
+Schritte; der bestehende Pages-Workflow bleibt unverändert.
 
 ## PWA und Offline-Nutzung
 
