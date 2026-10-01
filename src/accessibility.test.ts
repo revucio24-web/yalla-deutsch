@@ -273,7 +273,22 @@ describe('visual accessibility regressions', () => {
     expect(avatarButtons).toContain('aria-pressed={avatar === item}');
     expect(avatarButtons).toContain('onClick={() => setAvatar(item)}');
     expect(avatarButtons).not.toContain('nickname');
-    expect(appSource).toMatch(/setAvatar\(progress\.avatar\);\s*navigate\('profile'\)/);
+    expect(appSource).toMatch(/const openProfile = \(\) => \{ setAvatar\(progress\.avatar\); navigate\('profile'\); \};/);
+    expect(appSource).toContain('onClick={openProfile}');
+  });
+
+  it('syncs a saved non-first avatar when the desktop sidebar opens profile with an empty nickname', () => {
+    const sidebar = appSource.match(/<nav aria-label="Hauptnavigation"[\s\S]*?<\/nav>/)?.[0] ?? '';
+    const nickname = '';
+    const firstAvatar = '🦊';
+    const savedAvatar = '🐼';
+
+    expect(nickname).toBe('');
+    expect(savedAvatar).not.toBe(firstAvatar);
+    expect(sidebar).toContain("onClick={() => item.id === 'profile' ? openProfile() : navigate(item.id)}");
+    expect(appSource).toMatch(/const openProfile = \(\) => \{ setAvatar\(progress\.avatar\); navigate\('profile'\); \};/);
+    expect(appSource).toContain("className={avatar === item ? 'selected' : ''}");
+    expect(appSource).toContain('aria-pressed={avatar === item}');
   });
 
   it('keeps the city scene visually aligned with the shared palette using CSS-drawn trees', () => {
