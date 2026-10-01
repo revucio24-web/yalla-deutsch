@@ -91,6 +91,7 @@ describe('visual accessibility regressions', () => {
       ['muted copy on the next-card gradient start', muted, '#eef4ef'],
       ['muted copy on the dialog overview surface', muted, '#edf3ee'],
       ['muted copy on the active mobile navigation surface', muted, '#e9f0eb'],
+      ['inactive mobile navigation on its darkest composited surface', cssProperty('.mobile-nav button', 'color'), '#f6f6f2'],
       ['header stage', cssProperty('.header-stage', 'color'), page],
       ['star pill icon', cssProperty('.top-pill', 'color'), cssProperty('.top-pill', 'background')],
       ['star count', cssProperty('.top-pill b', 'color'), paper],
@@ -103,6 +104,10 @@ describe('visual accessibility regressions', () => {
       ['mobile navigation labels', cssProperty('.mobile-nav button', 'color'), paper],
       ['active mobile navigation labels', cssProperty('.mobile-nav button.active', 'color'), '#e9f0eb'],
       ['city lesson labels', cssProperty('.lesson-copy small', 'color'), paper],
+      ['city building labels on their paper chip', cssProperty('.building-label', 'color'), cssProperty('.building-label', 'background')],
+      ['disabled city lesson titles', cssProperty('.lesson-row:disabled', 'color'), paper],
+      ['disabled mission titles', cssProperty('.mission-row:disabled', 'color'), paper],
+      ['disabled world-tile titles', cssProperty('.world-tile:disabled', 'color'), paper],
       ['world tile labels', cssProperty('.world-tile small', 'color'), paper],
       ['collection tools copy', cssProperty('.collection-tools', 'color'), page],
       ['dialog points', cssProperty('.dialog-session-score', 'color'), paper],
@@ -207,6 +212,82 @@ describe('visual accessibility regressions', () => {
     expect(cssProperty('.dialog-choice:not(:disabled):hover', 'border-color')).toBe('var(--answer-hover)');
   });
 
+  it('measures resting form-field borders on their actual surfaces and preserves input focus', () => {
+    const fields = ['.collection-tools input', '.edit-panel input', '.welcome-panel input'];
+    for (const selector of fields) {
+      const border = cssProperty(selector, 'border-color');
+      const surface = cssProperty(selector, 'background');
+      expect(border).toBe('var(--field-border)');
+      expectPair(`${selector} resting border`, border, surface, 3);
+      const placeholder = cssProperty('input::placeholder', 'color');
+      expect(placeholder).toBe('var(--muted)');
+      expectPair(`${selector} placeholder`, placeholder, surface, 4.5);
+    }
+    expect(cssProperty('input::placeholder', 'opacity')).toBe('1');
+    expect(cssProperty('input:focus-visible', 'outline')).toBe('3px solid var(--focus-ring-light)');
+    expect(cssProperty('input:focus-visible', 'outline-offset')).toBe('3px');
+    expect(cssProperty('input:focus-visible', 'box-shadow')).toBe('0 0 0 6px var(--focus-ring-dark)');
+  });
+
+  it('measures actual card edges on light, colored, and dark surfaces plus their visible states', () => {
+    const cardEdge = token('card-border');
+    for (const surface of [token('paper'), token('page'), '#faf6ed', '#e7ece4', '#dfe4dd', '#dfe6dc', '#d7dfd5', '#d6ccb6', '#cfc6b1', '#d0c2a5', '#c9bda1', '#edf3ee']) {
+      expectPair(`card edge on ${surface}`, cardEdge, surface, 3);
+    }
+    const cards = [
+      '.next-card', '.level-card', '.mission-group', '.city-detail', '.word-card', '.stats-grid > div',
+      '.progress-panel', '.district-progress', '.edit-panel', '.settings-panel', '.reset-panel',
+      '.welcome-panel', '.finish-panel', '.review-panel', '.memory-game-panel', '.dialog-scenario-card',
+      '.dialog-session-card', '.dialog-result-card', '.world-tile', '.city-scene', '.empty-state',
+      '.task-card', '.dialog-home-card', '.dialog-overview', '.memory-game-stats > div', '.memory-feedback',
+    ];
+    for (const selector of cards) {
+      expect(cssProperty(selector, 'border-color'), `${selector} uses the contrast-safe card edge`).toBe('var(--card-border)');
+    }
+    const profileEdge = cssProperty('.profile-panel', 'border-color');
+    expect(profileEdge).toBe('var(--line)');
+    for (const surface of ['#203f3d', '#315d52']) expectPair(`dark profile-card edge on ${surface}`, profileEdge, surface, 3);
+    for (const selector of ['.world-tile:disabled', '.lesson-row:disabled', '.mission-row:disabled']) {
+      expect(cssProperty(selector, 'border-color')).toBe('var(--card-border)');
+      expect(cssProperty(selector, 'opacity')).toBe('1');
+    }
+    for (const selector of ['.lesson-row:hover:not(:disabled)', '.mission-row:hover:not(:disabled)']) {
+      const hoverEdge = cssProperty(selector, 'border-color');
+      expect(hoverEdge).toBe('var(--answer-hover)');
+      expectPair(`${selector} edge`, hoverEdge, '#f5f8f5', 3);
+    }
+    expect(cssProperty('.avatar-options button', 'border-color')).toBe('var(--card-border)');
+    const selectedAvatarEdge = cssProperty('.avatar-options button.selected', 'border-color');
+    expect(selectedAvatarEdge).toBe('var(--answer-selected)');
+    expectPair('selected avatar edge', selectedAvatarEdge, '#e7f0eb', 3);
+  });
+
+  it('keeps the profile avatar marker and pressed state synced to the selected avatar with an empty name draft', () => {
+    const profileStart = appSource.indexOf("screen === 'profile' &&");
+    const settingsStart = appSource.indexOf("screen === 'settings' &&", profileStart);
+    expect(profileStart).toBeGreaterThanOrEqual(0);
+    expect(settingsStart).toBeGreaterThan(profileStart);
+    const profile = appSource.slice(profileStart, settingsStart);
+    const avatarButtons = profile.match(/<div className="avatar-options">([\s\S]*?)<\/div>/)?.[1] ?? '';
+    expect(avatarButtons).toContain("className={avatar === item ? 'selected' : ''}");
+    expect(avatarButtons).toContain('aria-pressed={avatar === item}');
+    expect(avatarButtons).toContain('onClick={() => setAvatar(item)}');
+    expect(avatarButtons).not.toContain('nickname');
+    expect(appSource).toMatch(/setAvatar\(progress\.avatar\);\s*navigate\('profile'\)/);
+  });
+
+  it('keeps the city scene visually aligned with the shared palette using CSS-drawn trees', () => {
+    expect(cssProperty('.city-scene', 'border-color')).toBe('var(--card-border)');
+    expect(themeCss).toContain('.city-scene { height: 318px; border-radius: 16px; }');
+    expect(cssProperty('.building-roof', 'clip-path')).toBe('none');
+    expect(cssProperty('.scene-tree', 'font-size')).toBe('0');
+    expect(appSource).toContain('<span lang="de">{world.de}</span>');
+    expect(cssProperty('.building-label > span', 'hyphens')).toBe('auto');
+    expect(cssProperty('.building-label > span', 'overflow-wrap')).toBe('normal');
+    expect(cssProperty('.scene-tree::before', 'content')).toBe('""');
+    expect(cssProperty('.scene-tree::after', 'content')).toBe('""');
+  });
+
   it('gives interactive states a border, shape, icon, or text signal in addition to color', () => {
     expect(cssProperty('.mobile-nav button.active', 'box-shadow')).toBe('inset 0 -3px 0 var(--navy)');
     expect(cssProperty('.nav-item.active', 'box-shadow')).toContain('inset');
@@ -230,6 +311,12 @@ describe('visual accessibility regressions', () => {
 
   it('keeps mobile labels readable without ellipsis and reserves space above the fixed navigation', () => {
     expect(themeCss).toMatch(/\.mobile-nav small\s*\{[^}]*text-overflow:\s*clip;[^}]*white-space:\s*normal/);
+    expect(cssProperty('.mobile-nav small', 'font-size')).toBe('.75rem');
+    expect(cssProperty('.mobile-nav small', 'overflow-wrap')).toBe('normal');
+    expect(cssProperty('.mobile-nav button', 'min-height')).toBe('60px');
+    expect(cssProperty('.mobile-nav', 'min-height')).toBe('76px');
+    expect(cssProperty('.mobile-nav', 'background')).toMatch(/^rgba\(\s*255,\s*254,\s*250,\s*\.96\s*\)$/);
+    expect(cssProperty('.main-area', 'padding-bottom')).toBe('calc(124px + env(safe-area-inset-bottom))');
     expect(appSource).toContain("{ id: 'game', ar: 'لعبة الأزواج', de: 'Paare-Spiel'");
     expect(appSource).not.toContain("mobileAr: 'لعبة'");
     expect(cssProperty('.world-strip', 'display')).toBe('grid');
